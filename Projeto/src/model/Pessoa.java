@@ -18,7 +18,8 @@ public class Pessoa {
         this.sobrenome = sobrenome;
         this.idade = idade;
         this.sexo = sexo;
-    }
+}
+
 
     public String getSexo() {
         return sexo;

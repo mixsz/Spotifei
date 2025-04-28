@@ -9,35 +9,22 @@ package model;
  * @author Danilo
  */
 public class Usuario extends Pessoa{
-    private String nome, sobrenome, username, senha,sexo;
-    private int idade;
+    private String username, senha;
 
-    public Usuario(String nome, String sobrenome, String username, 
+    public Usuario(String nome, String sobrenome, String username, // pra cadastro
             int idade, String senha, String sexo) {
         super(nome, sobrenome, idade,sexo);
         this.username = username;
         this.senha = senha;
     }
     
-
+    public Usuario(String username, String senha) { // pra login
+        this.username = username;
+        this.senha = senha;
+    }
     public Usuario() {
     }
   
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
 
     public String getUsername() {
         return username;
@@ -53,22 +40,6 @@ public class Usuario extends Pessoa{
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
     }
 
     

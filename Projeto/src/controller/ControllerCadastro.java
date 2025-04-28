@@ -4,10 +4,14 @@
  */
 package controller;
 
+import DAO.Conexao;
+import DAO.UsuarioDAO;
 import javax.swing.JOptionPane;
 import model.Usuario;
 import view.CadastroFrame;
 import view.LoginFrame;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
@@ -75,17 +79,45 @@ public class ControllerCadastro extends javax.swing.JFrame{
         //deixa a string padronizada: eXemplO -> Exemplo
         
         sobrenome = sobrenome.substring(0, 1).toUpperCase() 
-                + sobrenome.substring(1).toLowerCase();    
+                + sobrenome.substring(1).toLowerCase();   
+//        System.out.println("Nome: " + nome);
+//        System.out.println("Sobrenome: " + sobrenome);
+//        System.out.println("Username: " + username);
+//        System.out.println("Idade: " + idade);
+//        System.out.println("Sexo: " + sexo);
+//        System.out.println("Senha: " + senha);
         
         Usuario usuario = new Usuario(nome,sobrenome,username,idadeInt,senha,sexo);
         
-        JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!", 
-            "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        LoginFrame loginFrame = new LoginFrame();
-        view.setVisible(false);
-        loginFrame.setLocationRelativeTo(null);
-        loginFrame.setVisible(true); 
+         try {
+            Conexao conexao = new Conexao();
+            Connection conn = conexao.getConnection(); 
+            UsuarioDAO usuarioDAO = new UsuarioDAO(conn);
+            
+            if (usuarioDAO.verificaUsername(username)) {
+            JOptionPane.showMessageDialog(null, "Esse username já existe!", 
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+            
+            boolean sucesso = usuarioDAO.cadastrarUsuarioDB(usuario);
+            if (sucesso) {           
+                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!", 
+                "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                LoginFrame loginFrame = new LoginFrame();
+                view.setVisible(false);
+                loginFrame.setLocationRelativeTo(null);
+                loginFrame.setVisible(true); 
+              
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário!",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro de conexão!.", 
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
-    
-    
 }
