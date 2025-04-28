@@ -114,10 +114,10 @@ public class ControllerCadastro extends javax.swing.JFrame{
                         "Erro", JOptionPane.ERROR_MESSAGE);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro de conexão!.", 
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Erro de conexão!.", 
+                        "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

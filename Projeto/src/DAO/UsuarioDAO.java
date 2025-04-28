@@ -18,7 +18,7 @@ public class UsuarioDAO {
                 + "sexo, senha) values (?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = conn.prepareStatement(sql);
        
-        statement.setString(1, usuario.getNome()); // jeito nao hackeavel!!!
+        statement.setString(1, usuario.getNome());
         statement.setString(2, usuario.getSobrenome());
         statement.setString(3, usuario.getUsername());
         statement.setInt(4, usuario.getIdade());
