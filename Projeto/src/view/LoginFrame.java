@@ -4,9 +4,11 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Mixzq
+ * @author Danilo
  */
 public class LoginFrame extends javax.swing.JFrame {
 
@@ -26,67 +28,70 @@ public class LoginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtSpotifei1 = new javax.swing.JLabel();
+        titulo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        txtSenha = new javax.swing.JLabel();
-        btnSenha = new javax.swing.JPasswordField();
-        btnUsername = new javax.swing.JTextField();
-        txtUsername = new javax.swing.JLabel();
-        txtNaoImportantw = new javax.swing.JLabel();
-        btnAcessar1 = new javax.swing.JButton();
-        btnAcessar2 = new javax.swing.JButton();
+        lblSenha = new javax.swing.JLabel();
+        txtSenha = new javax.swing.JPasswordField();
+        txtUsername = new javax.swing.JTextField();
+        lblUsername = new javax.swing.JLabel();
+        lblNaoImportante = new javax.swing.JLabel();
+        btnAcessar = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
         setBackground(new java.awt.Color(190, 234, 151));
 
-        txtSpotifei1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        txtSpotifei1.setForeground(new java.awt.Color(73, 151, 51));
-        txtSpotifei1.setText("Spotifei");
+        titulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        titulo.setForeground(new java.awt.Color(73, 151, 51));
+        titulo.setText("Spotifei");
 
         jPanel1.setBackground(new java.awt.Color(144, 238, 144));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtSenha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtSenha.setForeground(new java.awt.Color(51, 51, 51));
-        txtSenha.setText("Senha:");
+        lblSenha.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblSenha.setForeground(new java.awt.Color(51, 51, 51));
+        lblSenha.setText("Senha:");
 
-        btnSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnSenha.addActionListener(new java.awt.event.ActionListener() {
+        txtSenha.setBackground(new java.awt.Color(204, 255, 204));
+        txtSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSenhaActionPerformed(evt);
+                txtSenhaActionPerformed(evt);
             }
         });
 
-        btnUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnUsername.addActionListener(new java.awt.event.ActionListener() {
+        txtUsername.setBackground(new java.awt.Color(204, 255, 204));
+        txtUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsernameActionPerformed(evt);
+                txtUsernameActionPerformed(evt);
             }
         });
 
-        txtUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtUsername.setForeground(new java.awt.Color(51, 51, 51));
-        txtUsername.setText("Username:");
+        lblUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblUsername.setForeground(new java.awt.Color(51, 51, 51));
+        lblUsername.setText("Username:");
 
-        txtNaoImportantw.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        txtNaoImportantw.setText("Login");
+        lblNaoImportante.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblNaoImportante.setText("Login");
 
-        btnAcessar1.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        btnAcessar1.setForeground(new java.awt.Color(51, 102, 0));
-        btnAcessar1.setText("Acessar");
-        btnAcessar1.addActionListener(new java.awt.event.ActionListener() {
+        btnAcessar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        btnAcessar.setForeground(new java.awt.Color(51, 102, 0));
+        btnAcessar.setText("Acessar");
+        btnAcessar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAcessar1ActionPerformed(evt);
+                btnAcessarActionPerformed(evt);
             }
         });
 
-        btnAcessar2.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        btnAcessar2.setForeground(new java.awt.Color(51, 102, 0));
-        btnAcessar2.setText("Cadastrar");
-        btnAcessar2.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        btnCadastrar.setForeground(new java.awt.Color(51, 102, 0));
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAcessar2ActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
@@ -97,44 +102,53 @@ public class LoginFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAcessar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(90, 90, 90))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsername)
-                            .addComponent(txtSenha))
+                            .addComponent(lblUsername)
+                            .addComponent(lblSenha))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnSenha)
-                            .addComponent(btnUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(92, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAcessar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAcessar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(90, 90, 90))))
+                            .addComponent(txtSenha)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(92, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(txtNaoImportantw)
+                .addComponent(lblNaoImportante)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(txtNaoImportantw)
+                .addComponent(lblNaoImportante)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsername)
-                    .addComponent(btnUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblUsername)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSenha)
-                    .addComponent(btnSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSenha)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcessar1)
-                    .addComponent(btnAcessar2))
+                    .addComponent(btnAcessar)
+                    .addComponent(btnCadastrar))
                 .addGap(135, 135, 135))
         );
+
+        btnSair.setBackground(new java.awt.Color(255, 99, 71));
+        btnSair.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,41 +158,58 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addContainerGap(175, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtSpotifei1)
-                        .addGap(329, 329, 329))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(142, 142, 142))))
+                        .addGap(142, 142, 142))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(titulo)
+                        .addGap(329, 329, 329))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(txtSpotifei1)
+                .addComponent(titulo)
                 .addGap(31, 31, 31)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(btnSair)
+                .addGap(28, 28, 28))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSenhaActionPerformed
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSenhaActionPerformed
+    }//GEN-LAST:event_txtSenhaActionPerformed
 
-    private void btnUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsernameActionPerformed
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUsernameActionPerformed
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
-    private void btnAcessar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessar1ActionPerformed
+    private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAcessar1ActionPerformed
+    }//GEN-LAST:event_btnAcessarActionPerformed
 
-    private void btnAcessar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessar2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAcessar2ActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        this.setVisible(false);   
+        CadastroFrame cadastroFrame = new CadastroFrame();
+        cadastroFrame.setLocationRelativeTo(null);
+        cadastroFrame.setVisible(true);  
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        JOptionPane.showMessageDialog(null, 
+                                     "Até mais!",
+                                     "Despedida", 
+                                     JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);    
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,14 +247,15 @@ public class LoginFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAcessar1;
-    private javax.swing.JButton btnAcessar2;
-    private javax.swing.JPasswordField btnSenha;
-    private javax.swing.JTextField btnUsername;
+    private javax.swing.JButton btnAcessar;
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnSair;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel txtNaoImportantw;
-    private javax.swing.JLabel txtSenha;
-    private javax.swing.JLabel txtSpotifei1;
-    private javax.swing.JLabel txtUsername;
+    private javax.swing.JLabel lblNaoImportante;
+    private javax.swing.JLabel lblSenha;
+    private javax.swing.JLabel lblUsername;
+    private javax.swing.JLabel titulo;
+    private javax.swing.JPasswordField txtSenha;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
