@@ -8,7 +8,7 @@ package model;
  *
  * @author Danilo
  */
-public class Usuario extends Pessoa{
+public class Usuario extends Pessoa implements Autenticacao{
     private String username, senha;
 
     public Usuario(String nome, String sobrenome, String username, // pra cadastro
@@ -24,8 +24,7 @@ public class Usuario extends Pessoa{
     }
     public Usuario() {
     }
-  
-
+    
     public String getUsername() {
         return username;
     }
@@ -42,6 +41,10 @@ public class Usuario extends Pessoa{
         this.senha = senha;
     }
 
-    
-    
+     @Override
+    public boolean autenticar(String username, String senha) {
+        return this.username.equals(username) && this.senha.equals(senha);
+    }
+    //retorna verdadeiro se o username e senha digitados correspondem ao mesmo
+    // armazenado no objeto   
 }
