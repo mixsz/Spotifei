@@ -11,6 +11,7 @@ import view.LoginFrame;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
+import view.HomeFrame;
 
 /**
  *
@@ -18,9 +19,9 @@ import java.sql.SQLException;
  */
 public class ControllerLogin{
     
-        private LoginFrame view;
+    private LoginFrame view;
         
-        public ControllerLogin(LoginFrame loginFrame) {
+    public ControllerLogin(LoginFrame loginFrame) {
         this.view = loginFrame;
     }
         
@@ -33,20 +34,32 @@ public class ControllerLogin{
             UsuarioDAO dao = new UsuarioDAO(conn);
             ResultSet res = dao.logar(usuario);
             if(res.next()){
-                JOptionPane.showMessageDialog(view, "Login efetuado!","Aviso",
-                                              JOptionPane.INFORMATION_MESSAGE);
+                if (usuario.autenticar(usuario.getUsername(), usuario.getSenha())){
+            //se possuir mais linha, verifica se o username e senha batem
+                    JOptionPane.showMessageDialog(view, 
+                                                  "Login efetuado!","Aviso",
+                                                  JOptionPane.INFORMATION_MESSAGE);
+                    HomeFrame home = new HomeFrame(usuario);
+                    view.setVisible(false); 
+                    home.setLocationRelativeTo(null);
+                    home.setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(view, "Username ou senha i"
+                                                  + "ncorreto!","Aviso",
+                                                  JOptionPane.ERROR_MESSAGE);
+                }
             }
             else{
                  JOptionPane.showMessageDialog(view, "Username ou senha i"
                                                + "ncorreto!","Aviso",
-                                              JOptionPane.ERROR_MESSAGE);
+                                               JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(SQLException e){
              JOptionPane.showMessageDialog(view, "Erro de conexão!","Aviso",
-                                              JOptionPane.ERROR_MESSAGE);
+                                           JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
 }
