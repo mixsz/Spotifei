@@ -76,7 +76,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addComponent(titulo)
                 .addGap(17, 17, 17))
         );
@@ -109,8 +109,9 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
+        btnAcessar.setBackground(new java.awt.Color(51, 51, 51));
         btnAcessar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        btnAcessar.setForeground(new java.awt.Color(51, 102, 0));
+        btnAcessar.setForeground(new java.awt.Color(0, 153, 0));
         btnAcessar.setText("Acessar");
         btnAcessar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,9 +119,9 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        btnCadastrar.setBackground(new java.awt.Color(204, 204, 204));
+        btnCadastrar.setBackground(new java.awt.Color(51, 51, 51));
         btnCadastrar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        btnCadastrar.setForeground(new java.awt.Color(51, 102, 0));
+        btnCadastrar.setForeground(new java.awt.Color(204, 204, 204));
         btnCadastrar.setText("Cadastrar conta");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,10 +197,11 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
