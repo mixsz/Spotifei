@@ -39,7 +39,7 @@ public class CadastroFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         sexo = new javax.swing.ButtonGroup();
-        title = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         lblCadastro = new javax.swing.JLabel();
@@ -58,16 +58,16 @@ public class CadastroFrame extends javax.swing.JFrame {
         btnMasculino = new javax.swing.JRadioButton();
         btnFeminino = new javax.swing.JRadioButton();
         lblSenha2 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        title = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro");
 
-        title.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        title.setForeground(new java.awt.Color(73, 151, 51));
-        title.setText("Spotifei");
+        jPanel5.setBackground(new java.awt.Color(144, 238, 144));
 
-        jPanel1.setBackground(new java.awt.Color(144, 238, 144));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblNome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -77,8 +77,9 @@ public class CadastroFrame extends javax.swing.JFrame {
         lblCadastro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblCadastro.setText("Cadastro");
 
+        btnAcessar2.setBackground(new java.awt.Color(51, 51, 51));
         btnAcessar2.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        btnAcessar2.setForeground(new java.awt.Color(51, 102, 0));
+        btnAcessar2.setForeground(new java.awt.Color(0, 153, 0));
         btnAcessar2.setText("Cadastrar");
         btnAcessar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,21 +186,11 @@ public class CadastroFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(142, 142, 142)
+                        .addComponent(lblCadastro))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCadastro)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUsername2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUsername2)
-                            .addComponent(lblUsername)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtUsername1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(lblUsername1, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(lblNome)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnMasculino)
-                                .addGap(28, 28, 28)
-                                .addComponent(btnFeminino))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(lblSenha2)
@@ -209,18 +200,29 @@ public class CadastroFrame extends javax.swing.JFrame {
                                     .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblSenha, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblSenha1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSenha1, javax.swing.GroupLayout.Alignment.LEADING)))))
+                                    .addComponent(txtSenha1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNome)
+                            .addComponent(txtUsername2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUsername2)
+                            .addComponent(lblUsername)
+                            .addComponent(lblUsername1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnMasculino)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnFeminino))
+                            .addComponent(txtUsername1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(btnAcessar2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(111, Short.MAX_VALUE))
+                        .addGap(93, 93, 93)
+                        .addComponent(btnAcessar2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addComponent(lblCadastro)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,7 +240,7 @@ public class CadastroFrame extends javax.swing.JFrame {
                 .addComponent(txtUsername1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSenha2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMasculino)
                     .addComponent(btnFeminino))
@@ -252,7 +254,30 @@ public class CadastroFrame extends javax.swing.JFrame {
                 .addComponent(txtSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAcessar2)
-                .addGap(12, 12, 12))
+                .addGap(32, 32, 32))
+        );
+
+        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+
+        title.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        title.setForeground(new java.awt.Color(73, 151, 51));
+        title.setText("Spotifei");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(title)
+                .addGap(312, 312, 312))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(title)
+                .addGap(16, 16, 16))
         );
 
         btnVoltar.setBackground(new java.awt.Color(204, 204, 204));
@@ -264,34 +289,42 @@ public class CadastroFrame extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVoltar))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
-                        .addComponent(title)))
-                .addContainerGap(189, Short.MAX_VALUE))
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(title)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnVoltar))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -380,7 +413,13 @@ public class CadastroFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnFeminino;
     private javax.swing.JRadioButton btnMasculino;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblCadastro;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSenha;
@@ -389,8 +428,11 @@ public class CadastroFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsername;
     private javax.swing.JLabel lblUsername1;
     private javax.swing.JLabel lblUsername2;
+    private javax.swing.JLabel lblUsername3;
     private javax.swing.ButtonGroup sexo;
     private javax.swing.JLabel title;
+    private javax.swing.JLabel titulo1;
+    private javax.swing.JLabel titulo2;
     private javax.swing.JTextField txtNome;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JPasswordField txtSenha1;

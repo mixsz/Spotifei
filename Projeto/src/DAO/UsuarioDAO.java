@@ -26,10 +26,7 @@ public class UsuarioDAO {
         statement.setString(6, usuario.getSenha());
         int linha = statement.executeUpdate();
 
-        if(linha>0){
-            return true;
-        }
-        return false;
+        return linha>0;
     }
     
     public boolean verificaUsername(String username) throws SQLException {
