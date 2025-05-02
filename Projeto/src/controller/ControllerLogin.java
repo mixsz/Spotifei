@@ -34,12 +34,13 @@ public class ControllerLogin{
             UsuarioDAO dao = new UsuarioDAO(conn);
             ResultSet res = dao.logar(usuario);
             if(res.next()){
+                int idUsuario = res.getInt("id");
                 if (usuario.autenticar(usuario.getUsername(), usuario.getSenha())){
-            //se possuir mais linha, verifica se o username e senha batem
+                //se possuir linha(s), verifica se o username e senha batem
                     JOptionPane.showMessageDialog(view, 
                                                   "Login efetuado!","Aviso",
                                                   JOptionPane.INFORMATION_MESSAGE);
-                    HomeFrame home = new HomeFrame(usuario);
+                    HomeFrame home = new HomeFrame(usuario.getUsername(),idUsuario);
                     view.setVisible(false); 
                     home.setLocationRelativeTo(null);
                     home.setVisible(true);
@@ -61,5 +62,4 @@ public class ControllerLogin{
                                            JOptionPane.ERROR_MESSAGE);
         }
     }
-
 }

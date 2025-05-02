@@ -8,30 +8,31 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.Usuario;
 
 /**
  *
- * @author Mixzq
+ * @author Danilo
  */
 public class HomeFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form HomeFrame
      */
-    private Usuario usuario;
-
-    public HomeFrame(Usuario usuario) {
-    this.usuario = usuario;
+    private String usuario;
+    private int id;
+    
+    public HomeFrame(String username, int id) {
+    this.usuario = username;
     initComponents();
-    lblUsername.setText(usuario.getUsername());
-    }
+    lblUsername.setText(usuario);
+    this.id = id;
+    } // recebe apenas o id e nome do usuario (atributos unicos)
 
-    public Usuario getUsuario() {
+    public String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 
@@ -91,14 +92,6 @@ public class HomeFrame extends javax.swing.JFrame {
         this.jPanel2 = jPanel2;
     }
 
-    public JPanel getjPanel3() {
-        return jPanel3;
-    }
-
-    public void setjPanel3(JPanel jPanel3) {
-        this.jPanel3 = jPanel3;
-    }
-
     public JLabel getTitulo1() {
         return titulo1;
     }
@@ -107,20 +100,20 @@ public class HomeFrame extends javax.swing.JFrame {
         this.titulo1 = titulo1;
     }
 
-    public JLabel getTitulo2() {
-        return titulo2;
-    }
-
-    public void setTitulo2(JLabel titulo2) {
-        this.titulo2 = titulo2;
-    }
-
     public JLabel getLblUsername() {
         return lblUsername;
     }
 
     public void setLblUsername(JLabel lblUsername) {
         this.lblUsername = lblUsername;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     
@@ -214,7 +207,7 @@ public class HomeFrame extends javax.swing.JFrame {
         btnDesconectar.setBackground(new java.awt.Color(51, 51, 51));
         btnDesconectar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDesconectar.setForeground(new java.awt.Color(153, 0, 0));
-        btnDesconectar.setText("Desconectar");
+        btnDesconectar.setText("Sair");
         btnDesconectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesconectarActionPerformed(evt);
@@ -284,7 +277,10 @@ public class HomeFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMusicaActionPerformed
-        // TODO add your handling code here:
+         this.setVisible(false);
+         BuscarMusicaFrame bm = new BuscarMusicaFrame(usuario,id); 
+         bm.setLocationRelativeTo(null);
+         bm.setVisible(true);
     }//GEN-LAST:event_btnBuscarMusicaActionPerformed
 
     private void btnGerenciarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarPlaylistActionPerformed
@@ -296,8 +292,8 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVisualizarHistoricoActionPerformed
 
     private void btnDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesconectarActionPerformed
-    int confirm = JOptionPane.showConfirmDialog(this, "Deseja realmente se "
-                                                + "desconectar?", "Confirmação",
+    int confirm = JOptionPane.showConfirmDialog(this, "Deseja realmente "
+                                                + "sair?", "Confirmação",
                                                 JOptionPane.YES_NO_OPTION);   
     if (confirm == JOptionPane.YES_OPTION) {
         this.setVisible(false);
@@ -349,9 +345,7 @@ public class HomeFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JLabel titulo1;
-    private javax.swing.JLabel titulo2;
     // End of variables declaration//GEN-END:variables
 }
