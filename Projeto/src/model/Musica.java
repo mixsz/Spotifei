@@ -9,6 +9,7 @@ package model;
  * @author Danilo
  */
 public class Musica {
+    private int id;
     private String nome;
     private Artista artista; // composicao
     private String genero;
@@ -36,8 +37,24 @@ public class Musica {
         this.anoLancamento = anoLancamento;
         this.album = album;
     }
-    
-    
+
+    public Musica(int id, String nome, Artista artista, String genero, 
+            int anoLancamento, String album) {
+        this.id = id;
+        this.nome = nome;
+        this.artista = artista;
+        this.genero = genero;
+        this.anoLancamento = anoLancamento;
+        this.album = album;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -99,4 +116,14 @@ public class Musica {
      *   FOREIGN KEY (artista_id) REFERENCES artista(id) ON DELETE CASCADE 
      *   );
     */
+    
+//    CREATE TABLE interacao (
+//        usuario_id INTEGER,
+//        musica_id INTEGER,
+//        status VARCHAR(10), 
+//        PRIMARY KEY (usuario_id, musica_id),
+//        FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+//        FOREIGN KEY (musica_id) REFERENCES musica(id)
+//    );
+    
 }

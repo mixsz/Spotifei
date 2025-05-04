@@ -66,6 +66,14 @@ public class Artista extends Pessoa{
     public void setGeneroMusical(String generoMusical) {
         this.generoMusical = generoMusical;
     }
+
+    public String getNomeArtistico() {
+        return nomeArtistico;
+    }
+
+    public void setNomeArtistico(String nomeArtistico) {
+        this.nomeArtistico = nomeArtistico;
+    }
     
         //Comandos SQL p/ artista:
     

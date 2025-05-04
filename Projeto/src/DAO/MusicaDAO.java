@@ -26,14 +26,14 @@ public class MusicaDAO {
               String genero) throws SQLException {
         ArrayList<Musica> musicas = new ArrayList<>();
         
-       StringBuilder sql = new StringBuilder("SELECT m.nome, m.genero, "
-                                            + "m.ano_lancamento, "
-                                            + "m.album, "
-                                            + "a.nome_artistico AS artista_nome "
-                                            + "FROM musica m "
-                                            + "JOIN artista a ON m.artista_id = a.id " 
-                                            + "WHERE 1=1"
-                                            );
+       StringBuilder sql = new StringBuilder("SELECT m.id, m.nome, m.genero, "
+                                      + "m.ano_lancamento, "
+                                      + "m.album, "
+                                      + "a.nome_artistico AS artista_nome "
+                                      + "FROM musica m "
+                                      + "JOIN artista a ON m.artista_id = a.id " 
+                                      + "WHERE 1=1");
+
        
        // faz um INNER JOIN com a table artista para salvar o nome do cantor(a)
         
@@ -53,19 +53,19 @@ public class MusicaDAO {
         
         PreparedStatement statement = conn.prepareStatement(sql.toString());
         
-        int index = 1;
+        int atb = 1;
         
 
         if (nome != null && !nome.isEmpty()) {
-            statement.setString(index++, nome + "%"); 
+            statement.setString(atb++, nome + "%"); 
         }
         
         if (artista != null && !artista.isEmpty()) {
-            statement.setString(index++, artista + "%"); 
+            statement.setString(atb++, artista + "%"); 
         }
         
         if (genero != null && !genero.isEmpty()) {
-            statement.setString(index++, genero + "%");
+            statement.setString(atb++, genero + "%");
         }
         // PESQUISA DE ACORDO COM OS CAMPOS PREENCHIDOS (SE TIVER NULL, IGNORA)
         // POSSÍVEL ERRO: SE O USUÁRIO DER UM ESPAÇO EM BRANCO, 
@@ -75,10 +75,12 @@ public class MusicaDAO {
 
 
         while (rs.next()) { 
+            int id = rs.getInt("id");
             String nomeArtista = rs.getString("artista_nome");
 
             Artista artistaObj = new Artista(nomeArtista);
             Musica musica = new Musica(
+                id,
                 rs.getString("nome"),
                 artistaObj,
                 rs.getString("genero"),
@@ -90,5 +92,50 @@ public class MusicaDAO {
         }
         
         return musicas;
+    }
+      
+      
+    // CURTIR E DESCURTIR MÚSICA
+      
+     public void curtirMusica(int usuarioId, int musicaId) throws SQLException {
+
+        String sql = "INSERT INTO interacao (usuario_id, musica_id, status) " +
+                 "VALUES (?, ?, ?) " +
+                 "ON CONFLICT (usuario_id, musica_id) "
+                + "DO UPDATE SET status = EXCLUDED.status";
+        
+        // ON CONFLICT serve pra caso o id do usuario e musica ja exista na tabela
+        // entao ele faz UPDATE em vez de INSERT
+        
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, usuarioId);
+            stmt.setInt(2, musicaId);
+            stmt.setString(3, "curtida");
+            stmt.executeUpdate();
+        } 
+        catch (SQLException e) {
+            System.err.println("Erro ao curtir música: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void descurtirMusica(int usuarioId, int musicaId) {
+        String sql = "INSERT INTO interacao (usuario_id, musica_id, status) " +
+                     "VALUES (?, ?, ?) " +
+                     "ON CONFLICT (usuario_id, musica_id) DO UPDATE SET status = EXCLUDED.status";
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, usuarioId);
+            stmt.setInt(2, musicaId);
+            stmt.setString(3, "descurtida");
+            stmt.executeUpdate();
+        } 
+        catch (SQLException e) {
+            System.err.println("Erro ao descurtir música: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

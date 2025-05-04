@@ -22,10 +22,12 @@ public class HomeFrame extends javax.swing.JFrame {
     private int id;
     
     public HomeFrame(String username, int id) {
-    this.usuario = username;
     initComponents();
+    this.usuario = username;
     lblUsername.setText(usuario);
-    this.id = id;
+    this.id = id;    
+    System.out.println("Usuário: "+usuario);
+    System.out.println("Id: "+id+'\n');
     } // recebe apenas o id e nome do usuario (atributos unicos)
 
     public String getUsuario() {
@@ -278,11 +280,11 @@ public class HomeFrame extends javax.swing.JFrame {
 
     private void btnBuscarMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMusicaActionPerformed
          this.setVisible(false);
-         BuscarMusicaFrame bm = new BuscarMusicaFrame(usuario,id); 
+         BuscarMusicaFrame bm = new BuscarMusicaFrame(this.usuario,this.id); 
          bm.setLocationRelativeTo(null);
          bm.setVisible(true);
     }//GEN-LAST:event_btnBuscarMusicaActionPerformed
-
+  
     private void btnGerenciarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarPlaylistActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGerenciarPlaylistActionPerformed

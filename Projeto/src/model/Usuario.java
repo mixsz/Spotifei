@@ -10,6 +10,7 @@ package model;
  */
 public class Usuario extends Pessoa implements Autenticacao{
     private String username, senha;
+    private int id;
 
     public Usuario(String nome, String sobrenome, String username, // pra cadastro
             int idade, String senha, String sexo) {
@@ -22,6 +23,15 @@ public class Usuario extends Pessoa implements Autenticacao{
         this.username = username;
         this.senha = senha;
     }
+
+    public Usuario(String username, String senha, int id, String nome, 
+                   String sobrenome, int idade, String sexo) {
+        super(nome, sobrenome, idade, sexo);
+        this.username = username;
+        this.senha = senha;
+        this.id = id;
+    }
+    
     public Usuario() {
     }
     
@@ -41,6 +51,14 @@ public class Usuario extends Pessoa implements Autenticacao{
         this.senha = senha;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
      @Override
     public boolean autenticar(String username, String senha) {
         return this.username.equals(username) && this.senha.equals(senha);

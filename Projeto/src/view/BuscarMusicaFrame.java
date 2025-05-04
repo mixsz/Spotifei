@@ -19,14 +19,17 @@ public class BuscarMusicaFrame extends javax.swing.JFrame {
     /**
      * Creates new form BuscarMusica
      */
-    private String usuario;
+    private ControllerMusica controller;
+    private String username;
     private int id;
+    
      public BuscarMusicaFrame(String username, int id) {
-        this.usuario = username;
         initComponents();
+        this.username = username;
         this.id = id;
+        this.controller = new ControllerMusica(this, username, id);
     } // recebe apenas o id e nome do usuario (atributos unicos)
-    ControllerMusica controller = new ControllerMusica(this);
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,6 +54,7 @@ public class BuscarMusicaFrame extends javax.swing.JFrame {
         btnVoltar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Buscar músicas");
 
         jPanel7.setBackground(new java.awt.Color(144, 238, 144));
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -80,7 +84,7 @@ public class BuscarMusicaFrame extends javax.swing.JFrame {
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
-        jLabel4.setText("Buscar música");
+        jLabel4.setText("Buscar músicas");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel5.setText("• Não é necessário preencher todos os campos!");
@@ -239,7 +243,7 @@ public class BuscarMusicaFrame extends javax.swing.JFrame {
 
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
         this.setVisible(false);
-        HomeFrame hm = new HomeFrame(usuario,id); 
+        HomeFrame hm = new HomeFrame(username,id); 
         hm.setLocationRelativeTo(null);
         hm.setVisible(true);
     }//GEN-LAST:event_btnVoltar1ActionPerformed
@@ -279,12 +283,12 @@ public class BuscarMusicaFrame extends javax.swing.JFrame {
 //        });
 //    }
     
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsuario(String username) {
+        this.username = username;
     }
 
     public int getId() {
