@@ -4,13 +4,16 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Danilo
  */
 public class Artista extends Pessoa{
     private String nacionalidade, status, generoMusical, nomeArtistico;
-
+    private ArrayList<Musica> músicas;
+    
     public Artista(String nacionalidade, String status, String generoMusical, 
             String nomeArtistico, String nome, String sobrenome, int idade, 
             String sexo) {
@@ -29,6 +32,19 @@ public class Artista extends Pessoa{
         this.generoMusical = generoMusical;
     }   // construtor sem nome artistico
 
+    public Artista(String nacionalidade, String status, String generoMusical, 
+                   String nomeArtistico, ArrayList<Musica> músicas, String nome, 
+                   String sobrenome, int idade, String sexo) {
+        super(nome, sobrenome, idade, sexo);
+        this.nacionalidade = nacionalidade;
+        this.status = status;
+        this.generoMusical = generoMusical;
+        this.nomeArtistico = nomeArtistico;
+        this.músicas = músicas;
+    } // construtor com o arraylist
+
+    
+    
     public Artista(String nome, String sobrenome, int idade, String sexo) {
         super(nome, sobrenome, idade, sexo);
     }  
