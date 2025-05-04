@@ -115,15 +115,15 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
             btnDescurtir.setMaximumSize(new java.awt.Dimension(90, 25)); 
             // Adicionando ActionListener ao botão Curtir
             btnCurtir.addActionListener(e -> {
-                ControllerMusica controller = new ControllerMusica(usuario, id, this); // Ajuste com seus parâmetros
+                ControllerMusica controller = new ControllerMusica(usuario, id, this); 
                 
-                controller.curtirMusica(m.getId()); // Passando o ID da música
+                controller.curtirMusica(m.getId()); 
             });
 
             // Adicionando ActionListener ao botão Descurtir
             btnDescurtir.addActionListener(e -> {
-                ControllerMusica controller = new ControllerMusica(usuario, id, this); // Ajuste com seus parâmetros
-                controller.descurtirMusica(m.getId()); // Passando o ID da música
+                ControllerMusica controller = new ControllerMusica(usuario, id, this);
+                controller.descurtirMusica(m.getId());
             });
 
             painelDireito.add(btnCurtir);
