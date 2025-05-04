@@ -5,7 +5,6 @@
 package view;
 
 import controller.ControllerMusica;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -49,105 +48,126 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         }
     }
     
-    private void mostrarMusicas() {
-        telaMostrar.removeAll();
-        telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
+private void mostrarMusicas() {
+    telaMostrar.removeAll();
+    telaMostrar2.removeAll(); 
+    telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
+    telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
 
-        // A PESQUISA SÓ VAI ATÉ 4 PORQUE MAIOR QUE ISSO PASSA DO TAMANHO DA TELA
-        int limite = Math.min(musicas.size(), 4);
+    // A PESQUISA SÓ VAI ATÉ 10 PORQUE MAIOR QUE ISSO PASSA DO TAMANHO DA TELA
+    // 5 DE CADA LADO: 0 a 4 -> telaMostrar /// 5 a 9 -> telaMostrar2
+    int limite = Math.min(musicas.size(), 10);
 
-        for (int i = 0; i < limite; i++) {
-            Musica m = musicas.get(i);
+    for (int i = 0; i < limite; i++) {
+        Musica m = musicas.get(i);
 
-            JPanel musicaPanel = new JPanel();
-            musicaPanel.setLayout(new BoxLayout(musicaPanel, BoxLayout.X_AXIS));  
-            musicaPanel.setBackground(new java.awt.Color(144, 238, 144));
+        JPanel musicaPanel = new JPanel();
+        musicaPanel.setLayout(new BoxLayout(musicaPanel, BoxLayout.X_AXIS)); 
+        musicaPanel.setBackground(new java.awt.Color(144, 238, 144));
 
-            // BORDA COM TAMANHOS FIXOS E CORES FIXAS
-            musicaPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
-                BorderFactory.createEmptyBorder(3, 15, 10, 15)  
-            ));
+        // BORDA COM TAMANHOS FIXOS E CORES FIXAS
+        musicaPanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
+            BorderFactory.createEmptyBorder(3, 15, 10, 15)  
+        ));
 
-            // PAINEL INTERNO QUE POSSUI CADA MUSICA
-            JPanel painelEsquerdo = new JPanel();
-            painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS));
-            painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
+        // PAINEL INTERNO QUE POSSUI CADA MUSICA
+        JPanel painelEsquerdo = new JPanel();
+        painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS)); 
+        painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
 
-            // NOME DA MUSICA POSSUI UMA FONTE MAIOR
-            JLabel lblNome = new JLabel(m.getNome());
-            lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
-            lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
-            painelEsquerdo.add(lblNome);
+        // NOME DA MUSICA POSSUI UMA FONTE MAIOR
+        JLabel lblNome = new JLabel(m.getNome());
+        lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
+        painelEsquerdo.add(lblNome);
 
-            // INFORMAÇÕES FORNECIDAS, ONDE O NOME DO DADO ESTÁ EM NEGRITO
-            JLabel lblArtista = new JLabel("<html><b>Artista:</b> " + m.getArtista().getNomeArtistico() + "</html>");
-            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + m.getGenero() + "</html>");
-            JLabel lblAno = new JLabel("<html><b>Ano:</b> " + m.getAnoLancamento() + "</html>");
-            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + m.getAlbum() + "</html>");
+        // INFORMAÇÕES FORNECIDAS, ONDE O NOME DO DADO ESTÁ EM NEGRITO
+        JLabel lblArtista = new JLabel("<html><b>Artista:</b> " 
+                               + m.getArtista().getNomeArtistico() + "</html>");
+        
+        JLabel lblGenero = new JLabel("<html><b>Gênero:</b> "
+                               + m.getGenero() + "</html>");
+        
+        JLabel lblAno = new JLabel("<html><b>Ano:</b> "
+                               + m.getAnoLancamento() + "</html>");
+        
+        JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " 
+                               + m.getAlbum() + "</html>");
 
-            Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
-            for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
-                lbl.setFont(fonte);
-                lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
-                painelEsquerdo.add(lbl);
-            }
-
-            // PAINEIS PARA OS BOTÕES CURTIR E DESCURTIR
-            JPanel painelDireito = new JPanel();
-            painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
-            painelDireito.setBackground(new java.awt.Color(144, 238, 144));
-
-            // BOTÃO CURTIR
-            JButton btnCurtir = new JButton("Curtir");
-            btnCurtir.setBackground(new java.awt.Color(51,51,51));  
-            btnCurtir.setForeground(new java.awt.Color(0,153,0));
-            btnCurtir.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btnCurtir.setPreferredSize(new java.awt.Dimension(90, 25));
-            btnCurtir.setMaximumSize(new java.awt.Dimension(90, 25));
-
-            // BOTÃO DESCURTIR
-            JButton btnDescurtir = new JButton("Descurtir");
-            btnDescurtir.setBackground(new java.awt.Color(51,51,51));  
-            btnDescurtir.setForeground(new java.awt.Color(200,0,0));
-            btnDescurtir.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btnDescurtir.setPreferredSize(new java.awt.Dimension(90, 25)); 
-            btnDescurtir.setMaximumSize(new java.awt.Dimension(90, 25)); 
-            // Adicionando ActionListener ao botão Curtir
-            btnCurtir.addActionListener(e -> {
-                ControllerMusica controller = new ControllerMusica(usuario, id, this); 
-                
-                controller.curtirMusica(m.getId()); 
-            });
-
-            // Adicionando ActionListener ao botão Descurtir
-            btnDescurtir.addActionListener(e -> {
-                ControllerMusica controller = new ControllerMusica(usuario, id, this);
-                controller.descurtirMusica(m.getId());
-            });
-
-            painelDireito.add(btnCurtir);
-            painelDireito.add(Box.createVerticalStrut(8)); // ESPACO ENTRE BOTOES
-            painelDireito.add(btnDescurtir);
-
-            // PAINEL DIREITO: BOTOES ---- PAINEL ESQUERDO: INFORMAÇÕES
-            musicaPanel.add(painelEsquerdo);
-            musicaPanel.add(painelDireito);
-
-            // TAMANHOS FIXOS DE PAINEIS
-            musicaPanel.setPreferredSize(new java.awt.Dimension(500, 130));
-            musicaPanel.setMaximumSize(new java.awt.Dimension(500, 130));
-            musicaPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-            // EXIBINDO
-            telaMostrar.add(musicaPanel);
-            telaMostrar.add(Box.createVerticalStrut(8)); // GAP ENTRE OBJETOS
+        Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
+        for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
+            lbl.setFont(fonte);
+            lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
+            painelEsquerdo.add(lbl);
         }
 
-        // COMANDOS Q GARANTEM A EXIBIÇÃO NA TELA
-        telaMostrar.revalidate();
-        telaMostrar.repaint();
+        // PAINEL PARA OS BOTÕES CURTIR E DESCURTIR
+        JPanel painelDireito = new JPanel();
+        painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
+        painelDireito.setBackground(new java.awt.Color(144, 238, 144));
+
+        // BOTÃO CURTIR
+        JButton btnCurtir = new JButton("Curtir");
+        btnCurtir.setBackground(new java.awt.Color(51,51,51));  
+        btnCurtir.setForeground(new java.awt.Color(0,153,0));
+        btnCurtir.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnCurtir.setPreferredSize(new java.awt.Dimension(80, 25)); 
+        btnCurtir.setMaximumSize(new java.awt.Dimension(80, 25)); 
+
+        // BOTÃO DESCURTIR
+        JButton btnDescurtir = new JButton("Descurtir");
+        btnDescurtir.setBackground(new java.awt.Color(51,51,51));  
+        btnDescurtir.setForeground(new java.awt.Color(200,0,0));
+        btnDescurtir.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnDescurtir.setPreferredSize(new java.awt.Dimension(80, 25)); 
+        btnDescurtir.setMaximumSize(new java.awt.Dimension(80, 25)); 
+
+        // Adicionando ActionListener ao botão Curtir
+        btnCurtir.addActionListener(e -> {
+            ControllerMusica controller = new ControllerMusica(usuario, id, this); 
+            
+            controller.curtirMusica(m.getId()); 
+        });
+
+        // Adicionando ActionListener ao botão Descurtir
+        btnDescurtir.addActionListener(e -> {
+            ControllerMusica controller = new ControllerMusica(usuario, id, this);
+            controller.descurtirMusica(m.getId());
+        });
+
+        painelDireito.add(btnCurtir);
+        painelDireito.add(Box.createVerticalStrut(8)); // ESPACO ENTRE BOTOES
+        painelDireito.add(btnDescurtir);
+
+        // PAINEL DIREITO: BOTOES ---- PAINEL ESQUERDO: INFORMAÇÕES
+        musicaPanel.add(painelEsquerdo);
+        musicaPanel.add(painelDireito);
+
+        // TAMANHOS FIXOS DE PAINEIS
+        musicaPanel.setPreferredSize(new java.awt.Dimension(400, 130));
+        musicaPanel.setMaximumSize(new java.awt.Dimension(400, 130));
+
+        // OBJETOS ANTES DO 5 FICAM NA COLUNA DA ESQUERDA
+        // OBJETOS DEPOIS DO 5 FICAM NA COLUNA DA DIREITA
+        if (i < 5) {
+            telaMostrar.add(musicaPanel);
+            telaMostrar.add(Box.createVerticalStrut(8)); // GAP ENTRE OBJETOS
+        } else {
+            musicaPanel.setPreferredSize(new java.awt.Dimension(400, 129)); 
+            musicaPanel.setMaximumSize(new java.awt.Dimension(400, 129));
+            telaMostrar2.add(musicaPanel);
+            telaMostrar2.add(Box.createVerticalStrut(8)); // GAP ENTRE OBJETOS 
+        }
     }
+
+    // COMANDOS Q GARANTEM A EXIBIÇÃO NA TELA
+    telaMostrar.revalidate();
+    telaMostrar.repaint();
+    telaMostrar2.revalidate();
+    telaMostrar2.repaint();
+}
+
 
 
     /**
@@ -165,6 +185,7 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         titulo4 = new javax.swing.JLabel();
         btnVoltar1 = new javax.swing.JButton();
         telaMostrar = new javax.swing.JPanel();
+        telaMostrar2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Músicas encontradas");
@@ -212,11 +233,24 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         telaMostrar.setLayout(telaMostrarLayout);
         telaMostrarLayout.setHorizontalGroup(
             telaMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 759, Short.MAX_VALUE)
+            .addGap(0, 401, Short.MAX_VALUE)
         );
         telaMostrarLayout.setVerticalGroup(
             telaMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 546, Short.MAX_VALUE)
+            .addGap(0, 688, Short.MAX_VALUE)
+        );
+
+        telaMostrar2.setBackground(new java.awt.Color(144, 238, 144));
+
+        javax.swing.GroupLayout telaMostrar2Layout = new javax.swing.GroupLayout(telaMostrar2);
+        telaMostrar2.setLayout(telaMostrar2Layout);
+        telaMostrar2Layout.setHorizontalGroup(
+            telaMostrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        telaMostrar2Layout.setVerticalGroup(
+            telaMostrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
@@ -227,17 +261,24 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
             .addGroup(painelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(telaMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(telaMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(telaMostrar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelLayout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(telaMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
+                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(telaMostrar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(telaMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
                 .addComponent(btnVoltar1)
                 .addGap(21, 21, 21))
         );
@@ -280,6 +321,7 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel painel;
     private javax.swing.JPanel telaMostrar;
+    private javax.swing.JPanel telaMostrar2;
     private javax.swing.JLabel titulo4;
     // End of variables declaration//GEN-END:variables
 }
