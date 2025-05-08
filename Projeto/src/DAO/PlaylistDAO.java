@@ -21,9 +21,6 @@ public class PlaylistDAO {
     public PlaylistDAO(Connection conn){
         this.conn = conn;
     }
-
-    public PlaylistDAO() {
-    }
     
     
     public boolean criarPlaylist(Playlist playlist) throws SQLException{
@@ -32,7 +29,7 @@ public class PlaylistDAO {
         statement.setString(1, playlist.getNome());
         statement.setInt(2, playlist.getIdUsuario());
         int linha = statement.executeUpdate();
-        return linha > 0;
+        return linha > 0; // se for maior que 0 é porque foi criado!
     }   
     
     public boolean verificaNome(String nomePlaylist, int id) throws SQLException{
@@ -44,7 +41,7 @@ public class PlaylistDAO {
         ResultSet res = statement.executeQuery();
         if (res.next()) {
             int count = res.getInt(1);
-            return count > 0;
+            return count > 0; // se for maior que 0 é porque ja existe!
         }
         return false;
     }
@@ -71,22 +68,22 @@ public class PlaylistDAO {
         return playlists;
     }
     
-    private ArrayList<Musica> buscarMusicas(int idPlaylist) throws SQLException {
+       private ArrayList<Musica> buscarMusicas(int idPlaylist) throws SQLException {
         ArrayList<Musica> musicas = new ArrayList<>();
         String sql = "SELECT m.* FROM musica m " +
-                     "JOIN musica_playlist mp ON m.id = mp.id_musica " +
-                     "WHERE mp.id_playlist = ?";
+                     "JOIN musicas_da_playlist pm ON m.id = pm.id_musica " +
+                     "WHERE pm.id_playlist = ?"; 
+            // busca musicas da playlist com o id solicitado
+            
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, idPlaylist);
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
-            Musica musica = new Musica(
-                rs.getString("nome")
-            );
+            Musica musica = new Musica(rs.getString("nome"));
             musicas.add(musica);
         }
-
+        
         return musicas;
     }
 }

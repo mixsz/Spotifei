@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import view.EditarPlaylistFrame;
 import view.GerenciarPlaylistFrame;
+import java.sql.Connection;
+
 /**
  *
  * @author Danilo
@@ -75,5 +77,21 @@ public class ControllerPlaylist {
                                           "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }  
+
+     public ArrayList<Playlist> getPlaylists(int usuarioId) {
+        try {
+            Conexao conexao = new Conexao();
+
+            Connection conn = conexao.getConnection(); 
+            
+            PlaylistDAO playlistDAO = new PlaylistDAO(conn);
+
+            return playlistDAO.acharPlaylists(usuarioId);
+        } 
+        catch (SQLException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
     
 }

@@ -4,6 +4,7 @@
  */
 package view;
 
+import DAO.PlaylistDAO;
 import controller.ControllerPlaylist;
 import java.awt.Component;
 import java.awt.Font;
@@ -36,7 +37,19 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
     public EditarPlaylistFrame(String username, int id) {
         initComponents();
         this.usuario = username;
-        this.id = id;   
+        this.id = id; 
+        this.controller = new ControllerPlaylist(this.usuario,this.id,this);
+        this.playlists = controller.getPlaylists(id);
+        exibirPlaylists(); // ver se funciona
+    }
+    
+    private void exibirPlaylists() {
+        for (Playlist playlist : playlists) {
+            System.out.println("Playlist: " + playlist.getNome());
+            for (Musica musica : playlist.getMusicas()) {
+                System.out.println("  - " + musica.getNome());
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -171,110 +184,6 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
         hm.setVisible(true);
     }//GEN-LAST:event_btnVoltar1ActionPerformed
     
-    private void mostrarPlaylists() {
-    telaMostrar.removeAll();
-    telaMostrar2.removeAll(); 
-    telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
-    telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
-
-    // Aqui você pode determinar o número máximo de playlists a exibir, como no caso das músicas
-    int limite = Math.min(playlists.size(), 10);
-
-    for (int i = 0; i < limite; i++) {
-        Playlist p = playlists.get(i);
-
-        JPanel playlistPanel = new JPanel();
-        playlistPanel.setLayout(new BoxLayout(playlistPanel, BoxLayout.X_AXIS)); 
-        playlistPanel.setBackground(new java.awt.Color(144, 238, 144));
-
-        // Borda com tamanhos fixos e cores fixas
-        playlistPanel.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
-            BorderFactory.createEmptyBorder(3, 15, 10, 15)
-        ));
-
-        // Painel interno que possui as informações da playlist
-        JPanel painelEsquerdo = new JPanel();
-        painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS)); 
-        painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
-
-        // Nome da Playlist possui uma fonte maior
-        JLabel lblNomePlaylist = new JLabel(p.getNome());
-        lblNomePlaylist.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
-        lblNomePlaylist.setAlignmentX(Component.LEFT_ALIGNMENT);
-        painelEsquerdo.add(lblNomePlaylist);
-
-        // Exibir as músicas da playlist
-        ArrayList<Musica> musicasPlaylist = p.getMusicas();
-        for (Musica musica : musicasPlaylist) {
-            JLabel lblMusica = new JLabel("<html><b>•</b> " + musica.getNome() + "</html>");
-            lblMusica.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 15));
-            lblMusica.setAlignmentX(Component.LEFT_ALIGNMENT);
-            painelEsquerdo.add(lblMusica);
-        }
-
-        // Painel para os botões Renomear, Adicionar, Remover
-        JPanel painelDireito = new JPanel();
-        painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
-        painelDireito.setBackground(new java.awt.Color(144, 238, 144));
-
-        // Botão Renomear
-        JButton btnRenomear = new JButton("Renomear");
-        btnRenomear.setBackground(new java.awt.Color(51,51,51));  
-        btnRenomear.setForeground(new java.awt.Color(0,153,0));
-        btnRenomear.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnRenomear.setPreferredSize(new java.awt.Dimension(100, 25)); 
-        btnRenomear.setMaximumSize(new java.awt.Dimension(100, 25));
-
-        // Botão Adicionar Música
-        JButton btnAdicionar = new JButton("Adicionar");
-        btnAdicionar.setBackground(new java.awt.Color(51,51,51));  
-        btnAdicionar.setForeground(new java.awt.Color(0,153,255));
-        btnAdicionar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnAdicionar.setPreferredSize(new java.awt.Dimension(100, 25)); 
-        btnAdicionar.setMaximumSize(new java.awt.Dimension(100, 25)); 
-
-        // Botão Remover
-        JButton btnRemover = new JButton("Remover");
-        btnRemover.setBackground(new java.awt.Color(51,51,51));  
-        btnRemover.setForeground(new java.awt.Color(255, 0, 0));
-        btnRemover.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnRemover.setPreferredSize(new java.awt.Dimension(100, 25)); 
-        btnRemover.setMaximumSize(new java.awt.Dimension(100, 25)); 
-
-        // Adicionando os botões ao painel
-        painelDireito.add(btnRenomear);
-        painelDireito.add(Box.createVerticalStrut(8)); // Espaço entre botões
-        painelDireito.add(btnAdicionar);
-        painelDireito.add(Box.createVerticalStrut(8)); // Espaço entre botões
-        painelDireito.add(btnRemover);
-
-        // Painel Direita: Botões ---- Painel Esquerdo: Informações
-        playlistPanel.add(painelEsquerdo);
-        playlistPanel.add(painelDireito);
-
-        // Tamanhos fixos de painéis
-        playlistPanel.setPreferredSize(new java.awt.Dimension(500, 200));
-        playlistPanel.setMaximumSize(new java.awt.Dimension(500, 200));
-
-        // Adiciona as playlists na tela com base no índice
-        if (i < 5) {
-            telaMostrar.add(playlistPanel);
-            telaMostrar.add(Box.createVerticalStrut(8)); // Gap entre objetos
-        } else {
-            playlistPanel.setPreferredSize(new java.awt.Dimension(500, 199)); 
-            playlistPanel.setMaximumSize(new java.awt.Dimension(500, 199));
-            telaMostrar2.add(playlistPanel);
-            telaMostrar2.add(Box.createVerticalStrut(8)); // Gap entre objetos 
-        }
-    }
-
-    // Comandos que garantem a exibição na tela
-    telaMostrar.revalidate();
-    telaMostrar.repaint();
-    telaMostrar2.revalidate();
-    telaMostrar2.repaint();
-}
     /**
      * @param args the command line arguments
      */
