@@ -4,7 +4,7 @@
  */
 package view;
 
-import controller.ControllerMusica;
+import controller.ControllerPlaylist;
 import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -13,168 +13,31 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Musica;
-
+import model.Playlist;
+import java.sql.SQLException;
 /**
  *
- * @author Danilo
+ * @author Dan
  */
-public class ResultadoMusicaFrame extends javax.swing.JFrame {
+public class EditarPlaylistFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form ResultadoMusicaFrame
+     * Creates new form EditarPlaylistFrame
      */
+    
     private String usuario;
     private int id;
-    private ArrayList <Musica> musicas;
-    private ControllerMusica controllerMusica;
+    private ControllerPlaylist controller;
+    private ArrayList<Playlist> playlists;
 
-    public ResultadoMusicaFrame(String usuario, int id, ArrayList<Musica> musicas) {
+    public EditarPlaylistFrame(String username, int id) {
         initComponents();
-        this.controllerMusica = controllerMusica;
-        this.usuario = usuario;
-        this.id = id;
-        this.musicas = musicas;
-        mostrarMusicas();
-         for(Musica m : musicas){
-            System.out.println("Artista: " + m.getArtista() +
-                                "\nNome: " + m.getNome() +
-                                "\nGenero: " + m.getGenero() +
-                                "\nAno: " + m.getAnoLancamento() + 
-                                "\nAlbum: " + m.getAlbum() + 
-                                "\nID: " + m.getId() +
-                                '\n');
-        }
+        this.usuario = username;
+        this.id = id;   
     }
-    
-    private void mostrarMusicas() {
-        telaMostrar.removeAll();
-        telaMostrar2.removeAll(); 
-        telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
-        telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
-
-        // A PESQUISA SÓ VAI ATÉ 10 PORQUE MAIOR QUE ISSO PASSA DO TAMANHO DA TELA
-        // 5 DE CADA LADO: 0 a 4 -> telaMostrar /// 5 a 9 -> telaMostrar2
-        int limite = Math.min(musicas.size(), 10);
-
-        for (int i = 0; i < limite; i++) {
-            Musica m = musicas.get(i);
-
-            JPanel musicaPanel = new JPanel();
-            musicaPanel.setLayout(new BoxLayout(musicaPanel, BoxLayout.X_AXIS)); 
-            musicaPanel.setBackground(new java.awt.Color(144, 238, 144));
-
-            // BORDA COM TAMANHOS FIXOS E CORES FIXAS
-            musicaPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
-                BorderFactory.createEmptyBorder(3, 15, 10, 15)  
-            ));
-
-            // PAINEL INTERNO QUE POSSUI CADA MUSICA
-            JPanel painelEsquerdo = new JPanel();
-            painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS)); 
-            painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
-
-            // NOME DA MUSICA POSSUI UMA FONTE MAIOR
-            JLabel lblNome = new JLabel(m.getNome());
-            lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
-            lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
-            painelEsquerdo.add(lblNome);
-
-            // INFORMAÇÕES FORNECIDAS, ONDE O NOME DO DADO ESTÁ EM NEGRITO
-            JLabel lblArtista = new JLabel("<html><b>Artista:</b> " 
-                                   + m.getArtista().getNomeArtistico() + "</html>");
-
-            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> "
-                                   + m.getGenero() + "</html>");
-
-            JLabel lblAno = new JLabel("<html><b>Ano:</b> "
-                                   + m.getAnoLancamento() + "</html>");
-
-            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " 
-                                   + m.getAlbum() + "</html>");
-
-            Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
-            for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
-                lbl.setFont(fonte);
-                lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
-                painelEsquerdo.add(lbl);
-            }
-
-            // PAINEL PARA OS BOTÕES CURTIR E DESCURTIR
-            JPanel painelDireito = new JPanel();
-            painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
-            painelDireito.setBackground(new java.awt.Color(144, 238, 144));
-
-            // BOTÃO CURTIR
-            JButton btnCurtir = new JButton("Curtir");
-            btnCurtir.setBackground(new java.awt.Color(51,51,51));  
-            btnCurtir.setForeground(new java.awt.Color(0,153,0));
-            btnCurtir.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btnCurtir.setPreferredSize(new java.awt.Dimension(80, 25)); 
-            btnCurtir.setMaximumSize(new java.awt.Dimension(80, 25)); 
-
-            // BOTÃO DESCURTIR
-            JButton btnDescurtir = new JButton("Descurtir");
-            btnDescurtir.setBackground(new java.awt.Color(51,51,51));  
-            btnDescurtir.setForeground(new java.awt.Color(200,0,0));
-            btnDescurtir.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btnDescurtir.setPreferredSize(new java.awt.Dimension(80, 25)); 
-            btnDescurtir.setMaximumSize(new java.awt.Dimension(80, 25)); 
-
-            // Adicionando ActionListener ao botão Curtir
-            btnCurtir.addActionListener(e -> {
-                ControllerMusica controller = new ControllerMusica(usuario, id, this); 
-
-                controller.curtirMusica(m.getId()); 
-            });
-
-            // Adicionando ActionListener ao botão Descurtir
-            btnDescurtir.addActionListener(e -> {
-                ControllerMusica controller = new ControllerMusica(usuario, id, this);
-                controller.descurtirMusica(m.getId());
-            });
-
-            painelDireito.add(btnCurtir);
-            painelDireito.add(Box.createVerticalStrut(8)); // ESPACO ENTRE BOTOES
-            painelDireito.add(btnDescurtir);
-
-            // PAINEL DIREITO: BOTOES ---- PAINEL ESQUERDO: INFORMAÇÕES
-            musicaPanel.add(painelEsquerdo);
-            musicaPanel.add(painelDireito);
-
-            // TAMANHOS FIXOS DE PAINEIS
-            musicaPanel.setPreferredSize(new java.awt.Dimension(400, 130));
-            musicaPanel.setMaximumSize(new java.awt.Dimension(400, 130));
-
-            // OBJETOS ANTES DO 5 FICAM NA COLUNA DA ESQUERDA
-            // OBJETOS DEPOIS DO 5 FICAM NA COLUNA DA DIREITA
-            if (i < 5) {
-                telaMostrar.add(musicaPanel);
-                telaMostrar.add(Box.createVerticalStrut(8)); // GAP ENTRE OBJETOS
-            } else {
-                musicaPanel.setPreferredSize(new java.awt.Dimension(400, 129)); 
-                musicaPanel.setMaximumSize(new java.awt.Dimension(400, 129));
-                telaMostrar2.add(musicaPanel);
-                telaMostrar2.add(Box.createVerticalStrut(8)); // GAP ENTRE OBJETOS 
-            }
-        }
-
-        // COMANDOS Q GARANTEM A EXIBIÇÃO NA TELA
-        telaMostrar.revalidate();
-        telaMostrar.repaint();
-        telaMostrar2.revalidate();
-        telaMostrar2.repaint();
-    }
-
-
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -188,8 +51,6 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         telaMostrar2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Músicas encontradas");
-        setBackground(new java.awt.Color(144, 238, 144));
 
         painel.setBackground(new java.awt.Color(144, 238, 144));
         painel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -301,20 +162,153 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
-    
+
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
         this.setVisible(false);
-        BuscarMusicaFrame hm = new BuscarMusicaFrame(usuario,id);
+        GerenciarPlaylistFrame hm = new GerenciarPlaylistFrame(usuario,id);
         hm.setLocationRelativeTo(null);
         hm.setVisible(true);
     }//GEN-LAST:event_btnVoltar1ActionPerformed
     
+    private void mostrarPlaylists() {
+    telaMostrar.removeAll();
+    telaMostrar2.removeAll(); 
+    telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
+    telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
+
+    // Aqui você pode determinar o número máximo de playlists a exibir, como no caso das músicas
+    int limite = Math.min(playlists.size(), 10);
+
+    for (int i = 0; i < limite; i++) {
+        Playlist p = playlists.get(i);
+
+        JPanel playlistPanel = new JPanel();
+        playlistPanel.setLayout(new BoxLayout(playlistPanel, BoxLayout.X_AXIS)); 
+        playlistPanel.setBackground(new java.awt.Color(144, 238, 144));
+
+        // Borda com tamanhos fixos e cores fixas
+        playlistPanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
+            BorderFactory.createEmptyBorder(3, 15, 10, 15)
+        ));
+
+        // Painel interno que possui as informações da playlist
+        JPanel painelEsquerdo = new JPanel();
+        painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS)); 
+        painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
+
+        // Nome da Playlist possui uma fonte maior
+        JLabel lblNomePlaylist = new JLabel(p.getNome());
+        lblNomePlaylist.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        lblNomePlaylist.setAlignmentX(Component.LEFT_ALIGNMENT);
+        painelEsquerdo.add(lblNomePlaylist);
+
+        // Exibir as músicas da playlist
+        ArrayList<Musica> musicasPlaylist = p.getMusicas();
+        for (Musica musica : musicasPlaylist) {
+            JLabel lblMusica = new JLabel("<html><b>•</b> " + musica.getNome() + "</html>");
+            lblMusica.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 15));
+            lblMusica.setAlignmentX(Component.LEFT_ALIGNMENT);
+            painelEsquerdo.add(lblMusica);
+        }
+
+        // Painel para os botões Renomear, Adicionar, Remover
+        JPanel painelDireito = new JPanel();
+        painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
+        painelDireito.setBackground(new java.awt.Color(144, 238, 144));
+
+        // Botão Renomear
+        JButton btnRenomear = new JButton("Renomear");
+        btnRenomear.setBackground(new java.awt.Color(51,51,51));  
+        btnRenomear.setForeground(new java.awt.Color(0,153,0));
+        btnRenomear.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnRenomear.setPreferredSize(new java.awt.Dimension(100, 25)); 
+        btnRenomear.setMaximumSize(new java.awt.Dimension(100, 25));
+
+        // Botão Adicionar Música
+        JButton btnAdicionar = new JButton("Adicionar");
+        btnAdicionar.setBackground(new java.awt.Color(51,51,51));  
+        btnAdicionar.setForeground(new java.awt.Color(0,153,255));
+        btnAdicionar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdicionar.setPreferredSize(new java.awt.Dimension(100, 25)); 
+        btnAdicionar.setMaximumSize(new java.awt.Dimension(100, 25)); 
+
+        // Botão Remover
+        JButton btnRemover = new JButton("Remover");
+        btnRemover.setBackground(new java.awt.Color(51,51,51));  
+        btnRemover.setForeground(new java.awt.Color(255, 0, 0));
+        btnRemover.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnRemover.setPreferredSize(new java.awt.Dimension(100, 25)); 
+        btnRemover.setMaximumSize(new java.awt.Dimension(100, 25)); 
+
+        // Adicionando os botões ao painel
+        painelDireito.add(btnRenomear);
+        painelDireito.add(Box.createVerticalStrut(8)); // Espaço entre botões
+        painelDireito.add(btnAdicionar);
+        painelDireito.add(Box.createVerticalStrut(8)); // Espaço entre botões
+        painelDireito.add(btnRemover);
+
+        // Painel Direita: Botões ---- Painel Esquerdo: Informações
+        playlistPanel.add(painelEsquerdo);
+        playlistPanel.add(painelDireito);
+
+        // Tamanhos fixos de painéis
+        playlistPanel.setPreferredSize(new java.awt.Dimension(500, 200));
+        playlistPanel.setMaximumSize(new java.awt.Dimension(500, 200));
+
+        // Adiciona as playlists na tela com base no índice
+        if (i < 5) {
+            telaMostrar.add(playlistPanel);
+            telaMostrar.add(Box.createVerticalStrut(8)); // Gap entre objetos
+        } else {
+            playlistPanel.setPreferredSize(new java.awt.Dimension(500, 199)); 
+            playlistPanel.setMaximumSize(new java.awt.Dimension(500, 199));
+            telaMostrar2.add(playlistPanel);
+            telaMostrar2.add(Box.createVerticalStrut(8)); // Gap entre objetos 
+        }
+    }
+
+    // Comandos que garantem a exibição na tela
+    telaMostrar.revalidate();
+    telaMostrar.repaint();
+    telaMostrar2.revalidate();
+    telaMostrar2.repaint();
+}
     /**
      * @param args the command line arguments
      */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(EditarPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(EditarPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(EditarPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(EditarPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new EditarPlaylistFrame().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVoltar1;

@@ -48,6 +48,10 @@ public class Musica {
         this.album = album;
     }
 
+    public Musica(String nome) {
+        this.nome = nome;
+    }
+
     public int getId() {
         return id;
     }

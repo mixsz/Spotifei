@@ -286,7 +286,10 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarMusicaActionPerformed
   
     private void btnGerenciarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarPlaylistActionPerformed
-        // TODO add your handling code here:
+         this.setVisible(false);
+         GerenciarPlaylistFrame gm = new GerenciarPlaylistFrame(this.usuario,this.id); 
+         gm.setLocationRelativeTo(null);
+         gm.setVisible(true);
     }//GEN-LAST:event_btnGerenciarPlaylistActionPerformed
 
     private void btnVisualizarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarHistoricoActionPerformed
