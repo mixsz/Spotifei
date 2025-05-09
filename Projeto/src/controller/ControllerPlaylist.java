@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import view.EditarPlaylistFrame;
 import view.GerenciarPlaylistFrame;
 import java.sql.Connection;
+import view.RenomearPlaylistFrame;
 
 /**
  *
@@ -25,6 +26,8 @@ public class ControllerPlaylist {
     private String usuario;
     private int id;
     private EditarPlaylistFrame view2;
+    private RenomearPlaylistFrame view3;
+
 
     public ControllerPlaylist(CriarPlaylistFrame view, String usuario, int id) {
         this.view = view;
@@ -36,6 +39,12 @@ public class ControllerPlaylist {
         this.usuario = usuario;
         this.id = id;
         this.view2 = view2;
+    }
+
+    public ControllerPlaylist(String usuario, int id, RenomearPlaylistFrame view3) {
+        this.usuario = usuario;
+        this.id = id;
+        this.view3 = view3;
     }
     
     
@@ -93,5 +102,53 @@ public class ControllerPlaylist {
             return new ArrayList<>();
         }
     }
-    
+     
+    public void renomearPlaylist() {
+        String nome = view3.getTxtNomePlaylist().getText();
+        int idPlaylist = view3.getIdPlaylist(); 
+
+        if (nome == null || nome.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, 
+                                        "O nome está vazio!",
+                                         "Erro", JOptionPane.ERROR_MESSAGE); 
+            return;
+        }
+
+        try {
+            Conexao conexao = new Conexao();
+            Connection conn = conexao.getConnection();
+            PlaylistDAO playlistDAO = new PlaylistDAO(conn);
+            
+             boolean existe = playlistDAO.verificaNome(nome, id);
+
+                if (existe) {
+                JOptionPane.showMessageDialog(null, 
+                        "Este nome de playlist está em uso!", 
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+                
+            boolean sucesso = playlistDAO.renomearPlaylistDAO(idPlaylist, nome);
+
+            if (sucesso) {
+                 JOptionPane.showMessageDialog(null, 
+                                    "Playlist renomeada com sucesso!", 
+                                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                view3.dispose();
+                EditarPlaylistFrame hm = new EditarPlaylistFrame(usuario,id);
+                hm.setLocationRelativeTo(null);
+                hm.setVisible(true);
+            } 
+            else {
+                 JOptionPane.showMessageDialog(null, 
+                                        "Erro ao renomear playlist!",
+                                         "Erro", JOptionPane.ERROR_MESSAGE); 
+            }
+        } 
+        catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro de conexão!",
+                                         "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    } 
 }

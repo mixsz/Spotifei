@@ -68,13 +68,13 @@ public class PlaylistDAO {
         return playlists;
     }
     
-       private ArrayList<Musica> buscarMusicas(int idPlaylist) throws SQLException {
+    private ArrayList<Musica> buscarMusicas(int idPlaylist) throws SQLException {
         ArrayList<Musica> musicas = new ArrayList<>();
         String sql = "SELECT m.* FROM musica m " +
                      "JOIN musicas_da_playlist pm ON m.id = pm.id_musica " +
                      "WHERE pm.id_playlist = ?"; 
             // busca musicas da playlist com o id solicitado
-            
+
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, idPlaylist);
         ResultSet rs = stmt.executeQuery();
@@ -83,7 +83,18 @@ public class PlaylistDAO {
             Musica musica = new Musica(rs.getString("nome"));
             musicas.add(musica);
         }
-        
+
         return musicas;
+    }
+       
+       
+    public boolean renomearPlaylistDAO(int idPlaylist, String nome) throws SQLException {
+        String sql = "UPDATE playlist SET nome = ? WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, nome);
+        stmt.setInt(2, idPlaylist);
+
+        int rowsUpdated = stmt.executeUpdate();
+        return rowsUpdated > 0;
     }
 }

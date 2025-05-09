@@ -112,16 +112,16 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
             btnCurtir.setBackground(new java.awt.Color(51,51,51));  
             btnCurtir.setForeground(new java.awt.Color(0,153,0));
             btnCurtir.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btnCurtir.setPreferredSize(new java.awt.Dimension(80, 25)); 
-            btnCurtir.setMaximumSize(new java.awt.Dimension(80, 25)); 
+            btnCurtir.setPreferredSize(new java.awt.Dimension(90, 25)); 
+            btnCurtir.setMaximumSize(new java.awt.Dimension(90, 25)); 
 
             // BOTÃO DESCURTIR
             JButton btnDescurtir = new JButton("Descurtir");
             btnDescurtir.setBackground(new java.awt.Color(51,51,51));  
             btnDescurtir.setForeground(new java.awt.Color(200,0,0));
             btnDescurtir.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btnDescurtir.setPreferredSize(new java.awt.Dimension(80, 25)); 
-            btnDescurtir.setMaximumSize(new java.awt.Dimension(80, 25)); 
+            btnDescurtir.setPreferredSize(new java.awt.Dimension(90, 25)); 
+            btnDescurtir.setMaximumSize(new java.awt.Dimension(90, 25)); 
 
             // Adicionando ActionListener ao botão Curtir
             btnCurtir.addActionListener(e -> {

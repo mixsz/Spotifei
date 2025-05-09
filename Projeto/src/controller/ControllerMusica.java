@@ -12,6 +12,7 @@ import DAO.MusicaDAO;
 import java.util.ArrayList;
 import model.Musica;
 import java.sql.Connection;
+import view.AdicionarMusicaFrame;
 import view.ResultadoMusicaFrame;
 
 /**
@@ -23,7 +24,8 @@ public class ControllerMusica {
     private String usuario;
     private int id;
     private ResultadoMusicaFrame view2;
-    
+    private AdicionarMusicaFrame view3;
+
     public ControllerMusica(BuscarMusicaFrame view,String usuario,int id) {
         this.view = view;
         this.usuario = usuario;
@@ -36,6 +38,11 @@ public class ControllerMusica {
         this.view2 = view2;
     }
      
+    public ControllerMusica(AdicionarMusicaFrame view3,String usuario,int id) {
+        this.view3 = view3;
+        this.usuario = usuario;
+        this.id = id;
+    }
     
     public void buscarMusica(){
         String nome = view.getTxtNome().getText();
@@ -99,6 +106,41 @@ public class ControllerMusica {
                                       "Erro", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+    }
+    
+    public ArrayList<Musica> buscarMusicasSimples() {
+        String nome = view3.getTxtMusica().getText();
+        String artista = view3.getTxtArtista().getText();
+        String genero = view3.getTxtGenero().getText();
+        ArrayList<Musica> musicas = new ArrayList<>();
+
+      
+          if ((nome == null || nome.isEmpty()) && 
+            (artista == null || artista.isEmpty()) && 
+            (genero == null || genero.isEmpty())) {        
+            return new ArrayList<>();
+        }
+          
+        try {
+            Conexao conexao = new Conexao();
+            Connection conn = conexao.getConnection();
+            MusicaDAO musicaDAO = new MusicaDAO(conn);
+
+            musicas = musicaDAO.buscarMusicas(
+                nome.isEmpty() ? null : nome, 
+                artista.isEmpty() ? null : artista, 
+                genero.isEmpty() ? null : genero
+            );
+             
+        } 
+        catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+            "Erro ao buscar músicas: " + e.getMessage(),
+            "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return new ArrayList<>(); 
+        }
+        return musicas;
     }
     
     

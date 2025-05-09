@@ -7,7 +7,10 @@ package view;
 import DAO.PlaylistDAO;
 import controller.ControllerPlaylist;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -40,10 +43,11 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
         this.id = id; 
         this.controller = new ControllerPlaylist(this.usuario,this.id,this);
         this.playlists = controller.getPlaylists(id);
-        exibirPlaylists(); // ver se funciona
+//        exibirPlaylists(); // ver se funciona
+        mostrarPlaylists();
     }
     
-    private void exibirPlaylists() {
+    private void exibirPlaylists() { // pra testar
         for (Playlist playlist : playlists) {
             System.out.println("Playlist: " + playlist.getNome());
             for (Musica musica : playlist.getMusicas()) {
@@ -51,6 +55,171 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
             }
         }
     }
+    private void mostrarPlaylists() {
+        telaMostrar.removeAll();
+        telaMostrar2.removeAll(); 
+        telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
+        telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
+
+        if (playlists.isEmpty()) {
+            // SE N TIVER PLAYLISTS MOSTRA ISSO:
+            JLabel lblSemPlaylists = new JLabel("Ops! Nenhuma playlist por aqui!");
+            lblSemPlaylists.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 50));
+            telaMostrar.add(lblSemPlaylists);
+            telaMostrar.revalidate();
+            telaMostrar.repaint();
+            return;
+        }
+
+        int limite = Math.min(playlists.size(), 6);  // 3 PLAYLISTS POR COLUNA
+
+        for (int i = 0; i < limite; i++) {
+            Playlist p = playlists.get(i);
+
+            JPanel playlistPanel = new JPanel();
+            playlistPanel.setLayout(new BoxLayout(playlistPanel, BoxLayout.X_AXIS)); 
+            playlistPanel.setBackground(new java.awt.Color(144, 238, 144));
+            playlistPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
+                BorderFactory.createEmptyBorder(5, 15, 10, 15)
+            ));
+
+            // COLUNA ESQUERDA
+            JPanel colEsquerda = new JPanel();
+            colEsquerda.setLayout(new BoxLayout(colEsquerda, BoxLayout.Y_AXIS)); 
+            colEsquerda.setBackground(new java.awt.Color(144, 238, 144));
+            colEsquerda.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            // TITULO
+            JLabel lblNome = new JLabel(p.getNome());
+            lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+            colEsquerda.add(lblNome);
+
+            // GAP DO TITULO E MUSICAS
+            colEsquerda.add(Box.createVerticalStrut(5)); 
+
+            Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
+            if (!p.getMusicas().isEmpty()) {
+                ArrayList<Musica> musicasDaPlaylist = p.getMusicas();
+                int maxMusicas = 6;
+
+                for (int j = 0; j < Math.min(musicasDaPlaylist.size(), maxMusicas); j++) {
+                    JLabel lblMusica = new JLabel("- " + musicasDaPlaylist.get(j).getNome());
+                    lblMusica.setFont(fonte);
+                    colEsquerda.add(lblMusica);
+                }
+                if (musicasDaPlaylist.size() > maxMusicas) {
+                    JLabel lblMais = new JLabel("  Mais...");
+                    Font f = new Font("Segoe UI Bold", Font.BOLD, 40);
+                    lblMais.setForeground(new java.awt.Color(51, 51, 51));
+                    colEsquerda.add(lblMais);
+                }
+
+            } else {
+                // SE N TIVER MUSICA NA PLAYLIST, APARECE ESSA MENSAGEM
+                JLabel lblVazia = new JLabel("Sem músicas por aqui!");
+                lblVazia.setFont(fonte);
+                colEsquerda.add(lblVazia);
+
+                colEsquerda.add(Box.createVerticalGlue());
+            }
+
+            // COL DIREITA
+            JPanel colDireita = new JPanel();
+            colDireita.setLayout(new BoxLayout(colDireita, BoxLayout.Y_AXIS)); 
+            colDireita.setBackground(new java.awt.Color(144, 238, 144));
+            colDireita.setAlignmentX(Component.LEFT_ALIGNMENT);  
+
+            // BTN RENOMEAR
+            JButton btnRenomear = new JButton("Renomear");
+            btnRenomear.setBackground(new java.awt.Color(204, 102, 0));
+            btnRenomear.setForeground(new java.awt.Color(51, 51, 51));
+            btnRenomear.setAlignmentX(Component.CENTER_ALIGNMENT);
+            btnRenomear.setPreferredSize(new java.awt.Dimension(95, 25));
+            btnRenomear.setMaximumSize(new java.awt.Dimension(95, 25)); 
+            
+            btnRenomear.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    
+                    int idPlaylist = p.getId(); 
+                    String nomePlaylist = p.getNome(); 
+
+                    RenomearPlaylistFrame renomearFrame = 
+                            new RenomearPlaylistFrame(usuario, id, 
+                                                    idPlaylist,nomePlaylist);
+                    dispose();
+                    renomearFrame.setLocationRelativeTo(null);
+
+                    renomearFrame.setVisible(true);
+                    
+                }
+            });
+            
+            colDireita.add(Box.createVerticalStrut(0)); 
+            colDireita.add(btnRenomear);
+
+            colDireita.add(Box.createVerticalStrut(15));
+
+            // BTN ADICIONAR
+            JButton btnAdicionar = new JButton("Adicionar");
+            btnAdicionar.setBackground(new java.awt.Color(73, 151, 51)); 
+            btnAdicionar.setForeground(new java.awt.Color(51, 51, 51));
+            btnAdicionar.setAlignmentX(Component.CENTER_ALIGNMENT);
+            btnAdicionar.setPreferredSize(new java.awt.Dimension(95, 25)); 
+            btnAdicionar.setMaximumSize(new java.awt.Dimension(95, 25));
+            btnAdicionar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    int idPlaylist = p.getId();
+                    String nomePlaylist = p.getNome();
+                    
+                    AdicionarMusicaFrame adicionarMusicaFrame =
+                        new AdicionarMusicaFrame(usuario, id, idPlaylist,nomePlaylist);
+
+                    dispose(); // fecha a tela atual, se quiser
+                    adicionarMusicaFrame.setLocationRelativeTo(null);
+                    adicionarMusicaFrame.setVisible(true);
+                }
+            });
+            colDireita.add(Box.createVerticalStrut(70));  
+            colDireita.add(btnAdicionar);
+
+            // BTN REMOVER
+            JButton btnRemover = new JButton("Remover");
+            btnRemover.setBackground(new java.awt.Color(153, 51, 0)); 
+            btnRemover.setForeground(new java.awt.Color(51, 51, 51));
+            btnRemover.setAlignmentX(Component.CENTER_ALIGNMENT);
+            btnRemover.setPreferredSize(new java.awt.Dimension(95, 25));
+            btnRemover.setMaximumSize(new java.awt.Dimension(95, 25));
+
+            colDireita.add(Box.createVerticalStrut(10)); 
+            colDireita.add(btnRemover);
+
+            // ADICIONA NA PLAYLIST 
+            playlistPanel.add(colEsquerda);
+            playlistPanel.add(colDireita);
+
+            // TAMANHO AJUSTADO
+            playlistPanel.setPreferredSize(new java.awt.Dimension(370, 200));
+            playlistPanel.setMaximumSize(new java.awt.Dimension(370, 200));
+
+            // DEPENDENDO DO INDICE DA PLAYLIST, VAI PRA COLUNA X
+            if (i < 3) {
+                telaMostrar.add(playlistPanel);
+                telaMostrar.add(Box.createVerticalStrut(10)); 
+            } else {
+                telaMostrar2.add(playlistPanel);
+                telaMostrar2.add(Box.createVerticalStrut(10));
+            }
+        }
+
+        telaMostrar.revalidate();
+        telaMostrar.repaint();
+        telaMostrar2.revalidate();
+        telaMostrar2.repaint();
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -64,6 +233,7 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
         telaMostrar2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Editar Playlist");
 
         painel.setBackground(new java.awt.Color(144, 238, 144));
         painel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -228,3 +398,4 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
     private javax.swing.JLabel titulo4;
     // End of variables declaration//GEN-END:variables
 }
+
