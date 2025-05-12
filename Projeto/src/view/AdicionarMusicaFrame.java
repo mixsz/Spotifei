@@ -369,7 +369,7 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
             return;
         }
 
-        int limite = Math.min(musicas.size(), 12); // Até 12 músicas (4 por colun)
+        int limite = Math.min(musicas.size(), 12); // Até 12 músicas (4 por coluna)
 
         for (int i = 0; i < limite; i++) {
             Musica m = musicas.get(i);
