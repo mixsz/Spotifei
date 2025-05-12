@@ -95,8 +95,8 @@ public class ControllerCadastro extends javax.swing.JFrame{
             UsuarioDAO usuarioDAO = new UsuarioDAO(conn);
             
             if (usuarioDAO.verificaUsername(username)) {
-            JOptionPane.showMessageDialog(null, "Esse username já existe!", 
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Esse username já está em uso!", 
+                    "Erro", JOptionPane.WARNING_MESSAGE);
             return;
             }
             
