@@ -192,7 +192,20 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
             btnRemover.setAlignmentX(Component.CENTER_ALIGNMENT);
             btnRemover.setPreferredSize(new java.awt.Dimension(95, 25));
             btnRemover.setMaximumSize(new java.awt.Dimension(95, 25));
+            btnRemover.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    int idPlaylist = p.getId();
+                    String nomePlaylist = p.getNome();
+                    
+                    ExcluirMusicaFrame removerMusicaFrame =
+                        new ExcluirMusicaFrame(usuario, id, idPlaylist,nomePlaylist);
 
+                    dispose(); // fecha a tela atual, se quiser
+                    removerMusicaFrame.setLocationRelativeTo(null);
+                    removerMusicaFrame.setVisible(true);
+                }
+            });
             colDireita.add(Box.createVerticalStrut(10)); 
             colDireita.add(btnRemover);
 

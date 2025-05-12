@@ -297,7 +297,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="2"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x2022; A pesquisa retorna no m&#xe1;ximo 10 m&#xfa;sicas!"/>
+            <Property name="text" type="java.lang.String" value="&#x2022; A pesquisa retorna no m&#xe1;ximo 15 m&#xfa;sicas!"/>
           </Properties>
         </Component>
       </SubComponents>

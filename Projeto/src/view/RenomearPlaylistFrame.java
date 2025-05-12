@@ -5,10 +5,18 @@
 package view;
 
 import controller.ControllerPlaylist;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import model.Musica;
 
 /**
  *
@@ -24,7 +32,7 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
     private int idPlaylist;
     private String nomePlaylist;
     private ControllerPlaylist c;
-
+    ArrayList <Musica> musicas;
     public RenomearPlaylistFrame(String username, int id, int idPlaylist, 
                                  String nomePlaylist) {
         initComponents();
@@ -33,7 +41,10 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         this.idPlaylist = idPlaylist;
         this.nomePlaylist = nomePlaylist;
         lblNomePlaylist.setText(nomePlaylist+":");
-        this.c = new ControllerPlaylist(this.usuario, this.idUsuario,this);
+        this.c = new ControllerPlaylist(this.usuario, this.idUsuario,this,
+                this.idPlaylist);
+        musicas = c.retornarMusicasDaPlaylistCompleto();
+        mostrarMusicas();
     }
 
     /**
@@ -48,13 +59,16 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         jPanel17 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         titulo9 = new javax.swing.JLabel();
-        btnVoltar = new javax.swing.JButton();
         jPanel19 = new javax.swing.JPanel();
         lblDigite = new javax.swing.JLabel();
         txtNomePlaylist = new javax.swing.JTextField();
         btnRenomear = new javax.swing.JButton();
         lblNomePlaylist = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
+        telaMostrar = new javax.swing.JPanel();
+        telaMostrar2 = new javax.swing.JPanel();
+        telaMostrar3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Renomear Playlist");
@@ -74,7 +88,7 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(353, 353, 353)
+                .addGap(505, 505, 505)
                 .addComponent(titulo9)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -86,25 +100,16 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        btnVoltar.setBackground(new java.awt.Color(204, 204, 204));
-        btnVoltar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-
         jPanel19.setBackground(new java.awt.Color(51, 51, 51));
         jPanel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 0), 2));
 
-        lblDigite.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        lblDigite.setForeground(new java.awt.Color(73, 151, 51));
+        lblDigite.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblDigite.setForeground(new java.awt.Color(0, 153, 51));
         lblDigite.setText("Digite o novo nome da playlist");
 
         txtNomePlaylist.setBackground(new java.awt.Color(204, 255, 204));
         txtNomePlaylist.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtNomePlaylist.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 0), 2));
+        txtNomePlaylist.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 0)));
 
         btnRenomear.setBackground(new java.awt.Color(73, 151, 51));
         btnRenomear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -116,94 +121,157 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
             }
         });
 
-        lblNomePlaylist.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        lblNomePlaylist.setForeground(new java.awt.Color(73, 151, 51));
+        lblNomePlaylist.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblNomePlaylist.setForeground(new java.awt.Color(0, 153, 51));
         lblNomePlaylist.setText("NOME PLAYLIST");
+
+        jLabel9.setFont(new java.awt.Font("Leelawadee UI", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(73, 151, 51));
+        jLabel9.setText("Renomear");
+
+        btnVoltar.setBackground(new java.awt.Color(153, 0, 51));
+        btnVoltar.setFont(new java.awt.Font("Yu Gothic UI", 1, 12)); // NOI18N
+        btnVoltar.setText("Cancelar");
+        btnVoltar.setBorder(null);
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addComponent(lblDigite)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNomePlaylist))
-                    .addComponent(txtNomePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(222, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRenomear, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                        .addContainerGap()
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel19Layout.createSequentialGroup()
+                                .addComponent(lblDigite)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNomePlaylist))
+                            .addComponent(jLabel9)
+                            .addComponent(txtNomePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(btnRenomear, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDigite)
                     .addComponent(lblNomePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(txtNomePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRenomear, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(txtNomePlaylist, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRenomear, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
         );
 
-        jLabel9.setFont(new java.awt.Font("Leelawadee UI", 1, 32)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel9.setText("Renomear Playlist");
+        telaMostrar.setBackground(new java.awt.Color(144, 238, 144));
+
+        javax.swing.GroupLayout telaMostrarLayout = new javax.swing.GroupLayout(telaMostrar);
+        telaMostrar.setLayout(telaMostrarLayout);
+        telaMostrarLayout.setHorizontalGroup(
+            telaMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 416, Short.MAX_VALUE)
+        );
+        telaMostrarLayout.setVerticalGroup(
+            telaMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 583, Short.MAX_VALUE)
+        );
+
+        telaMostrar2.setBackground(new java.awt.Color(144, 238, 144));
+
+        javax.swing.GroupLayout telaMostrar2Layout = new javax.swing.GroupLayout(telaMostrar2);
+        telaMostrar2.setLayout(telaMostrar2Layout);
+        telaMostrar2Layout.setHorizontalGroup(
+            telaMostrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 367, Short.MAX_VALUE)
+        );
+        telaMostrar2Layout.setVerticalGroup(
+            telaMostrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 583, Short.MAX_VALUE)
+        );
+
+        telaMostrar3.setBackground(new java.awt.Color(144, 238, 144));
+
+        javax.swing.GroupLayout telaMostrar3Layout = new javax.swing.GroupLayout(telaMostrar3);
+        telaMostrar3.setLayout(telaMostrar3Layout);
+        telaMostrar3Layout.setHorizontalGroup(
+            telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 356, Short.MAX_VALUE)
+        );
+        telaMostrar3Layout.setVerticalGroup(
+            telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 630, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(283, 283, 283))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+                .addContainerGap()
+                .addComponent(telaMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(telaMostrar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addGap(18, 18, 18)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
-                .addGap(18, 18, 18))
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(telaMostrar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(telaMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(109, 109, 109))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(telaMostrar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(62, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 711, Short.MAX_VALUE)
+            .addGap(0, 1167, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 362, Short.MAX_VALUE)
+            .addGap(0, 936, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRenomearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenomearActionPerformed
+        c.renomearPlaylist();
+    }//GEN-LAST:event_btnRenomearActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.setVisible(false);
@@ -211,10 +279,6 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         hm.setLocationRelativeTo(null);
         hm.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void btnRenomearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenomearActionPerformed
-        c.renomearPlaylist();
-    }//GEN-LAST:event_btnRenomearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,7 +314,77 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-    
+   private void mostrarMusicas() {
+        telaMostrar.removeAll();
+        telaMostrar2.removeAll();
+        telaMostrar3.removeAll();
+        telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
+        telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
+        telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
+
+        int limite = Math.min(musicas.size(), 15); // Agora mostra até 15 músicas
+
+        for (int i = 0; i < limite; i++) {
+            Musica m = musicas.get(i);
+
+            JPanel musicaPanel = new JPanel();
+            musicaPanel.setLayout(new BoxLayout(musicaPanel, BoxLayout.Y_AXIS));
+            musicaPanel.setBackground(new java.awt.Color(144, 238, 144));
+            musicaPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
+                BorderFactory.createEmptyBorder(3, 15, 10, 15)
+            ));
+
+            JLabel lblNome = new JLabel(m.getNome());
+            lblNome.setFont(new Font("Segoe UI", Font.BOLD, 20));
+            lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
+            lblNome.setBorder(BorderFactory.createEmptyBorder(0, 0, 7, 0));
+
+            String nomeArtista = (m.getArtista() != null) ? m.getArtista().getNomeArtistico() : "Artista desconhecido";
+            JLabel lblArtista = new JLabel("<html><b>Artista:</b> " + nomeArtista + "</html>");
+            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + m.getGenero() + "</html>");
+            JLabel lblAno = new JLabel("<html><b>Ano:</b> " + m.getAnoLancamento() + "</html>");
+            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + m.getAlbum() + "</html>");
+
+            Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
+            for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
+                lbl.setFont(fonte);
+                lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
+            }
+
+            JPanel painelInfo = new JPanel();
+            painelInfo.setLayout(new BoxLayout(painelInfo, BoxLayout.Y_AXIS));
+            painelInfo.setBackground(new java.awt.Color(144, 238, 144));
+            painelInfo.add(lblNome);
+            painelInfo.add(lblArtista);
+            painelInfo.add(lblGenero);
+            painelInfo.add(lblAno);
+            painelInfo.add(lblAlbum);
+
+            musicaPanel.add(painelInfo);
+            musicaPanel.setPreferredSize(new Dimension(400, 130));
+            musicaPanel.setMaximumSize(new Dimension(400, 130));
+
+            if (i < 5) {
+                telaMostrar.add(musicaPanel);
+                telaMostrar.add(Box.createVerticalStrut(8));
+            } else if (i < 10) {
+                telaMostrar2.add(musicaPanel);
+                telaMostrar2.add(Box.createVerticalStrut(8));
+            } else {
+                telaMostrar3.add(musicaPanel);
+                telaMostrar3.add(Box.createVerticalStrut(8));
+            }
+        }
+
+        telaMostrar.revalidate();
+        telaMostrar.repaint();
+        telaMostrar2.revalidate();
+        telaMostrar2.repaint();
+        telaMostrar3.revalidate();
+        telaMostrar3.repaint();
+    }
+
     public String getUsuario() {
         return usuario;
     }
@@ -397,6 +531,9 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JLabel lblDigite;
     private javax.swing.JLabel lblNomePlaylist;
+    private javax.swing.JPanel telaMostrar;
+    private javax.swing.JPanel telaMostrar2;
+    private javax.swing.JPanel telaMostrar3;
     private javax.swing.JLabel titulo9;
     private javax.swing.JTextField txtNomePlaylist;
     // End of variables declaration//GEN-END:variables

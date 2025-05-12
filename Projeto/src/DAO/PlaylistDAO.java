@@ -10,6 +10,7 @@ import model.Playlist;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import model.Artista;
 import model.Musica;
 /**
  *
@@ -68,7 +69,7 @@ public class PlaylistDAO {
         return playlists;
     }
     
-    private ArrayList<Musica> buscarMusicas(int idPlaylist) throws SQLException {
+    public ArrayList<Musica> buscarMusicas(int idPlaylist) throws SQLException {
         ArrayList<Musica> musicas = new ArrayList<>();
         String sql = "SELECT m.* FROM musica m " +
                      "JOIN musicas_da_playlist pm ON m.id = pm.id_musica " +
@@ -97,4 +98,80 @@ public class PlaylistDAO {
         int rowsUpdated = stmt.executeUpdate();
         return rowsUpdated > 0;
     }
+    
+    public boolean adicionarMusicaPlaylist(int idPlaylist, int idMusica) throws SQLException{
+        String sql = "INSERT INTO musicas_da_playlist (id_playlist, id_musica)"
+                + "VALUES (?, ?)";          
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, idPlaylist);
+        stmt.setInt(2, idMusica);
+        int rowsUpdated = stmt.executeUpdate();
+        return rowsUpdated > 0;
+    }
+    
+    public boolean removerMusicaPlaylist(int idPlaylist, int idMusica) throws SQLException{
+            String sql = "DELETE FROM musicas_da_playlist WHERE "
+                    + "id_playlist = ? AND id_musica = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, idPlaylist);
+        stmt.setInt(2, idMusica);
+        int rowsUpdated = stmt.executeUpdate();
+        return rowsUpdated > 0;
+    }
+    
+    public boolean verificaMusicaPlaylist(int idPlaylist, int idMusica)throws SQLException{
+        String sql = "SELECT COUNT(*) FROM musicas_da_playlist "
+                + "WHERE id_playlist = ? AND id_musica = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, idPlaylist);
+        stmt.setInt(2, idMusica);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+           return rs.getInt(1) > 0; // verifica por COUNT se a musica ja esta 
+                                    // na playlist
+       }
+       return false;
+   }
+    
+  public ArrayList<Musica> buscarMusicasCompleto(int idPlaylist) throws SQLException {
+        ArrayList<Musica> musicas = new ArrayList<>();
+
+        String sql = "SELECT m.id, m.nome, m.genero, m.ano_lancamento, m.album, " +
+                     "a.nome_artistico AS artista_nome " +
+                     "FROM musica m " +
+                     "JOIN artista a ON m.artista_id = a.id " +
+                     "JOIN musicas_da_playlist pm ON pm.id_musica = m.id " +
+                     "WHERE pm.id_playlist = ?";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1, idPlaylist);
+
+        ResultSet rs = statement.executeQuery();
+
+           while (rs.next()) {
+    int id = rs.getInt("id");
+    String nomeArtista = rs.getString("artista_nome");
+    String nomeMusica = rs.getString("nome");
+    String genero = rs.getString("genero");
+    int anoLancamento = rs.getInt("ano_lancamento");
+    String album = rs.getString("album");
+
+    System.out.println("Nome: " + nomeMusica + ", Gênero: " + genero + ", Ano: " + anoLancamento + ", Álbum: " + album);
+
+    Artista artistaObj = new Artista(nomeArtista);
+    Musica musica = new Musica(
+        id,
+        nomeMusica,
+        artistaObj,
+        genero,
+        anoLancamento,
+        album
+    );
+    musicas.add(musica);
+}
+        return musicas;
+        }
+
+
+
 }
