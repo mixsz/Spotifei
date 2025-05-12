@@ -251,14 +251,11 @@ private String usuario;
         telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
 
         if (musicas.isEmpty()) {
-            JLabel lblNaoEncontrado = new JLabel("Ops! Nenhuma música encontrada!");
-            JLabel lblNaoEncontrado2 = new JLabel(":C");
+            JLabel lblNaoEncontrado = new JLabel("Não há nada por aqui!");
             lblNaoEncontrado.setFont(new Font("Segoe UI", Font.BOLD, 25));
             lblNaoEncontrado.setAlignmentX(Component.CENTER_ALIGNMENT);
-            lblNaoEncontrado2.setFont(new Font("Segoe UI", Font.BOLD, 25));
-            lblNaoEncontrado2.setAlignmentX(Component.CENTER_ALIGNMENT);
+       
             telaMostrar.add(lblNaoEncontrado);
-            telaMostrar.add(lblNaoEncontrado2);
 
             telaMostrar.revalidate();
             telaMostrar.repaint();
