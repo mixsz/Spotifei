@@ -192,6 +192,7 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Excluir Playlist");
 
         painel.setBackground(new java.awt.Color(144, 238, 144));
         painel.setBorder(javax.swing.BorderFactory.createEtchedBorder());

@@ -23,7 +23,7 @@ public class MusicaDAO {
     }
     
       public ArrayList<Musica> buscarMusicas(String nome, String artista, 
-              String genero) throws SQLException {
+              String genero, int idUsuario) throws SQLException {
         ArrayList<Musica> musicas = new ArrayList<>();
         
        StringBuilder sql = new StringBuilder("SELECT m.id, m.nome, m.genero, "
@@ -90,7 +90,14 @@ public class MusicaDAO {
             musicas.add(musica);           
             // TRANSFORMA EM OBJETO E DEPOIS ADICIONA NO ARRAYLIST DE MUSICAS
         }
-        
+        int contagem = 0;
+        for (Musica musica : musicas) {
+            if(contagem >= 10){
+                break;
+            }
+            adicionarMusicaNoHistorico(idUsuario, musica.getId());
+            contagem++;
+        }
         return musicas;
     }
       
@@ -138,4 +145,95 @@ public class MusicaDAO {
             e.printStackTrace();
         }
     }
+    
+    public void adicionarMusicaNoHistorico(int idUsuario, int idMusica) throws SQLException {
+            // Passo 1: verifica se a musica ja ta no historico
+            
+            String sqlVerificar = "SELECT id FROM historico WHERE id_usuario = ? "
+                    + "AND id_musica = ?";
+            PreparedStatement stmtVerificar = conn.prepareStatement(sqlVerificar);
+            stmtVerificar.setInt(1, idUsuario);
+            stmtVerificar.setInt(2, idMusica);
+            ResultSet rs = stmtVerificar.executeQuery();
+
+            // OBS: se ja estiver, ela vai pro final da fila
+            if (rs.next()) {
+                String sqlExcluir = "DELETE FROM historico WHERE id_usuario = "
+                        + "? AND id_musica = ?";
+                PreparedStatement stmtExcluir = conn.prepareStatement(sqlExcluir);
+                stmtExcluir.setInt(1, idUsuario);
+                stmtExcluir.setInt(2, idMusica);
+                stmtExcluir.executeUpdate();
+            }
+
+            // Passo 2: adiciona no final do historico
+            String sqlInserir = "INSERT INTO historico (id_usuario, "
+                    + "id_musica) VALUES (?, ?)";
+            PreparedStatement stmtInserir = conn.prepareStatement(sqlInserir);
+            stmtInserir.setInt(1, idUsuario);
+            stmtInserir.setInt(2, idMusica);
+            stmtInserir.executeUpdate();
+
+            // Verifica se já tem 10 musicas no id desse usuario
+            String sqlHistorico = "SELECT COUNT(*) AS total FROM historico"
+                    + " WHERE id_usuario = ?";
+            PreparedStatement stmtContar = conn.prepareStatement(sqlHistorico);
+            stmtContar.setInt(1, idUsuario);
+            ResultSet rsContagem = stmtContar.executeQuery();
+
+            if (rsContagem.next() && rsContagem.getInt("total") > 10) {
+                // remove a musica mais antiga
+                String sqlExcluiAntiga = "DELETE FROM historico "
+                        + "WHERE id_usuario = ? AND id = (SELECT id FROM historico "
+                        + "WHERE id_usuario = ? ORDER BY id ASC LIMIT 1)";
+            // a musica com o menor id sera removida pois esta sendo ORDENADO ASC
+                PreparedStatement stmtExcluirMaisAntiga = conn.prepareStatement(sqlExcluiAntiga);
+                stmtExcluirMaisAntiga.setInt(1, idUsuario);
+                stmtExcluirMaisAntiga.setInt(2, idUsuario);
+                stmtExcluirMaisAntiga.executeUpdate();
+            }
+        }
+    
+    public ArrayList<Musica> buscarUltimasMusicas(int idUsuario) throws SQLException {
+        ArrayList<Musica> musicas = new ArrayList<>();
+
+        // Busca as 10 últimas musicas
+        String sql = "SELECT m.id, m.nome, m.genero, m.ano_lancamento, "
+                        + "m.album, a.nome_artistico AS artista_nome " +
+                     "FROM musica m " +
+                     "JOIN artista a ON m.artista_id = a.id " +
+                     "JOIN historico h ON m.id = h.id_musica " +
+                     "WHERE h.id_usuario = ? " +
+                     "ORDER BY h.id DESC " +
+                     "LIMIT 10";
+        /** 
+         * o LIMIT 10 é redundante, mas como n vai mudar nada e é mais seguro,
+         * vou deixar
+        */
+        
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, idUsuario);
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String nomeArtista = rs.getString("artista_nome");
+
+            Artista artistaObj = new Artista(nomeArtista);
+            Musica musica = new Musica(
+                id,
+                rs.getString("nome"),
+                artistaObj,
+                rs.getString("genero"),
+                rs.getInt("ano_lancamento"),
+                rs.getString("album")
+            );
+            musicas.add(musica);  // Adiciona a música na lista
+        }
+
+        return musicas;
+    }   
+
+    
 }

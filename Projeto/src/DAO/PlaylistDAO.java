@@ -192,8 +192,4 @@ public class PlaylistDAO {
 
         return linhas > 0;
     }
-
-
-
-  
 }

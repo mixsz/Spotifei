@@ -293,7 +293,10 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGerenciarPlaylistActionPerformed
 
     private void btnVisualizarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarHistoricoActionPerformed
-        // TODO add your handling code here:
+         this.setVisible(false);
+         VisualizarHistoricoFrame gm = new VisualizarHistoricoFrame(this.usuario,this.id); 
+         gm.setLocationRelativeTo(null);
+         gm.setVisible(true);
     }//GEN-LAST:event_btnVisualizarHistoricoActionPerformed
 
     private void btnDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesconectarActionPerformed
