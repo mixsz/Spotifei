@@ -194,7 +194,10 @@ public class GerenciarPlaylistFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPlaylistActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        ExcluirPlaylistFrame ep = new ExcluirPlaylistFrame(usuario,id); 
+        ep.setLocationRelativeTo(null);
+        ep.setVisible(true);
     }//GEN-LAST:event_btnExcluirPlaylistActionPerformed
 
     private void btnEditarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPlaylistActionPerformed

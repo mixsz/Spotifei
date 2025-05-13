@@ -18,6 +18,7 @@ import java.sql.Connection;
 import model.Musica;
 import view.AdicionarMusicaFrame;
 import view.ExcluirMusicaFrame;
+import view.ExcluirPlaylistFrame;
 import view.RenomearPlaylistFrame;
 
 /**
@@ -32,7 +33,9 @@ public class ControllerPlaylist {
     private RenomearPlaylistFrame view3;
     private AdicionarMusicaFrame view4;
     private ExcluirMusicaFrame view5;
+    private ExcluirPlaylistFrame view6;
     private int idPlaylist;
+    private ArrayList<Playlist> playlists;
 
     public ControllerPlaylist(CriarPlaylistFrame view, String usuario, int id) {
         this.view = view;
@@ -68,6 +71,12 @@ public class ControllerPlaylist {
         this.idUser = idUser;
         this.view5 = view5;
         this.idPlaylist = idPlaylist;
+    }
+    
+    public ControllerPlaylist(String usuario, int idUser, ExcluirPlaylistFrame view6) {
+        this.usuario = usuario;
+        this.idUser = idUser;
+        this.view6 = view6;
     }
     
     public void Criar(){
@@ -282,4 +291,44 @@ public class ControllerPlaylist {
         }
         return musicas;      
     }    
+     
+    public void deletarPlaylist(int idPlay) {
+        // TESTANDO System.out.println("id no controller: "+idPlay);
+        
+        int confirma = JOptionPane.showConfirmDialog(null, 
+                    "Você tem certeza que deseja excluir esta playlist?", 
+                    "Confirmar Exclusão", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.WARNING_MESSAGE);
+
+        if (confirma == JOptionPane.YES_OPTION) {
+            try{
+                Conexao conexao = new Conexao();
+                Connection conn = conexao.getConnection();
+                PlaylistDAO playlistDAO = new PlaylistDAO(conn);
+                
+                boolean sucesso = playlistDAO.excluirPlaylist(idPlay);
+
+                if (sucesso) {
+                    playlists = getPlaylists(idUser); //atualiza a propria playlist
+                    view6.mostrarPlaylists(playlists); // e joga na tela dnv
+                    JOptionPane.showMessageDialog(view6, 
+                                                "Playlist excluída com sucesso!",
+                                                "Sucesso",
+                                                JOptionPane.INFORMATION_MESSAGE);
+                } 
+                else {
+                     JOptionPane.showMessageDialog(view6, 
+                        "Erro ao remover a playlist!", 
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            } 
+            catch (SQLException e) {
+                  JOptionPane.showMessageDialog(view6, 
+                        "Erro de conexão!", 
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+    }
 }

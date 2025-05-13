@@ -95,9 +95,10 @@ public class PlaylistDAO {
         stmt.setString(1, nome);
         stmt.setInt(2, idPlaylist);
 
-        int rowsUpdated = stmt.executeUpdate();
-        return rowsUpdated > 0;
+        int linha = stmt.executeUpdate();
+        return linha > 0;
     }
+     
     
     public boolean adicionarMusicaPlaylist(int idPlaylist, int idMusica) throws SQLException{
         String sql = "INSERT INTO musicas_da_playlist (id_playlist, id_musica)"
@@ -105,8 +106,8 @@ public class PlaylistDAO {
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, idPlaylist);
         stmt.setInt(2, idMusica);
-        int rowsUpdated = stmt.executeUpdate();
-        return rowsUpdated > 0;
+        int linha = stmt.executeUpdate();
+        return linha > 0;
     }
     
     public boolean removerMusicaPlaylist(int idPlaylist, int idMusica) throws SQLException{
@@ -115,8 +116,8 @@ public class PlaylistDAO {
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, idPlaylist);
         stmt.setInt(2, idMusica);
-        int rowsUpdated = stmt.executeUpdate();
-        return rowsUpdated > 0;
+        int linha = stmt.executeUpdate();
+        return linha > 0;
     }
     
     public boolean verificaMusicaPlaylist(int idPlaylist, int idMusica)throws SQLException{
@@ -127,8 +128,10 @@ public class PlaylistDAO {
         stmt.setInt(2, idMusica);
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
-           return rs.getInt(1) > 0; // verifica por COUNT se a musica ja esta 
-                                    // na playlist
+           return rs.getInt(1) > 0; /**
+                                      * verifica por COUNT se a musica ja esta 
+                                      * na playlist
+                                     **/
        }
        return false;
    }
@@ -148,30 +151,49 @@ public class PlaylistDAO {
 
         ResultSet rs = statement.executeQuery();
 
-           while (rs.next()) {
-    int id = rs.getInt("id");
-    String nomeArtista = rs.getString("artista_nome");
-    String nomeMusica = rs.getString("nome");
-    String genero = rs.getString("genero");
-    int anoLancamento = rs.getInt("ano_lancamento");
-    String album = rs.getString("album");
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String nomeArtista = rs.getString("artista_nome");
+            String nomeMusica = rs.getString("nome");
+            String genero = rs.getString("genero");
+            int anoLancamento = rs.getInt("ano_lancamento");
+            String album = rs.getString("album");
 
-    System.out.println("Nome: " + nomeMusica + ", Gênero: " + genero + ", Ano: " + anoLancamento + ", Álbum: " + album);
+            System.out.println("Nome: " + nomeMusica + ", Gênero: " + genero + 
+                    ", Ano: " + anoLancamento + ", Álbum: " + album);
 
-    Artista artistaObj = new Artista(nomeArtista);
-    Musica musica = new Musica(
-        id,
-        nomeMusica,
-        artistaObj,
-        genero,
-        anoLancamento,
-        album
-    );
-    musicas.add(musica);
-}
-        return musicas;
+            Artista artistaObj = new Artista(nomeArtista);
+            Musica musica = new Musica(
+                id,
+                nomeMusica,
+                artistaObj,
+                genero,
+                anoLancamento,
+                album
+            );
+            musicas.add(musica);
         }
+        return musicas;
+    }
+
+    public boolean excluirPlaylist(int idPlaylist) throws SQLException {
+        /**
+         * como foi criado com ON DELETE CASCADE, todas as musicas relacionadas
+         * com o id da playlist ja são removidas automáticamente, então n
+         * é necessario excluir as musicas dessa playlist!
+         */ 
+        
+        String sqlDeletePlaylist = "DELETE FROM playlist WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sqlDeletePlaylist);
+        stmt.setInt(1, idPlaylist);
+        int linhas = stmt.executeUpdate();
+        
+        System.out.println("playlist deletada: " + linhas);
+
+        return linhas > 0;
+    }
 
 
 
+  
 }
