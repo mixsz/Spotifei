@@ -208,11 +208,17 @@ public class VisualizarHistoricoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMusicasBuscadasActionPerformed
 
     private void btnMusicasCurtidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicasCurtidasActionPerformed
-
+        this.setVisible(false);
+        MusicasCurtidasFrame hm = new MusicasCurtidasFrame(usuario,id);
+        hm.setLocationRelativeTo(null);
+        hm.setVisible(true);
     }//GEN-LAST:event_btnMusicasCurtidasActionPerformed
 
     private void btnMusicasDescurtidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicasDescurtidasActionPerformed
-
+        this.setVisible(false);
+        MusicasDescurtidasFrame hm = new MusicasDescurtidasFrame(usuario,id);
+        hm.setLocationRelativeTo(null);
+        hm.setVisible(true);
     }//GEN-LAST:event_btnMusicasDescurtidasActionPerformed
 
     /**

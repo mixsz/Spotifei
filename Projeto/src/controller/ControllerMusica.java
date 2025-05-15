@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import model.Musica;
 import java.sql.Connection;
 import view.AdicionarMusicaFrame;
+import view.MusicasCurtidasFrame;
+import view.MusicasDescurtidasFrame;
 import view.ResultadoMusicaFrame;
 import view.UltimasDezMusicasFrame;
 
@@ -27,6 +29,8 @@ public class ControllerMusica {
     private ResultadoMusicaFrame view2;
     private AdicionarMusicaFrame view3;
     private UltimasDezMusicasFrame view4;
+    private MusicasCurtidasFrame view5;
+    private MusicasDescurtidasFrame view6;
     
     public ControllerMusica(BuscarMusicaFrame view,String usuario,int id) {
         this.view = view;
@@ -52,6 +56,20 @@ public class ControllerMusica {
         this.usuario = usuario;
         this.id = id;
     }
+    
+     public ControllerMusica(MusicasCurtidasFrame view5,
+            String usuario,int id) {
+        this.view5 = view5;
+        this.usuario = usuario;
+        this.id = id;
+    }
+     
+    public ControllerMusica(MusicasDescurtidasFrame view6,
+          String usuario,int id) {
+      this.view6 = view6;
+      this.usuario = usuario;
+      this.id = id;
+  }
     
     public void buscarMusica(){
         String nome = view.getTxtNome().getText();
@@ -157,19 +175,22 @@ public class ControllerMusica {
     // LOCALIZADO NO ARQUIVO MusicaDAO.java
     
     public void curtirMusica(int musicaId) {
-        System.out.println("ID MUSICA: "+musicaId);
-
         try {
             Conexao conexao = new Conexao();
             Connection conn = conexao.getConnection();
             MusicaDAO musicaDAO = new MusicaDAO(conn);
-            System.out.println();
-            musicaDAO.curtirMusica(id, musicaId);
 
-            JOptionPane.showMessageDialog(view, "Música curtida!", 
-                    "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        } 
-        catch (SQLException e) {          
+            boolean sucesso = musicaDAO.curtirMusica(id, musicaId);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(view, "Música curtida!", 
+                        "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(view, "Você já curtiu essa música!", 
+                        "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(view, "Erro ao curtir música!", 
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -180,24 +201,27 @@ public class ControllerMusica {
             Conexao conexao = new Conexao();
             Connection conn = conexao.getConnection();
             MusicaDAO musicaDAO = new MusicaDAO(conn);
-            musicaDAO.descurtirMusica(id, musicaId);
 
-            JOptionPane.showMessageDialog(view, "Música descurtida!", "Sucesso", 
-                    JOptionPane.INFORMATION_MESSAGE);
-        } 
-        catch (SQLException e) {
+            boolean sucesso = musicaDAO.descurtirMusica(id, musicaId);
+
+            if (sucesso) {
+                JOptionPane.showMessageDialog(view, "Música descurtida!", 
+                        "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(view, "Você já descurtiu essa música!", 
+                        "Aviso", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(view, "Erro ao descurtir música!", 
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     
     public ArrayList<Musica> buscarUltimasBuscas() {
     
         ArrayList<Musica> musicas = new ArrayList<>();
-        System.out.println("MUSICAS:");
-        for(Musica m : musicas){
-            System.out.println(m.getNome());
-        }
         try {
             Conexao conexao = new Conexao();
             Connection conn = conexao.getConnection();
@@ -215,7 +239,45 @@ public class ControllerMusica {
         return musicas;
     }
 
+    public ArrayList<Musica> buscarMusicasCurtidas() {
     
+        ArrayList<Musica> musicas = new ArrayList<>();
+        try {
+            Conexao conexao = new Conexao();
+            Connection conn = conexao.getConnection();
+            MusicaDAO musicaDAO = new MusicaDAO(conn);
+
+            musicas = musicaDAO.buscarMusicasCurtidas(this.id);
+        } 
+        catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                "Erro ao exibir músicas curtidas!", 
+                "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+        return musicas;
+    }
+    
+    public ArrayList<Musica> buscarMusicasDescurtidas() {
+    
+        ArrayList<Musica> musicas = new ArrayList<>();
+        try {
+            Conexao conexao = new Conexao();
+            Connection conn = conexao.getConnection();
+            MusicaDAO musicaDAO = new MusicaDAO(conn);
+
+            musicas = musicaDAO.buscarMusicasDescurtidas(this.id);
+        } 
+        catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, 
+                "Erro ao exibir músicas descurtidas!", 
+                "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
+        return musicas;
+    }
     
 }
 

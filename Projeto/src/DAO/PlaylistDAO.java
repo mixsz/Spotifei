@@ -159,8 +159,8 @@ public class PlaylistDAO {
             int anoLancamento = rs.getInt("ano_lancamento");
             String album = rs.getString("album");
 
-            System.out.println("Nome: " + nomeMusica + ", Gênero: " + genero + 
-                    ", Ano: " + anoLancamento + ", Álbum: " + album);
+//            System.out.println("Nome: " + nomeMusica + ", Gênero: " + genero + 
+//                    ", Ano: " + anoLancamento + ", Álbum: " + album);
 
             Artista artistaObj = new Artista(nomeArtista);
             Musica musica = new Musica(
@@ -178,9 +178,9 @@ public class PlaylistDAO {
 
     public boolean excluirPlaylist(int idPlaylist) throws SQLException {
         /**
-         * como foi criado com ON DELETE CASCADE, todas as musicas relacionadas
-         * com o id da playlist ja são removidas automáticamente, então n
-         * é necessario excluir as musicas dessa playlist!
+         * como a tabela foi criada com ON DELETE CASCADE, todas as musicas relacionadas
+         * com o id da playlist ja são removidas automaticamente, entao n
+         * e necessario excluir as musicas dessa playlist manualmente!
          */ 
         
         String sqlDeletePlaylist = "DELETE FROM playlist WHERE id = ?";

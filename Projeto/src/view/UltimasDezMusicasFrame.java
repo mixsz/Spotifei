@@ -27,7 +27,7 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
     private String usuario;
     private int id;
     private ControllerMusica controller;
-
+    
     public UltimasDezMusicasFrame(String usuario, int id) {
         initComponents();
         this.usuario = usuario;
@@ -51,10 +51,10 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         titulo4 = new javax.swing.JLabel();
         btnVoltar1 = new javax.swing.JButton();
+        titulo5 = new javax.swing.JLabel();
         telaMostrar = new javax.swing.JPanel();
         telaMostrar2 = new javax.swing.JPanel();
         telaMostrar3 = new javax.swing.JPanel();
-        titulo5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Últimas 10 músicas buscadas");
@@ -74,7 +74,7 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(537, Short.MAX_VALUE)
                 .addComponent(titulo4)
                 .addGap(530, 530, 530))
         );
@@ -95,17 +95,21 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
             }
         });
 
+        titulo5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        titulo5.setForeground(new java.awt.Color(51, 51, 51));
+        titulo5.setText("Últimas 10 músicas buscadas:");
+
         telaMostrar.setBackground(new java.awt.Color(144, 238, 144));
 
         javax.swing.GroupLayout telaMostrarLayout = new javax.swing.GroupLayout(telaMostrar);
         telaMostrar.setLayout(telaMostrarLayout);
         telaMostrarLayout.setHorizontalGroup(
             telaMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 401, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         telaMostrarLayout.setVerticalGroup(
             telaMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 486, Short.MAX_VALUE)
+            .addGap(0, 541, Short.MAX_VALUE)
         );
 
         telaMostrar2.setBackground(new java.awt.Color(144, 238, 144));
@@ -114,11 +118,11 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
         telaMostrar2.setLayout(telaMostrar2Layout);
         telaMostrar2Layout.setHorizontalGroup(
             telaMostrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         telaMostrar2Layout.setVerticalGroup(
             telaMostrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 486, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         telaMostrar3.setBackground(new java.awt.Color(144, 238, 144));
@@ -127,16 +131,12 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
         telaMostrar3.setLayout(telaMostrar3Layout);
         telaMostrar3Layout.setHorizontalGroup(
             telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         telaMostrar3Layout.setVerticalGroup(
             telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 486, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        titulo5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        titulo5.setForeground(new java.awt.Color(51, 51, 51));
-        titulo5.setText("Últimas 10 músicas buscadas:");
 
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
@@ -147,19 +147,21 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addComponent(telaMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telaMostrar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(painelLayout.createSequentialGroup()
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titulo5)
                             .addGroup(painelLayout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(titulo5)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(painelLayout.createSequentialGroup()
+                                .addComponent(telaMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(telaMostrar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,14 +169,14 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titulo5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(telaMostrar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telaMostrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telaMostrar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
+                    .addComponent(telaMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(telaMostrar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVoltar1)
-                .addGap(94, 94, 94))
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -213,6 +215,21 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
         telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
         telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
         telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
+        
+        if (historico.isEmpty()) {
+        titulo5.setText("");
+        JLabel lblSemHistorico = new JLabel("          "
+                + "                                    "
+                + "Ops! Nenhuma música por aqui!");
+        lblSemHistorico.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 28));
+        lblSemHistorico.setAlignmentX(Component.CENTER_ALIGNMENT);
+        telaMostrar.add(Box.createVerticalGlue());
+        telaMostrar.add(lblSemHistorico);
+        telaMostrar.add(Box.createVerticalGlue());
+        telaMostrar.revalidate();
+        telaMostrar.repaint();
+        return;
+    }
 
         int limite = Math.min(historico.size(), 10); // Exibe no máximo 10
 

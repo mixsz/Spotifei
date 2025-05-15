@@ -73,7 +73,11 @@ public class Usuario extends Pessoa implements Autenticacao{
     
      @Override
     public boolean autenticar(String username, String senha) {
-        return this.username.equals(username) && this.senha.equals(senha);
+        if(this.username.equals(username) && this.senha.equals(senha)){
+            System.out.println("Usuário autenticado!\n");
+            return true;
+        }
+        return false;
     }
     //retorna verdadeiro se o username e senha digitados correspondem ao mesmo
     // armazenado no objeto   
