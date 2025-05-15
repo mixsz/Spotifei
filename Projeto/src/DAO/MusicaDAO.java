@@ -11,16 +11,41 @@ import java.util.ArrayList;
 import model.Musica;
 import java.sql.ResultSet;
 import model.Artista;
+
 /**
- *
+ * Classe responsável pelo acesso e manipulação de Músicas no banco de dados.
+ * Possui métodos pra curtir, descurtir, buscar músicas e gerenciar histórico.
+ * 
  * @author Danilo
  */
+
 public class MusicaDAO {
     private Connection conn;
 
+    /**
+     * Construtor que recebe a conexão com o banco de dados.
+     * 
+     * @param conn conexão já aberta com o banco de dados.
+     */
+    
     public MusicaDAO(Connection conn) {
         this.conn = conn;
     }
+    
+    /**
+     * Busca músicas filtrando por nome, artista e/ou gênero e associando.
+     * Além disso manipula o histórico das músicas buscadas do usuário.
+     * 
+     * Retorna a lista de músicas filtrada.
+     * 
+     * @param nome filtro pelo nome da música (pode ser null)
+     * @param artista filtro pelo nome do artista (pode ser null)
+     * @param genero filtro pelo gênero musical (pode ser null)
+     * @param idUsuario id do usuário para registrar as músicas no histórico dele
+     * @return lista de músicas que atendem aos filtros fornecidos
+     * @throws SQLException se ocorrer erro na conexao ao db
+     * 
+     */
     
       public ArrayList<Musica> buscarMusicas(String nome, String artista, 
               String genero, int idUsuario) throws SQLException {
@@ -69,7 +94,7 @@ public class MusicaDAO {
         }
         // PESQUISA DE ACORDO COM OS CAMPOS PREENCHIDOS (SE TIVER NULL, IGNORA)
         // POSSÍVEL ERRO: SE O USUÁRIO DER UM ESPAÇO EM BRANCO, 
-        //                ELE INCLUI COMO UM VALOR PREENCHIDO CORRETO
+        //                ELE INCLUI COMO UM VALOR PREENCHIDO CORRETO!!!
         
         ResultSet rs = statement.executeQuery();
 
@@ -102,7 +127,15 @@ public class MusicaDAO {
     }
       
       
-    // CURTIR E DESCURTIR MÚSICA
+     /**
+     * Marca a música como curtida, ou seja muda/cria o status 'curtida'
+     * entre o id da música e o id do usuário.
+     * 
+     * @param usuarioId id do usuário
+     * @param musicaId id da música curtida
+     * @return true: marcada como curtida - false: estava curtida
+     * @throws SQLException se ocorrer erro no DB
+     */
       
      public boolean curtirMusica(int usuarioId, int musicaId) throws SQLException {
         // primeiro verifica se ja foi curtida pelo usuario
@@ -141,7 +174,16 @@ public class MusicaDAO {
         return true;
     }
 
-
+    /**
+     * Marca a música como descurtida, ou seja muda/cria o status 'descurtida'
+     * entre o id da música e o id do usuário.
+     * 
+     * @param usuarioId id do usuário
+     * @param musicaId id da música descurtida
+     * @return true: marcada como descurtida - false: estava descurtida
+     * @throws SQLException se ocorrer erro no DB
+     */
+     
     public boolean descurtirMusica(int usuarioId, int musicaId) throws SQLException {
         String verificaSql = "SELECT status FROM interacao WHERE usuario_id = ?"
                 + " AND musica_id = ?";
@@ -175,7 +217,16 @@ public class MusicaDAO {
 
         return true;
     }
-
+    
+     /**
+     * Adiciona uma música no histórico do user.
+     * Se a música já estiver no histórico, ela é movida para o final.
+     * Limita o histórico pra 10 músicas.
+     * 
+     * @param idUsuario id do usuário
+     * @param idMusica id da música que vai ser adicionada no historico.
+     * @throws SQLException se ocorrer erro na operação no banco
+     */
     
     public void adicionarMusicaNoHistorico(int idUsuario, int idMusica) throws SQLException {
             // Passo 1: verifica se a musica ja ta no historico
@@ -225,6 +276,14 @@ public class MusicaDAO {
             }
         }
     
+     /**
+     * Aqui ele busca as músicas do histórico
+     * 
+     * @param idUsuario id do usuário
+     * @return ArrayList com as 10 (ou menos) músicas buscadas por último
+     * @throws SQLException se ocorrer erro no db
+     */
+    
     public ArrayList<Musica> buscarUltimasMusicas(int idUsuario) throws SQLException {
         ArrayList<Musica> musicas = new ArrayList<>();
 
@@ -265,6 +324,14 @@ public class MusicaDAO {
 
         return musicas;
     }   
+    
+     /**
+     * Busca as músicas curtidas
+     * 
+     * @param idUsuario id do usuário
+     * @return ArrayList com todas as musicas curtidas do usuario
+     * @throws SQLException se ocorrer erro na consulta ao banco
+     */
 
     public ArrayList<Musica> buscarMusicasCurtidas(int idUsuario) throws SQLException{
          ArrayList<Musica> musicas = new ArrayList<>();
@@ -301,6 +368,14 @@ public class MusicaDAO {
 
         return musicas;
     }
+    
+    /**
+     * Busca as músicas descurtidas
+     * 
+     * @param idUsuario id do usuário
+     * @return ArrayList com todas as musicas descurtidas do usuario
+     * @throws SQLException se ocorrer erro na consulta ao banco
+     */
     
      public ArrayList<Musica> buscarMusicasDescurtidas(int idUsuario) throws SQLException{
          ArrayList<Musica> musicas = new ArrayList<>();

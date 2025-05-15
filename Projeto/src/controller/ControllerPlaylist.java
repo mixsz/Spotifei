@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import model.Playlist;
 import view.CriarPlaylistFrame;
 import java.sql.SQLException;
-import java.sql.Connection;
 import java.util.ArrayList;
 import view.EditarPlaylistFrame;
 import view.GerenciarPlaylistFrame;

@@ -54,11 +54,6 @@ public class Artista extends Pessoa{
     }
 
     
-
-    
-    
-    // construtor apenas com atributos da classe pessoa
-
     public String getNacionalidade() {
         return nacionalidade;
     }

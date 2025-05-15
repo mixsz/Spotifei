@@ -8,6 +8,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Banco: spotifei
+ * Usuario: postgres
+ * Senha: elefante
+ * 
+ * Classe responsável por estabelecer conexão com o banco de dados.
+ * 
+ * @author Danilo ou Mixzq
+ */
+
 public class Conexao {
     public Connection getConnection() throws SQLException{
          Connection conexao = DriverManager.getConnection(
