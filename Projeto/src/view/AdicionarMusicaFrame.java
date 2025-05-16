@@ -78,6 +78,7 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
         btnPesquisar = new javax.swing.JButton();
         lblNomePlaylist = new javax.swing.JLabel();
         telaMostrar3 = new javax.swing.JPanel();
+        telaMostrar4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Adicionar Música");
@@ -98,16 +99,16 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(523, 523, 523)
+                .addGap(741, 741, 741)
                 .addComponent(titulo4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(titulo4)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         btnVoltar1.setBackground(new java.awt.Color(204, 204, 204));
@@ -263,6 +264,19 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        telaMostrar4.setBackground(new java.awt.Color(144, 238, 144));
+
+        javax.swing.GroupLayout telaMostrar4Layout = new javax.swing.GroupLayout(telaMostrar4);
+        telaMostrar4.setLayout(telaMostrar4Layout);
+        telaMostrar4Layout.setHorizontalGroup(
+            telaMostrar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 443, Short.MAX_VALUE)
+        );
+        telaMostrar4Layout.setVerticalGroup(
+            telaMostrar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -277,7 +291,9 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(telaMostrar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(telaMostrar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(telaMostrar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(painelLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,6 +315,7 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
                         .addGap(11, 11, 11))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
                         .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(telaMostrar4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(telaMostrar3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(telaMostrar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(40, 40, 40))))
@@ -310,8 +327,7 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,111 +361,124 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
     
     
-   private void mostrarMusicas() {
-        telaMostrar.removeAll();
-        telaMostrar2.removeAll();
-        telaMostrar3.removeAll();
+ private void mostrarMusicas() {
+    telaMostrar.removeAll();
+    telaMostrar2.removeAll();
+    telaMostrar3.removeAll();
+    telaMostrar4.removeAll(); 
 
-        telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
-        telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
-        telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
+    telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
+    telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
+    telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
+    telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS)); 
 
-        if (musicas.isEmpty()) {
-            JLabel lblNaoEncontrado = new JLabel("Ops! Nenhuma música encontrada!");
-            JLabel lblNaoEncontrado2 = new JLabel(":C");
-            lblNaoEncontrado.setFont(new Font("Segoe UI", Font.BOLD, 25));
-            lblNaoEncontrado.setAlignmentX(Component.CENTER_ALIGNMENT);
-            lblNaoEncontrado2.setFont(new Font("Segoe UI", Font.BOLD, 25));
-            lblNaoEncontrado2.setAlignmentX(Component.CENTER_ALIGNMENT);
-            telaMostrar.add(lblNaoEncontrado);
-            telaMostrar.add(lblNaoEncontrado2);
-
-            telaMostrar.revalidate();
-            telaMostrar.repaint();
-            return;
-        }
-
-        int limite = Math.min(musicas.size(), 12); // Até 12 músicas (4 por coluna)
-
-        for (int i = 0; i < limite; i++) {
-            Musica m = musicas.get(i);
-
-            JPanel musicaPanel = new JPanel();
-            musicaPanel.setLayout(new BoxLayout(musicaPanel, BoxLayout.X_AXIS));
-            musicaPanel.setBackground(new java.awt.Color(144, 238, 144));
-            musicaPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
-                BorderFactory.createEmptyBorder(3, 15, 10, 15)
-            ));
-
-            JPanel painelEsquerdo = new JPanel();
-            painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS));
-            painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
-
-            JLabel lblNome = new JLabel(m.getNome());
-            lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
-            lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
-            painelEsquerdo.add(lblNome);
-
-            JLabel lblArtista = new JLabel("<html><b>Artista:</b> " + m.getArtista().getNomeArtistico() + "</html>");
-            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + m.getGenero() + "</html>");
-            JLabel lblAno = new JLabel("<html><b>Ano:</b> " + m.getAnoLancamento() + "</html>");
-            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + m.getAlbum() + "</html>");
-
-            Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
-            for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
-                lbl.setFont(fonte);
-                lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
-                painelEsquerdo.add(lbl);
-            }
-
-            JPanel painelDireito = new JPanel();
-            painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
-            painelDireito.setBackground(new java.awt.Color(144, 238, 144));
-
-            JButton btnAdicionar = new JButton("Adicionar");
-            btnAdicionar.setBackground(new java.awt.Color(51, 51, 51));
-            btnAdicionar.setForeground(new java.awt.Color(0, 153, 0));
-            btnAdicionar.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btnAdicionar.setPreferredSize(new java.awt.Dimension(100, 25));
-            btnAdicionar.setMaximumSize(new java.awt.Dimension(100, 25));
-
-            btnAdicionar.addActionListener(e -> {
-                int idMusica = m.getId();
-                c.adicionaMusicaNaPlaylist(idMusica);
-            });
-
-            painelDireito.add(btnAdicionar);
-
-            musicaPanel.add(painelEsquerdo);
-            musicaPanel.add(painelDireito);
-
-            musicaPanel.setPreferredSize(new java.awt.Dimension(400, 130));
-            musicaPanel.setMaximumSize(new java.awt.Dimension(400, 130));
-
-            if (i < 4) {
-                telaMostrar.add(musicaPanel);
-                telaMostrar.add(Box.createVerticalStrut(8));
-            } else if (i < 8) {
-                musicaPanel.setPreferredSize(new java.awt.Dimension(400, 129));
-                musicaPanel.setMaximumSize(new java.awt.Dimension(400, 129));
-                telaMostrar2.add(musicaPanel);
-                telaMostrar2.add(Box.createVerticalStrut(8));
-            } else {
-                musicaPanel.setPreferredSize(new java.awt.Dimension(400, 129));
-                musicaPanel.setMaximumSize(new java.awt.Dimension(400, 129));
-                telaMostrar3.add(musicaPanel);
-                telaMostrar3.add(Box.createVerticalStrut(8));
-            }
-        }
+    if (musicas.isEmpty()) {
+        JLabel lblNaoEncontrado = new JLabel("Ops! Nenhuma música encontrada!");
+        JLabel lblNaoEncontrado2 = new JLabel(":C");
+        lblNaoEncontrado.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        lblNaoEncontrado.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lblNaoEncontrado2.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        lblNaoEncontrado2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        telaMostrar.add(lblNaoEncontrado);
+        telaMostrar.add(lblNaoEncontrado2);
 
         telaMostrar.revalidate();
         telaMostrar.repaint();
-        telaMostrar2.revalidate();
-        telaMostrar2.repaint();
-        telaMostrar3.revalidate();
-        telaMostrar3.repaint();
+        return;
     }
+
+    int limite = Math.min(musicas.size(), 16); // Até 16 músicas (4 por coluna)
+
+    for (int i = 0; i < limite; i++) {
+        Musica m = musicas.get(i);
+
+        JPanel musicaPanel = new JPanel();
+        musicaPanel.setLayout(new BoxLayout(musicaPanel, BoxLayout.X_AXIS));
+        musicaPanel.setBackground(new java.awt.Color(144, 238, 144));
+        musicaPanel.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
+            BorderFactory.createEmptyBorder(3, 15, 10, 15)
+        ));
+
+        JPanel painelEsquerdo = new JPanel();
+        painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS));
+        painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
+
+         String nomeInteiro = m.getNome();
+        String nomeExibicao = nomeInteiro.length() > 26 ? 
+                nomeInteiro.substring(0, 23) + "..." : nomeInteiro;
+        JLabel lblNome = new JLabel(nomeExibicao);
+            // tive q limitar o caracteres pois o botao estava se deslocando
+            
+        lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
+        painelEsquerdo.add(lblNome);
+
+        JLabel lblArtista = new JLabel("<html><b>Artista:</b> " + 
+                m.getArtista().getNomeArtistico() + "</html>");
+        JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + 
+                m.getGenero() + "</html>");
+        JLabel lblAno = new JLabel("<html><b>Ano:</b> " +
+                m.getAnoLancamento() + "</html>");
+        JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + 
+                m.getAlbum() + "</html>");
+
+        Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
+        for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
+            lbl.setFont(fonte);
+            lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
+            painelEsquerdo.add(lbl);
+        }
+
+        JPanel painelDireito = new JPanel();
+        painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
+        painelDireito.setBackground(new java.awt.Color(144, 238, 144));
+
+        JButton btnAdicionar = new JButton("Adicionar");
+        btnAdicionar.setBackground(new java.awt.Color(51, 51, 51));
+        btnAdicionar.setForeground(new java.awt.Color(0, 153, 0));
+        btnAdicionar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnAdicionar.setPreferredSize(new java.awt.Dimension(100, 25));
+        btnAdicionar.setMaximumSize(new java.awt.Dimension(100, 25));
+
+        btnAdicionar.addActionListener(e -> {
+            int idMusica = m.getId();
+            c.adicionaMusicaNaPlaylist(idMusica);
+        });
+
+        painelDireito.add(btnAdicionar);
+
+        musicaPanel.add(painelEsquerdo);
+        musicaPanel.add(painelDireito);
+
+        musicaPanel.setPreferredSize(new java.awt.Dimension(400, 130));
+        musicaPanel.setMaximumSize(new java.awt.Dimension(400, 130));
+
+        if (i < 4) {
+            telaMostrar.add(musicaPanel);
+            telaMostrar.add(Box.createVerticalStrut(8));
+        } else if (i < 8) {
+            telaMostrar2.add(musicaPanel);
+            telaMostrar2.add(Box.createVerticalStrut(8));
+        } else if (i < 12) {
+            telaMostrar3.add(musicaPanel);
+            telaMostrar3.add(Box.createVerticalStrut(8));
+        } else {
+            telaMostrar4.add(musicaPanel);
+            telaMostrar4.add(Box.createVerticalStrut(8));
+        }
+    }
+
+    telaMostrar.revalidate();
+    telaMostrar.repaint();
+    telaMostrar2.revalidate();
+    telaMostrar2.repaint();
+    telaMostrar3.revalidate();
+    telaMostrar3.repaint();
+    telaMostrar4.revalidate(); 
+    telaMostrar4.repaint();    
+}
+
 
     
     public String getNomePlaylist() {
@@ -704,6 +733,7 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
     private javax.swing.JPanel telaMostrar;
     private javax.swing.JPanel telaMostrar2;
     private javax.swing.JPanel telaMostrar3;
+    private javax.swing.JPanel telaMostrar4;
     private javax.swing.JLabel titulo4;
     private javax.swing.JTextField txtArtista;
     private javax.swing.JTextField txtGenero;

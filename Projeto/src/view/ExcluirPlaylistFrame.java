@@ -54,14 +54,16 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
         }
     }
     
-    public void mostrarPlaylists(ArrayList<Playlist> playlists) {
+  public void mostrarPlaylists(ArrayList<Playlist> playlists) {
         telaMostrar.removeAll();
         telaMostrar2.removeAll();
         telaMostrar3.removeAll(); 
+        telaMostrar4.removeAll();
 
         telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
         telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
         telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
+        telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS));
 
         if (playlists.isEmpty()) {
             excluirlbl.setText("");
@@ -73,7 +75,7 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
             return;
         }
 
-        int limite = Math.min(playlists.size(), 9); // até 3 por coluna
+        int limite = Math.min(playlists.size(), 12); // até 3 por coluna, até 12 total
 
         for (int i = 0; i < limite; i++) {
             Playlist p = playlists.get(i);
@@ -135,16 +137,15 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
             btnX.setFocusPainted(false);
             btnX.setPreferredSize(new java.awt.Dimension(45, 25));
             btnX.setMaximumSize(new java.awt.Dimension(45, 25));
-            
+
             btnX.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     controller.deletarPlaylist(p.getId());
                 }
             });
-            
+
             painelInferior.add(btnX);
             colDireita.add(painelInferior, BorderLayout.SOUTH);
-
 
             playlistPanel.add(colEsquerda);
             playlistPanel.add(Box.createHorizontalStrut(10));
@@ -159,9 +160,12 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
             } else if (i < 6) {
                 telaMostrar2.add(playlistPanel);
                 telaMostrar2.add(Box.createVerticalStrut(10));
-            } else {
+            } else if (i < 9) {
                 telaMostrar3.add(playlistPanel);
                 telaMostrar3.add(Box.createVerticalStrut(10));
+            } else {
+                telaMostrar4.add(playlistPanel);
+                telaMostrar4.add(Box.createVerticalStrut(10));
             }
         }
 
@@ -171,7 +175,10 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
         telaMostrar2.repaint();
         telaMostrar3.revalidate();
         telaMostrar3.repaint();
+        telaMostrar4.revalidate();
+        telaMostrar4.repaint();
     }
+
 
     
     /**
@@ -191,6 +198,7 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
         telaMostrar2 = new javax.swing.JPanel();
         telaMostrar3 = new javax.swing.JPanel();
         excluirlbl = new javax.swing.JLabel();
+        telaMostrar4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Excluir Playlist");
@@ -210,16 +218,16 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(504, 504, 504)
+                .addGap(680, 680, 680)
                 .addComponent(titulo4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(titulo4)
-                .addGap(20, 20, 20))
+                .addGap(21, 21, 21))
         );
 
         btnVoltar1.setBackground(new java.awt.Color(204, 204, 204));
@@ -263,7 +271,7 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
         telaMostrar3.setLayout(telaMostrar3Layout);
         telaMostrar3Layout.setHorizontalGroup(
             telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
+            .addGap(0, 315, Short.MAX_VALUE)
         );
         telaMostrar3Layout.setVerticalGroup(
             telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,6 +282,19 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
         excluirlbl.setForeground(new java.awt.Color(51, 51, 51));
         excluirlbl.setText("Excluir Playlist");
 
+        telaMostrar4.setBackground(new java.awt.Color(144, 238, 144));
+
+        javax.swing.GroupLayout telaMostrar4Layout = new javax.swing.GroupLayout(telaMostrar4);
+        telaMostrar4.setLayout(telaMostrar4Layout);
+        telaMostrar4Layout.setHorizontalGroup(
+            telaMostrar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 344, Short.MAX_VALUE)
+        );
+        telaMostrar4Layout.setVerticalGroup(
+            telaMostrar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout painelLayout = new javax.swing.GroupLayout(painel);
         painel.setLayout(painelLayout);
         painelLayout.setHorizontalGroup(
@@ -282,15 +303,20 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
             .addGroup(painelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(painelLayout.createSequentialGroup()
                         .addComponent(telaMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(telaMostrar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telaMostrar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(excluirlbl))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(telaMostrar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(telaMostrar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(excluirlbl))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +328,8 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(telaMostrar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(telaMostrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(telaMostrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(telaMostrar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVoltar1)
                 .addGap(14, 14, 14))
@@ -375,6 +402,7 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
     private javax.swing.JPanel telaMostrar;
     private javax.swing.JPanel telaMostrar2;
     private javax.swing.JPanel telaMostrar3;
+    private javax.swing.JPanel telaMostrar4;
     private javax.swing.JLabel titulo4;
     // End of variables declaration//GEN-END:variables
 }

@@ -233,28 +233,28 @@ public class MusicaDAO {
             
             String sqlVerificar = "SELECT id FROM historico WHERE id_usuario = ? "
                     + "AND id_musica = ?";
-            PreparedStatement stmtVerificar = conn.prepareStatement(sqlVerificar);
-            stmtVerificar.setInt(1, idUsuario);
-            stmtVerificar.setInt(2, idMusica);
-            ResultSet rs = stmtVerificar.executeQuery();
+            PreparedStatement verificaStmt = conn.prepareStatement(sqlVerificar);
+            verificaStmt.setInt(1, idUsuario);
+            verificaStmt.setInt(2, idMusica);
+            ResultSet rs = verificaStmt.executeQuery();
 
             // OBS: se ja estiver, ela vai pro final da fila
             if (rs.next()) {
                 String sqlExcluir = "DELETE FROM historico WHERE id_usuario = "
                         + "? AND id_musica = ?";
-                PreparedStatement stmtExcluir = conn.prepareStatement(sqlExcluir);
-                stmtExcluir.setInt(1, idUsuario);
-                stmtExcluir.setInt(2, idMusica);
-                stmtExcluir.executeUpdate();
+                PreparedStatement excluiStmt = conn.prepareStatement(sqlExcluir);
+                excluiStmt.setInt(1, idUsuario);
+                excluiStmt.setInt(2, idMusica);
+                excluiStmt.executeUpdate();
             }
 
             // Passo 2: adiciona no final do historico
             String sqlInserir = "INSERT INTO historico (id_usuario, "
                     + "id_musica) VALUES (?, ?)";
-            PreparedStatement stmtInserir = conn.prepareStatement(sqlInserir);
-            stmtInserir.setInt(1, idUsuario);
-            stmtInserir.setInt(2, idMusica);
-            stmtInserir.executeUpdate();
+            PreparedStatement insereStmt = conn.prepareStatement(sqlInserir);
+            insereStmt.setInt(1, idUsuario);
+            insereStmt.setInt(2, idMusica);
+            insereStmt.executeUpdate();
 
             // Verifica se já tem 10 musicas no id desse usuario
             String sqlHistorico = "SELECT COUNT(*) AS total FROM historico"

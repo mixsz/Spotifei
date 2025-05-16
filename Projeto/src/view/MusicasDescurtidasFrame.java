@@ -46,37 +46,40 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
        }
     }  
 
-     private void mostrarMusicasDescurtidas(ArrayList<Musica> curtidas) {
+    private void mostrarMusicasDescurtidas(ArrayList<Musica> descurtidas) {
         telaMostrar.removeAll();
         telaMostrar2.removeAll();
         telaMostrar3.removeAll();
+        telaMostrar4.removeAll();  
 
         telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
         telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
         telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
+        telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS)); 
 
         telaMostrar.setAlignmentY(Component.TOP_ALIGNMENT);
         telaMostrar2.setAlignmentY(Component.TOP_ALIGNMENT);
         telaMostrar3.setAlignmentY(Component.TOP_ALIGNMENT);
-        
-        if (curtidas.isEmpty()) {
-        titulo5.setText("");
-        JLabel lblSemDescurtidas = new JLabel("                              "
-                + "Ops! Nenhuma música descurtida por aqui!");
-        lblSemDescurtidas.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 28));
-        lblSemDescurtidas.setAlignmentX(Component.CENTER_ALIGNMENT);
-        telaMostrar.add(Box.createVerticalGlue());
-        telaMostrar.add(lblSemDescurtidas);
-        telaMostrar.add(Box.createVerticalGlue());
-        telaMostrar.revalidate();
-        telaMostrar.repaint();
-        return;
-    }
+        telaMostrar4.setAlignmentY(Component.TOP_ALIGNMENT);
 
-        int limite = Math.min(curtidas.size(), 21); // maximo de 21 musicas
+        if (descurtidas.isEmpty()) {
+            titulo5.setText("");
+            JLabel lblSemDescurtidas = new JLabel("                                   "
+                    + "                     Ops! Nenhuma música descurtida por aqui!");
+            lblSemDescurtidas.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 28));
+            lblSemDescurtidas.setAlignmentX(Component.CENTER_ALIGNMENT);
+            telaMostrar.add(Box.createVerticalGlue());
+            telaMostrar.add(lblSemDescurtidas);
+            telaMostrar.add(Box.createVerticalGlue());
+            telaMostrar.revalidate();
+            telaMostrar.repaint();
+            return;
+        }
+
+        int limite = Math.min(descurtidas.size(), 28); // máximo de 28 músicas
 
         for (int i = 0; i < limite; i++) {
-            Musica m = curtidas.get(i);
+            Musica m = descurtidas.get(i);
 
             JPanel musicaPanel = new JPanel();
             musicaPanel.setLayout(new BoxLayout(musicaPanel, BoxLayout.X_AXIS));
@@ -115,18 +118,22 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
             musicaPanel.setPreferredSize(new java.awt.Dimension(350, 110));
             musicaPanel.setMaximumSize(new java.awt.Dimension(350, 110));
 
-            // Adiciona nas colunas conforme o índice
+            // distribui em 4 colunas
             if (i < 7) {
                 telaMostrar.add(musicaPanel);
                 telaMostrar.add(Box.createVerticalStrut(6));
             } else if (i < 14) {
                 telaMostrar2.add(musicaPanel);
                 telaMostrar2.add(Box.createVerticalStrut(6));
-            } else {
+            } else if (i < 21) {
                 telaMostrar3.add(musicaPanel);
                 telaMostrar3.add(Box.createVerticalStrut(6));
+            } else {
+                telaMostrar4.add(musicaPanel);
+                telaMostrar4.add(Box.createVerticalStrut(6));
             }
         }
+
         // atualiza as telas
         telaMostrar.revalidate();
         telaMostrar.repaint();
@@ -134,7 +141,10 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
         telaMostrar2.repaint();
         telaMostrar3.revalidate();
         telaMostrar3.repaint();
+        telaMostrar4.revalidate();
+        telaMostrar4.repaint();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -153,11 +163,15 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
         telaMostrar = new javax.swing.JPanel();
         telaMostrar2 = new javax.swing.JPanel();
         telaMostrar3 = new javax.swing.JPanel();
+        telaMostrar4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Músicas descurtidas");
 
         painel.setBackground(new java.awt.Color(144, 238, 144));
-        painel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        painel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+        painel.setForeground(new java.awt.Color(0, 102, 0));
+        painel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel8.setBackground(new java.awt.Color(51, 51, 51));
         jPanel8.setForeground(new java.awt.Color(102, 102, 102));
@@ -171,16 +185,16 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(419, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(titulo4)
-                .addGap(530, 530, 530))
+                .addGap(649, 649, 649))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(titulo4)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         titulo5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -206,7 +220,7 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
         );
         telaMostrarLayout.setVerticalGroup(
             telaMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 803, Short.MAX_VALUE)
         );
 
         telaMostrar2.setBackground(new java.awt.Color(144, 238, 144));
@@ -219,7 +233,7 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
         );
         telaMostrar2Layout.setVerticalGroup(
             telaMostrar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 807, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         telaMostrar3.setBackground(new java.awt.Color(144, 238, 144));
@@ -228,10 +242,23 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
         telaMostrar3.setLayout(telaMostrar3Layout);
         telaMostrar3Layout.setHorizontalGroup(
             telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 275, Short.MAX_VALUE)
         );
         telaMostrar3Layout.setVerticalGroup(
             telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        telaMostrar4.setBackground(new java.awt.Color(144, 238, 144));
+
+        javax.swing.GroupLayout telaMostrar4Layout = new javax.swing.GroupLayout(telaMostrar4);
+        telaMostrar4.setLayout(telaMostrar4Layout);
+        telaMostrar4Layout.setHorizontalGroup(
+            telaMostrar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 292, Short.MAX_VALUE)
+        );
+        telaMostrar4Layout.setVerticalGroup(
+            telaMostrar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -243,20 +270,18 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
             .addGroup(painelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titulo5)
                     .addGroup(painelLayout.createSequentialGroup()
-                        .addComponent(telaMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(telaMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(telaMostrar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(painelLayout.createSequentialGroup()
-                        .addComponent(titulo5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(painelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(telaMostrar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(telaMostrar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         painelLayout.setVerticalGroup(
             painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,30 +291,30 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
                 .addComponent(titulo5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelLayout.createSequentialGroup()
+                        .addComponent(telaMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVoltar1)
+                        .addGap(16, 16, 16))
                     .addComponent(telaMostrar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(telaMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVoltar1)
-                .addGap(28, 28, 28))
+                    .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(telaMostrar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(painel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
@@ -341,6 +366,7 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
     private javax.swing.JPanel telaMostrar;
     private javax.swing.JPanel telaMostrar2;
     private javax.swing.JPanel telaMostrar3;
+    private javax.swing.JPanel telaMostrar4;
     private javax.swing.JLabel titulo4;
     private javax.swing.JLabel titulo5;
     // End of variables declaration//GEN-END:variables

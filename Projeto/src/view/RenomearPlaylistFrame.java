@@ -69,6 +69,7 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         telaMostrar = new javax.swing.JPanel();
         telaMostrar2 = new javax.swing.JPanel();
         telaMostrar3 = new javax.swing.JPanel();
+        telaMostrar4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Renomear Playlist");
@@ -88,16 +89,16 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(505, 505, 505)
+                .addGap(732, 732, 732)
                 .addComponent(titulo9)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(titulo9)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         jPanel19.setBackground(new java.awt.Color(51, 51, 51));
@@ -214,7 +215,20 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         );
         telaMostrar3Layout.setVerticalGroup(
             telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        telaMostrar4.setBackground(new java.awt.Color(144, 238, 144));
+
+        javax.swing.GroupLayout telaMostrar4Layout = new javax.swing.GroupLayout(telaMostrar4);
+        telaMostrar4.setLayout(telaMostrar4Layout);
+        telaMostrar4Layout.setHorizontalGroup(
+            telaMostrar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 432, Short.MAX_VALUE)
+        );
+        telaMostrar4Layout.setVerticalGroup(
+            telaMostrar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
@@ -229,7 +243,9 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(telaMostrar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(telaMostrar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(telaMostrar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
@@ -238,24 +254,23 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(telaMostrar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(telaMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(109, 109, 109))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telaMostrar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(62, Short.MAX_VALUE))))
+                            .addComponent(telaMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(telaMostrar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(109, 109, 109))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1167, Short.MAX_VALUE)
+            .addGap(0, 1605, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -318,11 +333,14 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         telaMostrar.removeAll();
         telaMostrar2.removeAll();
         telaMostrar3.removeAll();
+        telaMostrar4.removeAll(); 
+
         telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
         telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
         telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
+        telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS)); 
 
-        int limite = Math.min(musicas.size(), 15); // Agora mostra até 15 músicas
+        int limite = Math.min(musicas.size(), 20); // mostra até 20 músicas
 
         for (int i = 0; i < limite; i++) {
             Musica m = musicas.get(i);
@@ -340,7 +358,8 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
             lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
             lblNome.setBorder(BorderFactory.createEmptyBorder(0, 0, 7, 0));
 
-            String nomeArtista = (m.getArtista() != null) ? m.getArtista().getNomeArtistico() : "Artista desconhecido";
+            String nomeArtista = (m.getArtista() != null) ?
+                    m.getArtista().getNomeArtistico() : "Artista desconhecido";
             JLabel lblArtista = new JLabel("<html><b>Artista:</b> " + nomeArtista + "</html>");
             JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + m.getGenero() + "</html>");
             JLabel lblAno = new JLabel("<html><b>Ano:</b> " + m.getAnoLancamento() + "</html>");
@@ -371,9 +390,12 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
             } else if (i < 10) {
                 telaMostrar2.add(musicaPanel);
                 telaMostrar2.add(Box.createVerticalStrut(8));
-            } else {
+            } else if (i < 15) {
                 telaMostrar3.add(musicaPanel);
                 telaMostrar3.add(Box.createVerticalStrut(8));
+            } else {
+                telaMostrar4.add(musicaPanel);
+                telaMostrar4.add(Box.createVerticalStrut(8));
             }
         }
 
@@ -383,7 +405,10 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         telaMostrar2.repaint();
         telaMostrar3.revalidate();
         telaMostrar3.repaint();
+        telaMostrar4.revalidate();
+        telaMostrar4.repaint();
     }
+
 
     public String getUsuario() {
         return usuario;
@@ -534,6 +559,7 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
     private javax.swing.JPanel telaMostrar;
     private javax.swing.JPanel telaMostrar2;
     private javax.swing.JPanel telaMostrar3;
+    private javax.swing.JPanel telaMostrar4;
     private javax.swing.JLabel titulo9;
     private javax.swing.JTextField txtNomePlaylist;
     // End of variables declaration//GEN-END:variables

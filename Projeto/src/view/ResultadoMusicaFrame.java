@@ -52,13 +52,15 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         telaMostrar.removeAll();
         telaMostrar2.removeAll();
         telaMostrar3.removeAll();
+        telaMostrar4.removeAll();
 
         telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
         telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
         telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
+        telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS));
 
         // LIMITE MUSICAS
-        int limite = Math.min(musicas.size(), 15); // 15 MUSICAS NO TOTAL (5 POR COL)
+        int limite = Math.min(musicas.size(), 20); // 20 MUSICAS NO TOTAL (5 POR COL)
 
         for (int i = 0; i < limite; i++) {
             Musica m = musicas.get(i);
@@ -76,19 +78,21 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
             painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS)); 
             painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
 
-            JLabel lblNome = new JLabel(m.getNome());
+            String nomeInteiro = m.getNome();
+            String nomeExibicao = nomeInteiro.length() > 26 ? 
+                    nomeInteiro.substring(0, 23) + "..." : nomeInteiro;
+            JLabel lblNome = new JLabel(nomeExibicao);
+            // tive q limitar o caracteres pois os botoes estavam se deslocando
+            
             lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
             lblNome.setAlignmentX(Component.LEFT_ALIGNMENT); 
             painelEsquerdo.add(lblNome);
 
             JLabel lblArtista = new JLabel("<html><b>Artista:</b> " +
                     m.getArtista().getNomeArtistico() + "</html>");
-            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + m.getGenero() 
-                    + "</html>");
-            JLabel lblAno = new JLabel("<html><b>Ano:</b> " + m.getAnoLancamento() 
-                    + "</html>");
-            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + m.getAlbum() 
-                    + "</html>");
+            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + m.getGenero() + "</html>");
+            JLabel lblAno = new JLabel("<html><b>Ano:</b> " + m.getAnoLancamento() + "</html>");
+            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + m.getAlbum() + "</html>");
 
             Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
             for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
@@ -141,9 +145,12 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
             } else if (i < 10) {
                 telaMostrar2.add(musicaPanel);
                 telaMostrar2.add(Box.createVerticalStrut(8));
-            } else {
+            } else if (i < 15) {
                 telaMostrar3.add(musicaPanel);
                 telaMostrar3.add(Box.createVerticalStrut(8));
+            } else {
+                telaMostrar4.add(musicaPanel);
+                telaMostrar4.add(Box.createVerticalStrut(8));
             }
         }
 
@@ -153,7 +160,10 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         telaMostrar2.repaint();
         telaMostrar3.revalidate();
         telaMostrar3.repaint();
+        telaMostrar4.revalidate();
+        telaMostrar4.repaint();
     }
+
 
 
 
@@ -176,6 +186,7 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         telaMostrar = new javax.swing.JPanel();
         telaMostrar2 = new javax.swing.JPanel();
         telaMostrar3 = new javax.swing.JPanel();
+        telaMostrar4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Músicas encontradas");
@@ -198,14 +209,14 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(titulo4)
-                .addGap(530, 530, 530))
+                .addGap(748, 748, 748))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(25, 25, 25)
                 .addComponent(titulo4)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         btnVoltar1.setBackground(new java.awt.Color(204, 204, 204));
@@ -249,10 +260,23 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         telaMostrar3.setLayout(telaMostrar3Layout);
         telaMostrar3Layout.setHorizontalGroup(
             telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         telaMostrar3Layout.setVerticalGroup(
             telaMostrar3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        telaMostrar4.setBackground(new java.awt.Color(144, 238, 144));
+
+        javax.swing.GroupLayout telaMostrar4Layout = new javax.swing.GroupLayout(telaMostrar4);
+        telaMostrar4.setLayout(telaMostrar4Layout);
+        telaMostrar4Layout.setHorizontalGroup(
+            telaMostrar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 401, Short.MAX_VALUE)
+        );
+        telaMostrar4Layout.setVerticalGroup(
+            telaMostrar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -272,7 +296,9 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(telaMostrar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(telaMostrar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(telaMostrar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         painelLayout.setVerticalGroup(
@@ -281,6 +307,7 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(telaMostrar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(telaMostrar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(telaMostrar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(telaMostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -329,6 +356,7 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
     private javax.swing.JPanel telaMostrar;
     private javax.swing.JPanel telaMostrar2;
     private javax.swing.JPanel telaMostrar3;
+    private javax.swing.JPanel telaMostrar4;
     private javax.swing.JLabel titulo4;
     // End of variables declaration//GEN-END:variables
 }

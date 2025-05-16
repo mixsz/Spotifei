@@ -276,7 +276,8 @@ public class PlaylistDAO {
   
     public boolean excluirPlaylist(int idPlaylist) throws SQLException {
         /**
-         * como a tabela foi criada com ON DELETE CASCADE, todas as musicas relacionadas
+         * como a tabela foi criada com ON DELETE CASCADE, todas as musicas 
+         * relacionadas
          * com o id da playlist ja são removidas automaticamente, entao n
          * e necessario excluir as musicas dessa playlist manualmente!
          */ 
