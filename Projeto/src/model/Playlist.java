@@ -7,16 +7,34 @@ package model;
 import java.util.ArrayList;
 
 /**
- *
+ * Representa uma playlist de músicas relacionada a um usuário.
+ * 
+ * informações: ID da playlist, nome da playlist, usuário dono da playlist,
+ * lista de músicas associadas, e identificadores auxiliares para relacionamento
+ * com banco de dados.
+ * 
+ * Varios construtores que provavelmente nem todos sao utilizados
+ * Alem disso, alguns construtores usam o objeto Usuario, outros apenas utilizam
+ * o id de um usuario
+ * 
  * @author Danilo
  */
+
 public class Playlist {
     private int id;
     private String nome;
     private Usuario usuario;
     private ArrayList<Musica> musicas;
-    private int idUsuario;
-    private int idMusica;
+    private int idUsuario; // importante na criacao de uma playlist 
+    private int idMusica;  // importante na adicao de uma musica na playlist
+    
+    /**
+     * 
+     * @param id
+     * @param nome
+     * @param usuario
+     * @param musicas 
+     */
     
     public Playlist(int id, String nome, Usuario usuario, ArrayList<Musica> musicas) {
         this.id = id;
@@ -24,20 +42,40 @@ public class Playlist {
         this.usuario = usuario;
         this.musicas = musicas;
     }
-
+    /**
+     * 
+     * @param nome
+     * @param usuario
+     * @param musicas 
+     */
+    
     public Playlist(String nome, Usuario usuario, ArrayList<Musica> musicas) {
         this.nome = nome;
         this.usuario = usuario;
         this.musicas = musicas;
     }
-
+    /**
+     * 
+     * @param id
+     * @param nome
+     * @param musicas
+     * @param idUsuario 
+     */
+    
     public Playlist(int id, String nome, ArrayList<Musica> musicas, int idUsuario) {
         this.id = id;
         this.nome = nome;
         this.musicas = musicas;
         this.idUsuario = idUsuario;
     }
-
+    /**
+     * 
+     * @param nome
+     * @param musicas
+     * @param idUsuario
+     * @param idMusica 
+     */
+    
     public Playlist(String nome, ArrayList<Musica> musicas, int idUsuario, 
                     int idMusica) {
         this.nome = nome;
@@ -45,12 +83,21 @@ public class Playlist {
         this.idUsuario = idUsuario;
         this.idMusica = idMusica;
     }
-
+    /**
+     * 
+     * @param nome
+     * @param idUsuario 
+     */
     public Playlist(String nome, int idUsuario) {
         this.nome = nome;
         this.idUsuario = idUsuario;
     }
-
+    /**
+     * 
+     * @param id
+     * @param nome
+     * @param idUsuario 
+     */
     public Playlist(int id, String nome, int idUsuario) {
         this.id = id;
         this.nome = nome;

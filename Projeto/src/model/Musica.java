@@ -5,9 +5,17 @@
 package model;
 
 /**
- *
+ * representa uma música com seus atributos como nome, artista, gênero,
+ * ano de lançamento e album.
+ * 
+ * Cada música pode estar associada a um artista (composicao)
+ * 
+ * fornece varios construtores, porem é mt provavel que nao tenha sido
+ * utilizado todos os construtores
+ * 
  * @author Danilo
  */
+
 public class Musica {
     private int id;
     private String nome;
@@ -16,6 +24,15 @@ public class Musica {
     private int anoLancamento;
     private String album;
 
+    /**
+     * 
+     * @param nome
+     * @param artista
+     * @param genero
+     * @param anoLancamento
+     * @param album 
+     */
+    
     public Musica(String nome, Artista artista, String genero, 
             int anoLancamento, String album) {
         this.nome = nome;
@@ -24,20 +41,39 @@ public class Musica {
         this.anoLancamento = anoLancamento;
         this.album = album;
     }
-
+    /**
+     * 
+     * @param nome
+     * @param genero
+     * @param album 
+     */
     public Musica(String nome, String genero, String album) {
         this.nome = nome;
         this.genero = genero;
         this.album = album;
     }
-
+    /**
+     * 
+     * @param nome
+     * @param genero
+     * @param anoLancamento
+     * @param album 
+     */
     public Musica(String nome, String genero, int anoLancamento, String album) {
         this.nome = nome;
         this.genero = genero;
         this.anoLancamento = anoLancamento;
         this.album = album;
     }
-
+    /**
+     * 
+     * @param id
+     * @param nome
+     * @param artista
+     * @param genero
+     * @param anoLancamento
+     * @param album 
+     */
     public Musica(int id, String nome, Artista artista, String genero, 
             int anoLancamento, String album) {
         this.id = id;
@@ -47,7 +83,7 @@ public class Musica {
         this.anoLancamento = anoLancamento;
         this.album = album;
     }
-
+    
     public Musica(String nome) {
         this.nome = nome;
     }
@@ -107,27 +143,5 @@ public class Musica {
                 ", album=" + album + '}';
     }
     
-    
-    /* CASO PRECISE, COMANDO SQL PRA CRIAR TABLE MUSICA:
-     *
-     *   CREATE TABLE musica (
-     *   id SERIAL PRIMARY KEY,
-     *   nome VARCHAR(255) NOT NULL,
-     *   artista_id INT NOT NULL, 
-     *   genero VARCHAR(100),
-     *   ano_lancamento INT,
-     *   album VARCHAR(255),
-     *   FOREIGN KEY (artista_id) REFERENCES artista(id) ON DELETE CASCADE 
-     *   );
-    */
-    
-//    CREATE TABLE interacao (
-//        usuario_id INTEGER,
-//        musica_id INTEGER,
-//        status VARCHAR(10), 
-//        PRIMARY KEY (usuario_id, musica_id),
-//        FOREIGN KEY (usuario_id) REFERENCES usuario(id),
-//        FOREIGN KEY (musica_id) REFERENCES musica(id)
-//    );
     
 }

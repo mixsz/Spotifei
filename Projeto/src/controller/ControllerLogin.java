@@ -14,17 +14,35 @@ import java.sql.SQLException;
 import view.HomeFrame;
 
 /**
- *
+ * classe responsável por controlar o de login dos usuários.
+ * Verifica dados e interage com o banco de dados.
+ * 
  * @author Danilo
  */
+
 public class ControllerLogin{
     
     private LoginFrame view;
-        
+    
+     /**
+     * Construtor do ControllerLogin.
+     * 
+     * @param loginFrame A interface de login que será controlada.
+     */
+    
     public ControllerLogin(LoginFrame loginFrame) {
         this.view = loginFrame;
     }
-        
+    
+    /**
+     * verifica se os dados estão corretos conforme o db:
+     *   captura dados inseridos do usuario
+     *   verifica se ta correto
+     *   utiliza o metodo autenticar implementado pela classe model.usuario
+     *   se tiver certo, é redirecionado pra home
+     *   se der erro, mostrar um pop-up de erro
+     */
+    
     public void loginUsuario(){
         Usuario usuario = new Usuario(view.getTxtUsername().getText(),
                             view.getTxtSenha().getText());

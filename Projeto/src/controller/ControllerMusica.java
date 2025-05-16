@@ -19,12 +19,25 @@ import view.ResultadoMusicaFrame;
 import view.UltimasDezMusicasFrame;
 
 /**
- *
+ * controlador responsável por lidar com todas as ações de músicas,
+ * buscar, curtir, descurtir, salvar no histórico e exibir o historico
+ * 
+ * tem varios construtores como parametro, pois é uma classe utilizada por 
+ * diversas outras classes de interface grafica!
+
  * @author Danilo
  */
 public class ControllerMusica {
     private BuscarMusicaFrame view;
-    private String usuario;
+    /**
+     * Todos os construtores possuem tanto o nome do usuário quanto o id do usuário
+     * que está logado. 
+     * Isso serve para nao perder a informacao do usuario durante
+     * a troca de telas
+     * 
+     */
+    
+    private String usuario; 
     private int id;
     private ResultadoMusicaFrame view2;
     private AdicionarMusicaFrame view3;
@@ -70,7 +83,17 @@ public class ControllerMusica {
       this.usuario = usuario;
       this.id = id;
   }
-    
+    /**
+     * realiza a busca de músicas com base nos campos preenchidos na tela
+     * obs: é necessario apenas um campo preenchido + utilizado na tela principal
+     * de buscar musicas
+     * 
+     * obs2: esse metodo n tem return, porem ele abre a tela de resultados de
+     * musicas utilizando o construtor da mesma com os parametros:
+     * id usuario
+     * username (usuario)
+     * ArrayList de Musicas encontradas
+     */
     public void buscarMusica(){
         String nome = view.getTxtNome().getText();
         String artista = view.getTxtArtista().getText();
@@ -135,6 +158,12 @@ public class ControllerMusica {
         }
     }
     
+    /**
+     * utilizado na tela de adicionar musicas na playlist
+     * @return arraylist com tais informacoes fornecidas
+     * que possui apenas o nome das musicas, sem outras infos
+     */
+    
     public ArrayList<Musica> buscarMusicasSimples() {
         String nome = view3.getTxtMusica().getText();
         String artista = view3.getTxtArtista().getText();
@@ -171,9 +200,10 @@ public class ControllerMusica {
     }
     
     
-    // METODOS PARA MOSTRAR POP-UP DE ÊXITO E CHAMAR O METODO curtir E descurtir
-    // LOCALIZADO NO ARQUIVO MusicaDAO.java
-    
+    /** 
+     * realizacao a interacao de curtir musica e mostrar um pop-up conforme o res
+     * @param musicaId ID da música a ser curtida.
+     */
     public void curtirMusica(int musicaId) {
         try {
             Conexao conexao = new Conexao();
@@ -195,7 +225,10 @@ public class ControllerMusica {
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    /** 
+     * realizacao a interacao de descurtir musica e mostrar um pop-up conforme o res
+     * @param musicaId ID da música a ser descurtida.
+     */
     public void descurtirMusica(int musicaId) {
         try {
             Conexao conexao = new Conexao();
@@ -218,6 +251,11 @@ public class ControllerMusica {
         }
     }
 
+     /**
+     * retorna a lista com as últimas 10 músicas buscadas pelo usuario.
+     * 
+     * @return arraylist com as ultimas 10 musicas buscadas pelo user.
+     */
     
     public ArrayList<Musica> buscarUltimasBuscas() {
     
@@ -238,7 +276,13 @@ public class ControllerMusica {
 
         return musicas;
     }
-
+    
+    /**
+     * retorna a lista com as musicas curtidas pelo usuario.
+     * 
+     * @return arraylist com as musicas curtidas pelo user.
+     */
+    
     public ArrayList<Musica> buscarMusicasCurtidas() {
     
         ArrayList<Musica> musicas = new ArrayList<>();
@@ -258,6 +302,12 @@ public class ControllerMusica {
 
         return musicas;
     }
+    
+     /**
+     * retorna a lista com as musicas descurtidas pelo usuario.
+     * 
+     * @return arraylist com as musicas descurtidas pelo user.
+     */
     
     public ArrayList<Musica> buscarMusicasDescurtidas() {
     

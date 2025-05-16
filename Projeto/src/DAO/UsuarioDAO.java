@@ -6,12 +6,33 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import model.Usuario;
 
+/**
+ * Classe responsável pelas interações com o DB relacionadas a entidade Usuario.
+ * Fornece cadastro, login, verificação de username e autenticação
+ * 
+ * @author Danilo
+ */
+
 public class UsuarioDAO {
     private Connection conn;
-
+    
+     /**
+     * Construtor que recebe a conexão com o banco de dados.
+     * 
+     * @param conn conexão já aberta com o banco de dados.
+     */
+    
     public UsuarioDAO(Connection conn) {
         this.conn = conn;
     }
+    
+     /**
+     * cadastra um novo usuário no DB.
+     * 
+     * @param usuario objeto Usuario com informações recebidas.
+     * @return true: cadastro bem-sucedido - false: caso contrário.
+     * @throws SQLException se ocorrer erro no banco de dados.
+     */
     
     public boolean cadastrarUsuarioDB(Usuario usuario) throws SQLException {
         String sql = "insert into usuario (nome, sobrenome, username, idade, "
@@ -29,6 +50,14 @@ public class UsuarioDAO {
         return linha>0;
     }
     
+     /**
+     * Verifica se o username digitado já está em uso (no banco de dados).
+     * 
+     * @param username nome que vai ser verificado.
+     * @return true: se o nome de usuário já existir - false: caso contrário.
+     * @throws SQLException se ocorrer erro no db.
+     */
+    
     public boolean verificaUsername(String username) throws SQLException {
         String sql = "select count(*) from usuario where username = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
@@ -42,6 +71,15 @@ public class UsuarioDAO {
 
         return false; 
     }
+    
+     /**
+     * realiza a autenticação de um usuário pelo username e senha.
+     * obs: utilizado o jeito não hackeavel aprendido em aula.
+     * 
+     * @param usuario objeto Usuario contendo apenas username e senha.
+     * @return ResultSet se encontrado, retorna os dados do usuario.
+     * @throws SQLException se ocorrer erro na execução do db.
+     */
     
      public ResultSet logar(Usuario usuario) throws SQLException{
         String sql = "select * from usuario where username = ? AND senha = ?"; 

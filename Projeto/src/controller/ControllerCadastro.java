@@ -14,16 +14,34 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- *
- * @author Mixzq
+ * Classe responsável por controlar a tela de cadastro.
+ * realiza validações e interage com o DB pra criar uma nova conta
+ * 
+ * @author Danilo
  */
+
 public class ControllerCadastro extends javax.swing.JFrame{
     
     private CadastroFrame view;
-
+    
+     /**
+     * construtor do ControllerCadastro.
+     * 
+     * @param cadastroFrame interface do cadastro que será controlada.
+     */
+    
      public ControllerCadastro(CadastroFrame cadastroFrame) {
         this.view = cadastroFrame;
     }
+     
+       /**
+     * Realiza o processo de cadastro de um novo usuário:
+     *   1. Valida os campos preenchidos
+     *   2. Verifica se o username já existe
+     *   3. Verifica a idade (se é um número válido) e se as senhas batem
+     *   4. Conecta-se ao banco de dados para criar a conta
+     *   5. Exibe mensagens de sucesso ou erro
+     */
      
     public void Cadastro(){
         String nome = view.getTxtNome().getText();
