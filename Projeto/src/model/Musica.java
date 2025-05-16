@@ -87,6 +87,8 @@ public class Musica {
     public Musica(String nome) {
         this.nome = nome;
     }
+    
+    // GET e SET de todos os atributos
 
     public int getId() {
         return id;

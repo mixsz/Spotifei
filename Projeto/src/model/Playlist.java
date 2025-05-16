@@ -103,7 +103,8 @@ public class Playlist {
         this.nome = nome;
         this.idUsuario = idUsuario;
     }
-
+    // GET e SET de todos os atributos
+    
     public int getId() {
         return id;
     }

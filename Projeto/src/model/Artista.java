@@ -100,11 +100,17 @@ public class Artista extends Pessoa{
         super(nome, sobrenome, idade, sexo);
     }  
     
+    /**
+     * 
+     * @param nomeArtistico 
+     */
+    
     public Artista(String nomeArtistico) {
         this.nomeArtistico = nomeArtistico;
     }
 
-    
+    // GET e SET de todos os atributos
+
     public String getNacionalidade() {
         return nacionalidade;
     }

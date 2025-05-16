@@ -88,6 +88,8 @@ public class Usuario extends Pessoa implements Autenticacao{
     public Usuario() {
     }
     
+    // GET e SET de todos os atributos
+
     public String getUsername() {
         return username;
     }

@@ -43,6 +43,8 @@ public class Pessoa {
         this.nome = nome;
     }
     
+    // GET e SET de todos os atributos
+
       public Pessoa() {
     }
 
