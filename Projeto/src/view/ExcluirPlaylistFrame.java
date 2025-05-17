@@ -23,7 +23,8 @@ import model.Musica;
 import model.Playlist;
 
 /**
- *
+ * Interface responsavel por mostrar todas as playlists do usuario, e dar a 
+ * possibilidade da exclusao de cada playlist, atraves de um botao 'X'
  * @author Mixzq
  */
 public class ExcluirPlaylistFrame extends javax.swing.JFrame {
@@ -35,7 +36,14 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
     private int id;
     private ControllerPlaylist controller;
     private ArrayList<Playlist> playlists;
-
+    /**
+     * Alem de receber o username do usuario e o id, é instanciado um objeto
+     * controller da classe ControllerPlaylist, que serve para pegar os metodos
+     * da mesma classe.
+     * No caso foi utilizado para pegar todas as playlists do usuario (linha 52)
+     * @param username
+     * @param id 
+     */
     public ExcluirPlaylistFrame(String username, int id) {
         initComponents();
         this.usuario = username;
@@ -45,7 +53,10 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
         //exibirPlaylists();
         mostrarPlaylists(playlists);
     }
-    private void exibirPlaylists() { // pra testar
+    /**
+     * Print para TESTAR o retorno da playlist pelo terminal
+     */
+    private void exibirPlaylists() {
         for (Playlist playlist : playlists) {
             System.out.println("Playlist: " + playlist.getNome());
             for (Musica musica : playlist.getMusicas()) {
@@ -53,8 +64,16 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
             }
         }
     }
-    
-  public void mostrarPlaylists(ArrayList<Playlist> playlists) {
+    /**
+     * O metodo que mostra todas as playlists, divididas por blocos (PlaylistPanel),
+     * junto com o botao 'X' para excluir tal playlist
+     * 
+     * obs: é necessario o parametro 'playlists' para a atualizacao imediata da 
+     * tela apos
+     * uma exclusao (ele sera removido da tela apos o usuario confirmar)
+     * @param playlists 
+     */
+    public void mostrarPlaylists(ArrayList<Playlist> playlists) {
         telaMostrar.removeAll();
         telaMostrar2.removeAll();
         telaMostrar3.removeAll(); 
@@ -351,7 +370,10 @@ public class ExcluirPlaylistFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Volta na pagina anterior, no caso Gerenciar Playlist
+     * @param evt 
+     */
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
         this.setVisible(false);
         GerenciarPlaylistFrame hm = new GerenciarPlaylistFrame(usuario,id);

@@ -11,9 +11,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
+ * Interface grafica que apenas recebe o nome da nova playlist
+ * do usuario, verifica se ja existe alguma playlist do usuario com esse nome
+ * e retorna sucesso ou algum erro conforme o dado fornecido
+ * 
  * @author Dan
  */
+
 public class CriarPlaylistFrame extends javax.swing.JFrame {
 
     /**
@@ -22,7 +26,13 @@ public class CriarPlaylistFrame extends javax.swing.JFrame {
     private ControllerPlaylist c;
     private String usuario;
     private int id;
-    
+    /**
+     * Alem do construtor precisar do id e username, 
+     * é criado um objeto c localizado no ControllerPlaylist
+     * 
+     * @param username
+     * @param id 
+     */
     public CriarPlaylistFrame(String username, int id) {
         initComponents();
         this.usuario = username;
@@ -188,14 +198,25 @@ public class CriarPlaylistFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Volta na pagina anterior após o click, nesse caso Gerenciar Playlist
+     * @param evt 
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.setVisible(false);
         GerenciarPlaylistFrame hm = new GerenciarPlaylistFrame(usuario,id);
         hm.setLocationRelativeTo(null);
         hm.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
-
+    
+    /**
+     * Aqui é onde o metodo Criar é chamado (atraves do objeto instanciado no
+     * construtor)
+     * Aqui ocorre a verificação de nome e a confirmacao se a playlist foi ou
+     * nao criada.
+     * @param evt 
+     */
     private void btnCriarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarPlaylistActionPerformed
         c.Criar();
     }//GEN-LAST:event_btnCriarPlaylistActionPerformed
@@ -234,6 +255,7 @@ public class CriarPlaylistFrame extends javax.swing.JFrame {
 //            }
 //        });
 //    }
+    // GET e SET dos elementos
     
     public String getUsuario() {
         return usuario;
@@ -318,6 +340,9 @@ public class CriarPlaylistFrame extends javax.swing.JFrame {
     public JTextField getTxtNomePlaylist() {
         return txtNomePlaylist;
     }
+    public void setTxtNomePlaylist(JTextField txtNomePlaylist) {
+        this.txtNomePlaylist = txtNomePlaylist;
+    } 
 
     /**
      * @param args the command line arguments
@@ -352,10 +377,7 @@ public class CriarPlaylistFrame extends javax.swing.JFrame {
 //                new CriarPlaylistFrame().setVisible(true);
 //            }
 //        });
-//    }
-    public void setTxtNomePlaylist(JTextField txtNomePlaylist) {
-        this.txtNomePlaylist = txtNomePlaylist;
-    }    
+//    }   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCriarPlaylist;

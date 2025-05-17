@@ -19,7 +19,10 @@ import javax.swing.JPanel;
 import model.Musica;
 
 /**
- *
+ * Interface grafica que tem a funcionalidade de remover musica(s) de uma 
+ * determinada
+ * playlist
+ * 
  * @author Mixzq
  */
 public class ExcluirMusicaFrame extends javax.swing.JFrame {
@@ -27,12 +30,23 @@ public class ExcluirMusicaFrame extends javax.swing.JFrame {
     /**
      * Creates new form ExcluirMusicaFrame
      */
-private String usuario;
+    private String usuario;
     private int idUsuario;
     private int idPlaylist;
     private String nomePlaylist;
     private ControllerPlaylist c;
     ArrayList <Musica> musicas;
+    
+    /**
+     * Alem dos atributos username e id, é necessario a id da playlist e o 
+     * nome da playlist (para mudar o lbl).
+     * É instanciado um objeto c para ControllerPlaylist, e depois um arrayList
+     * musicas que recebe todas as musicas dessa playlist atraves do metodo (61)
+     * @param username
+     * @param id
+     * @param idPlaylist
+     * @param nomePlaylist 
+     */
     public ExcluirMusicaFrame(String username, int id, int idPlaylist, 
                                  String nomePlaylist) {
         initComponents();
@@ -45,9 +59,9 @@ private String usuario;
         titulo11.setText(nomePlaylist);
 
         musicas = c.retornarMusicasDaPlaylistCompleto();
-        for(Musica m : musicas){
-            System.out.println(m.getNome());
-        }
+//        for(Musica m : musicas){
+//            System.out.println(m.getNome());
+//        }
         mostrarMusicas(musicas);
     }
 
@@ -250,115 +264,130 @@ private String usuario;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Volta na pagina anterior, nesse caso Editar Playlist
+     * @param evt 
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.setVisible(false);
         EditarPlaylistFrame hm = new EditarPlaylistFrame(usuario,idUsuario);
         hm.setLocationRelativeTo(null);
         hm.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
+    /**
+     * Metodo utilizado para mostrar todas as musicas da playlist, alem disso
+     * é criado um botao 'x' (359) que indica a exclusao da musica (os botoes sao
+     * criados dentro de cada bloco dividido por musica - musicaPanel)
+     * @param musicas 
+     */
+    
+    public void mostrarMusicas(ArrayList<Musica> musicas) {
+        telaMostrar.removeAll();
+        telaMostrar2.removeAll();
+        telaMostrar3.removeAll();
+        telaMostrar4.removeAll(); 
 
-  public void mostrarMusicas(ArrayList<Musica> musicas) {
-    telaMostrar.removeAll();
-    telaMostrar2.removeAll();
-    telaMostrar3.removeAll();
-    telaMostrar4.removeAll(); // nova coluna
+        telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
+        telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
+        telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
+        telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS));
 
-    telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
-    telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
-    telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
-    telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS)); // layout da nova coluna
+        if (musicas.isEmpty()) {
+            JLabel lblNaoEncontrado = new JLabel("Não há nada por aqui!");
+            lblNaoEncontrado.setFont(new Font("Segoe UI", Font.BOLD, 25));
+            lblNaoEncontrado.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    if (musicas.isEmpty()) {
-        JLabel lblNaoEncontrado = new JLabel("Não há nada por aqui!");
-        lblNaoEncontrado.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        lblNaoEncontrado.setAlignmentX(Component.CENTER_ALIGNMENT);
+            telaMostrar.add(lblNaoEncontrado);
+            telaMostrar.revalidate();
+            telaMostrar.repaint();
+            return;
+        }
 
-        telaMostrar.add(lblNaoEncontrado);
+        int limite = Math.min(musicas.size(), 20); // max 20 músicas (5 por col)
+
+        for (int i = 0; i < limite; i++) {
+            Musica m = musicas.get(i);
+
+            JPanel musicaPanel = new JPanel();
+            musicaPanel.setLayout(new BoxLayout(musicaPanel, BoxLayout.X_AXIS));
+            musicaPanel.setBackground(new java.awt.Color(144, 238, 144));
+            musicaPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
+                BorderFactory.createEmptyBorder(3, 15, 10, 15)
+            ));
+
+            JPanel painelEsquerdo = new JPanel();
+            painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS));
+            painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
+
+            JLabel lblNome = new JLabel(m.getNome());
+            lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+            lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
+            painelEsquerdo.add(lblNome);
+
+            String nomeArtista = (m.getArtista() != null) ?
+                    m.getArtista().getNomeArtistico() : "Artista desconhecido";
+            JLabel lblArtista = new JLabel("<html><b>Artista:</b> " +
+                    nomeArtista + "</html>");
+            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + 
+                    m.getGenero() + "</html>");
+            JLabel lblAno = new JLabel("<html><b>Ano:</b> " +
+                    m.getAnoLancamento() + "</html>");
+            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + 
+                    m.getAlbum() + "</html>");
+
+            Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
+            for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
+                lbl.setFont(fonte);
+                lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
+                painelEsquerdo.add(lbl);
+            }
+
+            JPanel painelDireito = new JPanel();
+            painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
+            painelDireito.setBackground(new java.awt.Color(144, 238, 144));
+
+            JButton btnRemover = new JButton("X");
+            btnRemover.setBackground(new java.awt.Color(204, 0, 51));
+            btnRemover.setForeground(new java.awt.Color(255, 255, 255));
+            btnRemover.setPreferredSize(new java.awt.Dimension(50, 50));
+            btnRemover.setMaximumSize(new java.awt.Dimension(42, 42));
+            btnRemover.addActionListener(e -> {
+                int idMusica = m.getId();
+                c.removerMusicaNaPlaylist(idPlaylist, idMusica);
+            });
+            painelDireito.add(btnRemover);
+
+            musicaPanel.add(painelEsquerdo);
+            musicaPanel.add(painelDireito);
+
+            musicaPanel.setPreferredSize(new java.awt.Dimension(400, 130));
+            musicaPanel.setMaximumSize(new java.awt.Dimension(400, 130));
+
+            if (i < 5) {
+                telaMostrar.add(musicaPanel);
+                telaMostrar.add(Box.createVerticalStrut(8));
+            } else if (i < 10) {
+                telaMostrar2.add(musicaPanel);
+                telaMostrar2.add(Box.createVerticalStrut(8));
+            } else if (i < 15) {
+                telaMostrar3.add(musicaPanel);
+                telaMostrar3.add(Box.createVerticalStrut(8));
+            } else {
+                telaMostrar4.add(musicaPanel);
+                telaMostrar4.add(Box.createVerticalStrut(8));
+            }
+        }
+
         telaMostrar.revalidate();
         telaMostrar.repaint();
-        return;
+        telaMostrar2.revalidate();
+        telaMostrar2.repaint();
+        telaMostrar3.revalidate();
+        telaMostrar3.repaint();
+        telaMostrar4.revalidate();
+        telaMostrar4.repaint();
     }
-
-    int limite = Math.min(musicas.size(), 20); // Até 20 músicas (5 por coluna)
-
-    for (int i = 0; i < limite; i++) {
-        Musica m = musicas.get(i);
-
-        JPanel musicaPanel = new JPanel();
-        musicaPanel.setLayout(new BoxLayout(musicaPanel, BoxLayout.X_AXIS));
-        musicaPanel.setBackground(new java.awt.Color(144, 238, 144));
-        musicaPanel.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
-            BorderFactory.createEmptyBorder(3, 15, 10, 15)
-        ));
-
-        JPanel painelEsquerdo = new JPanel();
-        painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS));
-        painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
-
-        JLabel lblNome = new JLabel(m.getNome());
-        lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
-        lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
-        painelEsquerdo.add(lblNome);
-
-        String nomeArtista = (m.getArtista() != null) ? m.getArtista().getNomeArtistico() : "Artista desconhecido";
-        JLabel lblArtista = new JLabel("<html><b>Artista:</b> " + nomeArtista + "</html>");
-        JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + m.getGenero() + "</html>");
-        JLabel lblAno = new JLabel("<html><b>Ano:</b> " + m.getAnoLancamento() + "</html>");
-        JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + m.getAlbum() + "</html>");
-
-        Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
-        for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
-            lbl.setFont(fonte);
-            lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
-            painelEsquerdo.add(lbl);
-        }
-
-        JPanel painelDireito = new JPanel();
-        painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
-        painelDireito.setBackground(new java.awt.Color(144, 238, 144));
-
-        JButton btnRemover = new JButton("X");
-        btnRemover.setBackground(new java.awt.Color(204, 0, 51));
-        btnRemover.setForeground(new java.awt.Color(255, 255, 255));
-        btnRemover.setPreferredSize(new java.awt.Dimension(50, 50));
-        btnRemover.setMaximumSize(new java.awt.Dimension(42, 42));
-        btnRemover.addActionListener(e -> {
-            int idMusica = m.getId();
-            c.removerMusicaNaPlaylist(idPlaylist, idMusica);
-        });
-        painelDireito.add(btnRemover);
-
-        musicaPanel.add(painelEsquerdo);
-        musicaPanel.add(painelDireito);
-
-        musicaPanel.setPreferredSize(new java.awt.Dimension(400, 130));
-        musicaPanel.setMaximumSize(new java.awt.Dimension(400, 130));
-
-        if (i < 5) {
-            telaMostrar.add(musicaPanel);
-            telaMostrar.add(Box.createVerticalStrut(8));
-        } else if (i < 10) {
-            telaMostrar2.add(musicaPanel);
-            telaMostrar2.add(Box.createVerticalStrut(8));
-        } else if (i < 15) {
-            telaMostrar3.add(musicaPanel);
-            telaMostrar3.add(Box.createVerticalStrut(8));
-        } else {
-            telaMostrar4.add(musicaPanel);
-            telaMostrar4.add(Box.createVerticalStrut(8));
-        }
-    }
-
-    telaMostrar.revalidate();
-    telaMostrar.repaint();
-    telaMostrar2.revalidate();
-    telaMostrar2.repaint();
-    telaMostrar3.revalidate();
-    telaMostrar3.repaint();
-    telaMostrar4.revalidate();
-    telaMostrar4.repaint();
-}
 
 
 

@@ -22,10 +22,19 @@ import javax.swing.JPanel;
 import model.Musica;
 import model.Playlist;
 import java.sql.SQLException;
+
 /**
- *
+ * Uma das janelas mais importantes, aqui é mostrado todas as playlists criada
+ * pelo usuario logado (separadas por bloco)
+ * .
+ * Junto com elas, existem 3 botões clickaveis em cada bloco de playlist: 
+ * renomear,
+ * adicionar,
+ * excluir
+ * 
  * @author Dan
  */
+
 public class EditarPlaylistFrame extends javax.swing.JFrame {
 
     /**
@@ -36,18 +45,33 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
     private int id;
     private ControllerPlaylist controller;
     private ArrayList<Playlist> playlists;
-
+    /**
+     * Alem da passagem de username(usuario) e id do usuario, é instanciado
+     * um objeto controller da classe ControllerPlaylist utilizado para chamar
+     * metodos especificos.
+     * 
+     * Alem disso, é criado um arrayList de playlists que recebe todas as 
+     * playlists do usuario logado (atraves do metodo getPlaylists
+     * 
+     * @param username
+     * @param id 
+     */
     public EditarPlaylistFrame(String username, int id) {
         initComponents();
         this.usuario = username;
         this.id = id; 
         this.controller = new ControllerPlaylist(this.usuario,this.id,this);
         this.playlists = controller.getPlaylists(id);
-//        exibirPlaylists(); // ver se funciona
+//      exibirPlaylists(); // ver se funciona
         mostrarPlaylists();
     }
     
-    private void exibirPlaylists() { // pra testar
+    
+    /**
+     * Método para testar se a playlist estavam sendo retornada corretamente
+     */
+   
+    private void exibirPlaylists() { 
         for (Playlist playlist : playlists) {
             System.out.println("Playlist: " + playlist.getNome());
             for (Musica musica : playlist.getMusicas()) {
@@ -55,6 +79,13 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
             }
         }
     }
+    /**
+     * É mostrado, separado por blocos, todas as playlists do usuario (com as 
+     * primeiras 7 musicas de cada playlist), cada bloco possui os botoes 
+     * "renomear", "adicionar" e "remover"
+     * 
+     * Se nao tiver playlists, mostra uma mensagem (linha 102)
+     */
     
     private void mostrarPlaylists() {
         telaMostrar.removeAll();
@@ -76,7 +107,7 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
             return;
         }
 
-        int limite = Math.min(playlists.size(), 12); // 3 por coluna, até 12 total
+        int limite = Math.min(playlists.size(), 12); // 3  por coluna, até 12 total
 
         for (int i = 0; i < limite; i++) {
             Playlist p = playlists.get(i);
@@ -391,7 +422,10 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Volta na janela anterior, nesse caso Gerenciar Playlist
+     * @param evt 
+     */
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
         this.setVisible(false);
         GerenciarPlaylistFrame hm = new GerenciarPlaylistFrame(usuario,id);

@@ -19,10 +19,14 @@ import view.AdicionarMusicaFrame;
 import view.ExcluirMusicaFrame;
 import view.ExcluirPlaylistFrame;
 import view.RenomearPlaylistFrame;
-
 /**
- *
- * @author Danilo
+ * controlador responsável por gerenciar metodos relacionadas as playlists,
+ * como criar, renomear, excluir, adicionar/remover músicas.
+ * 
+ * obs: existem varios construtores para essa classe, pois muitas interfaces
+ * graficas diferentes utilizam metodos que estao nessa classe.
+ * 
+ * obs2: todos os construtores tem obrigatoriamente 2 parametros: id e username
  */
 public class ControllerPlaylist {
     private CriarPlaylistFrame view;
@@ -35,19 +39,37 @@ public class ControllerPlaylist {
     private ExcluirPlaylistFrame view6;
     private int idPlaylist;
     private ArrayList<Playlist> playlists;
-
+    
+    /**
+     * 
+     * @param view
+     * @param usuario
+     * @param id 
+     */
+    
     public ControllerPlaylist(CriarPlaylistFrame view, String usuario, int id) {
         this.view = view;
         this.usuario = usuario;
         this.idUser = id;
     }
-
+    /**
+     * 
+     * @param usuario
+     * @param id
+     * @param view2 
+     */
     public ControllerPlaylist(String usuario, int id, EditarPlaylistFrame view2) {
         this.usuario = usuario;
         this.idUser = id;
         this.view2 = view2;
     }
-
+    /**
+     * 
+     * @param usuario
+     * @param id
+     * @param view3
+     * @param idPlaylist 
+     */
     public ControllerPlaylist(String usuario, int id, RenomearPlaylistFrame view3,
             int idPlaylist) {
         this.usuario = usuario;
@@ -55,15 +77,28 @@ public class ControllerPlaylist {
         this.view3 = view3;
         this.idPlaylist=idPlaylist;
     }
-    
-     public ControllerPlaylist(String usuario, int idUser, AdicionarMusicaFrame view4,
+    /**
+     * 
+     * @param usuario
+     * @param idUser
+     * @param view4
+     * @param idPlaylist 
+     */
+     public ControllerPlaylist(String usuario, int idUser, 
+             AdicionarMusicaFrame view4,
      int idPlaylist) {
         this.usuario = usuario;
         this.idUser = idUser;
         this.view4 = view4;
         this.idPlaylist = idPlaylist;
     }
-    
+    /**
+     * 
+     * @param usuario
+     * @param idUser
+     * @param view5
+     * @param idPlaylist 
+     */
     public ControllerPlaylist(String usuario, int idUser, ExcluirMusicaFrame view5,
      int idPlaylist) {
         this.usuario = usuario;
@@ -71,13 +106,22 @@ public class ControllerPlaylist {
         this.view5 = view5;
         this.idPlaylist = idPlaylist;
     }
-    
-    public ControllerPlaylist(String usuario, int idUser, ExcluirPlaylistFrame view6) {
+    /**
+     * 
+     * @param usuario
+     * @param idUser
+     * @param view6 
+     */
+    public ControllerPlaylist(String usuario, int idUser,
+            ExcluirPlaylistFrame view6) {
         this.usuario = usuario;
         this.idUser = idUser;
         this.view6 = view6;
     }
-    
+     /**
+     * Metodo que cria uma nova playlist para o usuario conforme o nome dado,
+     * verifica se o nome já existe entre as próprias playlists criadas por ele.
+     */
     public void Criar(){
         String nomePlaylist = view.getTxtNomePlaylist().getText();
         if(nomePlaylist == null || nomePlaylist.isEmpty()){
@@ -115,6 +159,11 @@ public class ControllerPlaylist {
                                           "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }  
+    /**
+     * Metodo que retorna todas as playlists (com as musicas) pelo id do usuario
+     * @param usuarioId
+     * @return 
+     */
 
      public ArrayList<Playlist> getPlaylists(int usuarioId) {
         try {
@@ -128,9 +177,13 @@ public class ControllerPlaylist {
         } 
         catch (SQLException e) {
             e.printStackTrace();
-            return new ArrayList<>();
+            return new ArrayList<>(); // retorna um arraylist vazio se der erro
         }
     }
+    /**
+     * Metodo que troca o nome da playlist que o usuário selecionou (linha 189)
+     * O metodo verifica se o nome ja foi utilizado (215) para evitar erros
+     */
      
     public void renomearPlaylist() {
         String nome = view3.getTxtNomePlaylist().getText();
@@ -190,6 +243,10 @@ public class ControllerPlaylist {
         }
     }
 
+    /**
+     * Adiciona uma música (selecionada pelo user) na playlist pelo id dela.
+     * @param idMusica ID da música a ser adicionada
+     */
     
     public void adicionaMusicaNaPlaylist(int idMusica){
         try{
@@ -197,7 +254,8 @@ public class ControllerPlaylist {
             Connection conn = conexao.getConnection();
             PlaylistDAO playlistDAO = new PlaylistDAO(conn);
             if(!playlistDAO.verificaMusicaPlaylist(idPlaylist, idMusica)){
-                boolean sucesso = playlistDAO.adicionarMusicaPlaylist(idPlaylist, idMusica);
+                boolean sucesso = playlistDAO.adicionarMusicaPlaylist
+                                                (idPlaylist, idMusica);
                 if(sucesso){
                     JOptionPane.showMessageDialog(view4,
                                 "Música adicionada com sucesso!",
@@ -221,6 +279,13 @@ public class ControllerPlaylist {
                                          "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    /**
+     * Remove musica da playlist apos confirmacao.
+     * Alem disso, atualiza a tela (view5).
+     * @param idPlaylist
+     * @param idMusica
+     */
     
     public void removerMusicaNaPlaylist(int idPlaylist, int idMusica) {
         if (JOptionPane.showConfirmDialog(
@@ -259,7 +324,11 @@ public class ControllerPlaylist {
             }
         }
     }
-      
+    
+    /**
+     * Retorna as músicas da playlist (sem as outras informacoes, apenas o nome)
+     * @return arrayList musicas
+     */
     
     public ArrayList <Musica> retornarMusicasDaPlaylist(){
         ArrayList <Musica> musicas = new ArrayList<>();
@@ -276,6 +345,12 @@ public class ControllerPlaylist {
         return musicas;      
     }
     
+    /**
+     * Diferente do metodo anterior, aqui é retornado as musicas com todas as
+     * informações
+     * 
+     * @return arralist musicas
+     */
      public ArrayList <Musica> retornarMusicasDaPlaylistCompleto(){
         ArrayList <Musica> musicas = new ArrayList<>();
         try{
@@ -290,6 +365,12 @@ public class ControllerPlaylist {
         }
         return musicas;      
     }    
+    
+     /**
+     * Exclui a playlist escolhida apos confirmacao.
+     * atualiza a janela apos exclusao (view6).
+     * @param idPlay ID da playlist.
+     */
      
     public void deletarPlaylist(int idPlay) {
         // TESTANDO System.out.println("id no controller: "+idPlay);

@@ -5,7 +5,8 @@
 package view;
 
 /**
- *
+ * Essa tela é responsavel por dar ao usuario 3 opcoes principais:
+ * Criar playlist - Editar playlist - Excluir Playlist
  * @author Danilo
  */
 public class GerenciarPlaylistFrame extends javax.swing.JFrame {
@@ -15,7 +16,12 @@ public class GerenciarPlaylistFrame extends javax.swing.JFrame {
      */
     private int id;
     private String usuario;
-    
+    /**
+     * É necessario apenas os atributos id e username pois essa interface grafica
+     * nao utiliza nenhum metodo do controller
+     * @param username
+     * @param id 
+     */
     public GerenciarPlaylistFrame(String username, int id) {
         initComponents();
         this.usuario = username;
@@ -192,28 +198,40 @@ public class GerenciarPlaylistFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * É direcionado para a tela Excluir Playlist (passa o nome e id do usuario)
+     * @param evt 
+     */
     private void btnExcluirPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPlaylistActionPerformed
         this.setVisible(false);
         ExcluirPlaylistFrame ep = new ExcluirPlaylistFrame(usuario,id); 
         ep.setLocationRelativeTo(null);
         ep.setVisible(true);
     }//GEN-LAST:event_btnExcluirPlaylistActionPerformed
-
+    /**
+     * É direcionado para a tela Editar Playlist (passa o nome e id do usuario)
+     * @param evt 
+     */
     private void btnEditarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPlaylistActionPerformed
         this.setVisible(false);
         EditarPlaylistFrame ep = new EditarPlaylistFrame(usuario,id); 
         ep.setLocationRelativeTo(null);
         ep.setVisible(true);
     }//GEN-LAST:event_btnEditarPlaylistActionPerformed
-
+     /**
+     * É direcionado para a tela Criar Playlist (passa o nome e id do usuario)
+     * @param evt 
+     */
     private void btnCriarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarPlaylistActionPerformed
         this.setVisible(false);
         CriarPlaylistFrame cp = new CriarPlaylistFrame(usuario,id); 
         cp.setLocationRelativeTo(null);
         cp.setVisible(true);
     }//GEN-LAST:event_btnCriarPlaylistActionPerformed
-
+    /**
+     * Volta a tela anterior, nesse caso HomeFrame
+     * @param evt 
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.setVisible(false);
         HomeFrame hm = new HomeFrame(usuario,id); 

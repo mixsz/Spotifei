@@ -19,7 +19,14 @@ import javax.swing.JTextField;
 import model.Musica;
 
 /**
- *
+ * Janela para adicionar musicas conforme a busca.
+ * Buscar por nome, album ou genero.
+ * 
+ * Utilizado os controller's Musica e Playlist
+ * 
+ * Assim como quase todas as interfaces gráficas, é necessário o id e username
+ * do usuário logado! (excessao do cadastro)
+ * 
  * @author Mixzq
  */
 public class AdicionarMusicaFrame extends javax.swing.JFrame {
@@ -36,7 +43,15 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
     private ControllerPlaylist c;
 
 
-    
+    /**
+     * Construtor que, além da necessidade do username e id, é preciso saber
+     * o id da playlist selecionada e o nome da playlist (para mudar no lbl)
+     * @param username
+     * @param idUsuario
+     * @param idPlaylist
+     * @param nomePlaylist 
+     * 
+     */
     public AdicionarMusicaFrame(String username, int idUsuario,int idPlaylist,
             String nomePlaylist) {
         initComponents();
@@ -49,7 +64,7 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
         this.c = new ControllerPlaylist(this.username, this.idUsuario,this,
                                         this.idPlaylist);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -339,14 +354,25 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    /**
+     * Botão que volta para a interface anterior (no caso a EditarPlaylistFrame)
+     * Necessário passar id e username!
+     */
+    
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
         this.setVisible(false);
         EditarPlaylistFrame hm = new EditarPlaylistFrame(username,idUsuario);
         hm.setLocationRelativeTo(null);
         hm.setVisible(true);
     }//GEN-LAST:event_btnVoltar1ActionPerformed
-
+    
+    /**
+     * Método apenas pra verificar se está sendo retornado o arrayList certo
+     * saída no terminal
+     */
+    
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         musicas = controller.buscarMusicasSimples(); 
         for (Musica m : musicas) {
@@ -360,130 +386,134 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
         mostrarMusicas();
     }//GEN-LAST:event_btnPesquisarActionPerformed
     
+    /**
+     * Método que mostra as musicas encontradas
+     * Dividido em 4 colunas (cada uma printa 4 músicas)
+     * Cada elemento é dividido pelo painelMusica
+     * Se não achar nenhuma música, fica um aviso (linha 408)
+     */
     
- private void mostrarMusicas() {
-    telaMostrar.removeAll();
-    telaMostrar2.removeAll();
-    telaMostrar3.removeAll();
-    telaMostrar4.removeAll(); 
+    private void mostrarMusicas() {
+        telaMostrar.removeAll();
+        telaMostrar2.removeAll();
+        telaMostrar3.removeAll();
+        telaMostrar4.removeAll(); 
 
-    telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
-    telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
-    telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
-    telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS)); 
+        telaMostrar.setLayout(new BoxLayout(telaMostrar, BoxLayout.Y_AXIS));
+        telaMostrar2.setLayout(new BoxLayout(telaMostrar2, BoxLayout.Y_AXIS));
+        telaMostrar3.setLayout(new BoxLayout(telaMostrar3, BoxLayout.Y_AXIS));
+        telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS)); 
 
-    if (musicas.isEmpty()) {
-        JLabel lblNaoEncontrado = new JLabel("Ops! Nenhuma música encontrada!");
-        JLabel lblNaoEncontrado2 = new JLabel(":C");
-        lblNaoEncontrado.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        lblNaoEncontrado.setAlignmentX(Component.CENTER_ALIGNMENT);
-        lblNaoEncontrado2.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        lblNaoEncontrado2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        telaMostrar.add(lblNaoEncontrado);
-        telaMostrar.add(lblNaoEncontrado2);
+        if (musicas.isEmpty()) {
+            JLabel lblNaoEncontrado = new JLabel("Ops! Nenhuma música encontrada!");
+            JLabel lblNaoEncontrado2 = new JLabel(":C");
+            lblNaoEncontrado.setFont(new Font("Segoe UI", Font.BOLD, 25));
+            lblNaoEncontrado.setAlignmentX(Component.CENTER_ALIGNMENT);
+            lblNaoEncontrado2.setFont(new Font("Segoe UI", Font.BOLD, 25));
+            lblNaoEncontrado2.setAlignmentX(Component.CENTER_ALIGNMENT);
+            telaMostrar.add(lblNaoEncontrado);
+            telaMostrar.add(lblNaoEncontrado2);
+
+            telaMostrar.revalidate();
+            telaMostrar.repaint();
+            return;
+        }
+
+        int limite = Math.min(musicas.size(), 16); // Até 16 músicas (4 por coluna)
+
+        for (int i = 0; i < limite; i++) {
+            Musica m = musicas.get(i);
+
+            JPanel painelMusica = new JPanel(); //cada musica fica dentro de um painel
+            painelMusica.setLayout(new BoxLayout(painelMusica, BoxLayout.X_AXIS));
+            painelMusica.setBackground(new java.awt.Color(144, 238, 144));
+            painelMusica.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
+                BorderFactory.createEmptyBorder(3, 15, 10, 15)
+            ));
+
+            JPanel painelEsquerdo = new JPanel();
+            painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS));
+            painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
+
+            String nomeInteiro = m.getNome();
+            String nomeExibicao = nomeInteiro.length() > 26 ? 
+                    nomeInteiro.substring(0, 23) + "..." : nomeInteiro;
+            JLabel lblNome = new JLabel(nomeExibicao);
+            // tive q limitar o caracteres pois o botao estava se deslocando
+
+            lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+            lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
+            painelEsquerdo.add(lblNome);
+
+            JLabel lblArtista = new JLabel("<html><b>Artista:</b> " + 
+                    m.getArtista().getNomeArtistico() + "</html>");
+            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + 
+                    m.getGenero() + "</html>");
+            JLabel lblAno = new JLabel("<html><b>Ano:</b> " +
+                    m.getAnoLancamento() + "</html>");
+            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + 
+                    m.getAlbum() + "</html>");
+
+            Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
+            for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
+                lbl.setFont(fonte);
+                lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
+                painelEsquerdo.add(lbl);
+            }
+
+            JPanel painelDireito = new JPanel();
+            painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
+            painelDireito.setBackground(new java.awt.Color(144, 238, 144));
+
+            JButton btnAdicionar = new JButton("Adicionar");
+            btnAdicionar.setBackground(new java.awt.Color(51, 51, 51));
+            btnAdicionar.setForeground(new java.awt.Color(0, 153, 0));
+            btnAdicionar.setAlignmentX(Component.CENTER_ALIGNMENT);
+            btnAdicionar.setPreferredSize(new java.awt.Dimension(100, 25));
+            btnAdicionar.setMaximumSize(new java.awt.Dimension(100, 25));
+
+            btnAdicionar.addActionListener(e -> {
+                int idMusica = m.getId();
+                c.adicionaMusicaNaPlaylist(idMusica);
+            });
+
+            painelDireito.add(btnAdicionar);
+
+            painelMusica.add(painelEsquerdo);
+            painelMusica.add(painelDireito);
+
+            painelMusica.setPreferredSize(new java.awt.Dimension(400, 130));
+            painelMusica.setMaximumSize(new java.awt.Dimension(400, 130));
+
+            if (i < 4) {
+                telaMostrar.add(painelMusica);
+                telaMostrar.add(Box.createVerticalStrut(8));
+            } else if (i < 8) {
+                telaMostrar2.add(painelMusica);
+                telaMostrar2.add(Box.createVerticalStrut(8));
+            } else if (i < 12) {
+                telaMostrar3.add(painelMusica);
+                telaMostrar3.add(Box.createVerticalStrut(8));
+            } else {
+                telaMostrar4.add(painelMusica);
+                telaMostrar4.add(Box.createVerticalStrut(8));
+            }
+        }
 
         telaMostrar.revalidate();
         telaMostrar.repaint();
-        return;
+        telaMostrar2.revalidate();
+        telaMostrar2.repaint();
+        telaMostrar3.revalidate();
+        telaMostrar3.repaint();
+        telaMostrar4.revalidate(); 
+        telaMostrar4.repaint();    
     }
-
-    int limite = Math.min(musicas.size(), 16); // Até 16 músicas (4 por coluna)
-
-    for (int i = 0; i < limite; i++) {
-        Musica m = musicas.get(i);
-
-        JPanel musicaPanel = new JPanel();
-        musicaPanel.setLayout(new BoxLayout(musicaPanel, BoxLayout.X_AXIS));
-        musicaPanel.setBackground(new java.awt.Color(144, 238, 144));
-        musicaPanel.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new java.awt.Color(60, 179, 113), 1),
-            BorderFactory.createEmptyBorder(3, 15, 10, 15)
-        ));
-
-        JPanel painelEsquerdo = new JPanel();
-        painelEsquerdo.setLayout(new BoxLayout(painelEsquerdo, BoxLayout.Y_AXIS));
-        painelEsquerdo.setBackground(new java.awt.Color(144, 238, 144));
-
-         String nomeInteiro = m.getNome();
-        String nomeExibicao = nomeInteiro.length() > 26 ? 
-                nomeInteiro.substring(0, 23) + "..." : nomeInteiro;
-        JLabel lblNome = new JLabel(nomeExibicao);
-            // tive q limitar o caracteres pois o botao estava se deslocando
-            
-        lblNome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
-        lblNome.setAlignmentX(Component.LEFT_ALIGNMENT);
-        painelEsquerdo.add(lblNome);
-
-        JLabel lblArtista = new JLabel("<html><b>Artista:</b> " + 
-                m.getArtista().getNomeArtistico() + "</html>");
-        JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + 
-                m.getGenero() + "</html>");
-        JLabel lblAno = new JLabel("<html><b>Ano:</b> " +
-                m.getAnoLancamento() + "</html>");
-        JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + 
-                m.getAlbum() + "</html>");
-
-        Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
-        for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
-            lbl.setFont(fonte);
-            lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
-            painelEsquerdo.add(lbl);
-        }
-
-        JPanel painelDireito = new JPanel();
-        painelDireito.setLayout(new BoxLayout(painelDireito, BoxLayout.Y_AXIS));
-        painelDireito.setBackground(new java.awt.Color(144, 238, 144));
-
-        JButton btnAdicionar = new JButton("Adicionar");
-        btnAdicionar.setBackground(new java.awt.Color(51, 51, 51));
-        btnAdicionar.setForeground(new java.awt.Color(0, 153, 0));
-        btnAdicionar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnAdicionar.setPreferredSize(new java.awt.Dimension(100, 25));
-        btnAdicionar.setMaximumSize(new java.awt.Dimension(100, 25));
-
-        btnAdicionar.addActionListener(e -> {
-            int idMusica = m.getId();
-            c.adicionaMusicaNaPlaylist(idMusica);
-        });
-
-        painelDireito.add(btnAdicionar);
-
-        musicaPanel.add(painelEsquerdo);
-        musicaPanel.add(painelDireito);
-
-        musicaPanel.setPreferredSize(new java.awt.Dimension(400, 130));
-        musicaPanel.setMaximumSize(new java.awt.Dimension(400, 130));
-
-        if (i < 4) {
-            telaMostrar.add(musicaPanel);
-            telaMostrar.add(Box.createVerticalStrut(8));
-        } else if (i < 8) {
-            telaMostrar2.add(musicaPanel);
-            telaMostrar2.add(Box.createVerticalStrut(8));
-        } else if (i < 12) {
-            telaMostrar3.add(musicaPanel);
-            telaMostrar3.add(Box.createVerticalStrut(8));
-        } else {
-            telaMostrar4.add(musicaPanel);
-            telaMostrar4.add(Box.createVerticalStrut(8));
-        }
-    }
-
-    telaMostrar.revalidate();
-    telaMostrar.repaint();
-    telaMostrar2.revalidate();
-    telaMostrar2.repaint();
-    telaMostrar3.revalidate();
-    telaMostrar3.repaint();
-    telaMostrar4.revalidate(); 
-    telaMostrar4.repaint();    
-}
 
 
     
-    public String getNomePlaylist() {
-        return nomePlaylist;
-    }
+    
 
     /**
      * @param args the command line arguments
@@ -520,6 +550,13 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
 //            }
 //        });
 //    }
+    
+    // GET E SET de todos os elementos
+    
+    public String getNomePlaylist() {
+        return nomePlaylist;
+    }
+    
     public void setNomePlaylist(String nomePlaylist) {    
         this.nomePlaylist = nomePlaylist;
     }
@@ -679,7 +716,12 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
     public JTextField getTxtMusica() {
         return txtMusica;
     }
-
+    
+    public void setTxtMusica(JTextField txtMusica) {
+        this.txtMusica = txtMusica;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -714,9 +756,6 @@ public class AdicionarMusicaFrame extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-    public void setTxtMusica(JTextField txtMusica) {
-        this.txtMusica = txtMusica;
-    }    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnVoltar1;

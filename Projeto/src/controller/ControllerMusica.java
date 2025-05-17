@@ -22,9 +22,10 @@ import view.UltimasDezMusicasFrame;
  * controlador responsável por lidar com todas as ações de músicas,
  * buscar, curtir, descurtir, salvar no histórico e exibir o historico
  * 
- * tem varios construtores como parametro, pois é uma classe utilizada por 
- * diversas outras classes de interface grafica!
-
+ * tem varios construtores com parametros diferente, pois é uma classe utilizada por 
+ * diversas outras interfaces graficas
+ * obs: todos os construtores obrigatoriamente tem 2 parametros: id e username
+ * 
  * @author Danilo
  */
 public class ControllerMusica {
@@ -44,39 +45,69 @@ public class ControllerMusica {
     private UltimasDezMusicasFrame view4;
     private MusicasCurtidasFrame view5;
     private MusicasDescurtidasFrame view6;
-    
+    /**
+     * 
+     * @param view
+     * @param usuario
+     * @param id 
+     */
     public ControllerMusica(BuscarMusicaFrame view,String usuario,int id) {
         this.view = view;
         this.usuario = usuario;
         this.id = id;
     }
-
+    /**
+     * 
+     * @param usuario
+     * @param id
+     * @param view2 
+     */
     public ControllerMusica(String usuario, int id, ResultadoMusicaFrame view2) {
         this.usuario = usuario;
         this.id = id;
         this.view2 = view2;
     }
-     
+    /**
+     * 
+     * @param view3
+     * @param usuario
+     * @param id 
+     */
     public ControllerMusica(AdicionarMusicaFrame view3,String usuario,int id) {
         this.view3 = view3;
         this.usuario = usuario;
         this.id = id;
     }
-    
+    /**
+     * 
+     * @param view4
+     * @param usuario
+     * @param id 
+     */
     public ControllerMusica(UltimasDezMusicasFrame view4,
             String usuario,int id) {
         this.view4 = view4;
         this.usuario = usuario;
         this.id = id;
     }
-    
+    /**
+     * 
+     * @param view5
+     * @param usuario
+     * @param id 
+     */
      public ControllerMusica(MusicasCurtidasFrame view5,
             String usuario,int id) {
         this.view5 = view5;
         this.usuario = usuario;
         this.id = id;
     }
-     
+    /**
+     * 
+     * @param view6
+     * @param usuario
+     * @param id 
+     */
     public ControllerMusica(MusicasDescurtidasFrame view6,
           String usuario,int id) {
       this.view6 = view6;
@@ -94,6 +125,7 @@ public class ControllerMusica {
      * username (usuario)
      * ArrayList de Musicas encontradas
      */
+    
     public void buscarMusica(){
         String nome = view.getTxtNome().getText();
         String artista = view.getTxtArtista().getText();

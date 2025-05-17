@@ -11,24 +11,29 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
+ * Aqui é a interface grafica principal para busca de músicas
  * @author Mixzq
+ * 
  */
+
 public class BuscarMusicaFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form BuscarMusica
-     */
     private ControllerMusica controller;
     private String username;
     private int id;
     
+    /**
+     *  Cria um objeto controller, e recebe id do usuario e username do usuario
+     * @param username
+     * @param id 
+     * 
+     */
      public BuscarMusicaFrame(String username, int id) {
         initComponents();
         this.username = username;
         this.id = id;
         this.controller = new ControllerMusica(this, username, id);
-    } // recebe apenas o id e nome do usuario (atributos unicos)
+    }
      
     /**
      * This method is called from within the constructor to initialize the form.
@@ -242,11 +247,20 @@ public class BuscarMusicaFrame extends javax.swing.JFrame {
     private void txtGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGeneroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGeneroActionPerformed
-
+    /**
+     * Aqui é onde ocorre a pesquisa, após o usuáriuo clicar no botão 'Pesquisar'
+     * é chamado o metodo buscarMusica que fica localizado no controllerMusica
+     * @param evt 
+     */
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         controller.buscarMusica();
     }//GEN-LAST:event_btnPesquisarActionPerformed
-
+    
+    /**
+     * Metodo que volta a pagina anterior, nesse caso a Home
+     * @param evt 
+     */
+    
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
         this.setVisible(false);
         HomeFrame hm = new HomeFrame(username,id); 
@@ -288,6 +302,8 @@ public class BuscarMusicaFrame extends javax.swing.JFrame {
 //            }
 //        });
 //    }
+    
+    // GET e SET dos elementos
     
     public String getUsername() {
         return username;
@@ -404,6 +420,10 @@ public class BuscarMusicaFrame extends javax.swing.JFrame {
     public JTextField getTxtNome() {
         return txtNome;
     }
+    
+    public void setTxtNome(JTextField txtNome) {
+        this.txtNome = txtNome;
+    }    
 
     /**
      * @param args the command line arguments
@@ -439,9 +459,7 @@ public class BuscarMusicaFrame extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-    public void setTxtNome(JTextField txtNome) {
-        this.txtNome = txtNome;
-    }    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnVoltar1;
@@ -459,3 +477,4 @@ public class BuscarMusicaFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }
+

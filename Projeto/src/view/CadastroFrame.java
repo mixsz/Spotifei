@@ -14,21 +14,26 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
- *
+ * Ttela principal para o usuário se cadastrar
  * @author Danilo
  */
 public class CadastroFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form CadastroFrame
+     * construtor que apenas chama o metodo criado pela propria IDE
      */
+    
     public CadastroFrame() {
         initComponents();
     }
     
+    /**
+     * o objeto foi criado fora do construtor, porem nao houve problemas
+     * entao foi deixado assim
+    */
+    
     ControllerCadastro controller = new ControllerCadastro(this);
-
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -341,7 +346,10 @@ public class CadastroFrame extends javax.swing.JFrame {
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
-
+    /**
+     * Volta na tela anterior após o click, nesse caso o LoginFrame
+     * @param evt 
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.setVisible(false);   
         LoginFrame loginFrame = new LoginFrame();
@@ -440,7 +448,10 @@ public class CadastroFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername1;
     private javax.swing.JTextField txtUsername2;
     // End of variables declaration//GEN-END:variables
-
+    
+    
+    // GET e SET de todos os elementos
+    
     public JButton getBtnAcessar2() {
         return btnAcessar2;
     }
