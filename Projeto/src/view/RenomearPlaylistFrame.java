@@ -19,7 +19,8 @@ import javax.swing.JTextField;
 import model.Musica;
 
 /**
- *
+ * Tela responsável por renomear uma playlist escolhida pelo usuário.
+ * Além disso é capaz de mostrar as músicas dessa playlist
  * @author Mixzq
  */
 public class RenomearPlaylistFrame extends javax.swing.JFrame {
@@ -33,6 +34,16 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
     private String nomePlaylist;
     private ControllerPlaylist c;
     ArrayList <Musica> musicas;
+    /**
+     * Além do username e id, é necessário passar o nome da playlist (o que estava)
+     * para mudar um lbl (linha 52)
+     * É instanciado um objeto da classe ControllerPlaylist
+     * É retornado um arrayList com as músicas dessa playlist
+     * @param username
+     * @param id
+     * @param idPlaylist
+     * @param nomePlaylist 
+     */
     public RenomearPlaylistFrame(String username, int id, int idPlaylist, 
                                  String nomePlaylist) {
         initComponents();
@@ -283,11 +294,19 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Após o click no botao, é chamado o metodo renomear playlist que verifica
+     * se o nome já é existente em alguma outra playlist do PRÓPRIO usuario.
+     * Se for existente, a playlist nao é renomeada!
+     * @param evt 
+     */
     private void btnRenomearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenomearActionPerformed
         c.renomearPlaylist();
     }//GEN-LAST:event_btnRenomearActionPerformed
-
+    /**
+     * Volta a página anterior, nesse caso Editar Playlsit
+     * @param evt 
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.setVisible(false);
         EditarPlaylistFrame hm = new EditarPlaylistFrame(usuario,idUsuario);
@@ -329,6 +348,11 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
 //            }
 //        });
 //    }
+    
+    /**
+     * Metodo que mostra as musicas da playlist na tela para o usuário
+     * É apenas visual, não possui nenhum botão
+     */
    private void mostrarMusicas() {
         telaMostrar.removeAll();
         telaMostrar2.removeAll();
@@ -360,10 +384,14 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
 
             String nomeArtista = (m.getArtista() != null) ?
                     m.getArtista().getNomeArtistico() : "Artista desconhecido";
-            JLabel lblArtista = new JLabel("<html><b>Artista:</b> " + nomeArtista + "</html>");
-            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + m.getGenero() + "</html>");
-            JLabel lblAno = new JLabel("<html><b>Ano:</b> " + m.getAnoLancamento() + "</html>");
-            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + m.getAlbum() + "</html>");
+            JLabel lblArtista = new JLabel("<html><b>Artista:</b> " +
+                    nomeArtista + "</html>");
+            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " +
+                    m.getGenero() + "</html>");
+            JLabel lblAno = new JLabel("<html><b>Ano:</b> " + 
+                    m.getAnoLancamento() + "</html>");
+            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + 
+                    m.getAlbum() + "</html>");
 
             Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
             for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {
@@ -409,7 +437,43 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         telaMostrar4.repaint();
     }
 
-
+    /**
+     * @param args the command line arguments
+     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(RenomearPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(RenomearPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(RenomearPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(RenomearPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new RenomearPlaylistFrame().setVisible(true);
+//            }
+//        });
+//    }    
+   
+   // GET e SET dos elementos
+   
     public String getUsuario() {
         return usuario;
     }
@@ -510,43 +574,9 @@ public class RenomearPlaylistFrame extends javax.swing.JFrame {
         return txtNomePlaylist;
     }
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(RenomearPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(RenomearPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(RenomearPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(RenomearPlaylistFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new RenomearPlaylistFrame().setVisible(true);
-//            }
-//        });
-//    }
     public void setTxtNomePlaylist(JTextField txtNomePlaylist) {
         this.txtNomePlaylist = txtNomePlaylist;
-    }    
+    } 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRenomear;
     private javax.swing.JButton btnVoltar;

@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import model.Musica;
 
 /**
- *
+ * Tela responsavel por mostrar as ultimas 10 musicas buscadas pelo usuario
  * @author Mixzq
  */
 public class UltimasDezMusicasFrame extends javax.swing.JFrame {
@@ -27,7 +27,13 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
     private String usuario;
     private int id;
     private ControllerMusica controller;
-    
+    /**
+     * Recebe as infos principais do usuario
+     * Cria um arrayList historico que é retornado apos a chamada de um metodo
+     * do objeto controller (buscarUltimasBuscas) da classe ControllerMusica
+     * @param usuario
+     * @param id 
+     */
     public UltimasDezMusicasFrame(String usuario, int id) {
         initComponents();
         this.usuario = usuario;
@@ -198,7 +204,10 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Volta na pagina anterior, no caso Visualizar historico
+     * @param evt 
+     */
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
         this.setVisible(false);
         VisualizarHistoricoFrame hm = new VisualizarHistoricoFrame(usuario,id);
@@ -206,7 +215,11 @@ public class UltimasDezMusicasFrame extends javax.swing.JFrame {
         hm.setVisible(true);
     }//GEN-LAST:event_btnVoltar1ActionPerformed
     
-    
+    /**
+     * Método responsavel por mostrar as 10 musicas encontradas no arrayList
+     * historico (parametro)
+     * @param historico 
+     */
     private void mostrarHistorico(ArrayList<Musica> historico) {
         telaMostrar.removeAll();
         telaMostrar2.removeAll();

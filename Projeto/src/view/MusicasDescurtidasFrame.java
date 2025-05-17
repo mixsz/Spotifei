@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import model.Musica;
 
 /**
- *
+ * Nessa tela, o usuário é capaz de ver todas as suas músicas descurtidas
  * @author Mixzq
  */
 public class MusicasDescurtidasFrame extends javax.swing.JFrame {
@@ -28,7 +28,16 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
     private int id;
     private ControllerMusica controller;
     private ArrayList<Musica> musicas;
-
+     /**
+     * é necessário o id do usuario e o username (usuario), um objeto
+     * 'controller' é instanciado dentro do construtor para ser utilizado o
+     * metodo de buscar musicas descurtidas (que esta dentro do ControllerMusica),
+     * que serve para retornar um arrayList com as musicas descurtidas do proprio
+     * user
+     * 
+     * @param usuario
+     * @param id 
+     */
     public MusicasDescurtidasFrame(String usuario, int id) {
         initComponents();
         this.usuario = usuario;
@@ -38,14 +47,24 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
         //mostraMusicasPRINT();
         mostrarMusicasDescurtidas(musicas);
     }   
-    
+    /**
+     * Mostra o arrayList retornado apos chamar o metodo de buscar musicas 
+     * descurtidas (via terminal)
+     * Metodo de teste
+     */
     public void mostraMusicasPRINT(){
        ArrayList<Musica> musicas = controller.buscarMusicasCurtidas();
        for(Musica m : musicas){
            System.out.println(m.getNome());
        }
     }  
-
+    /**
+     * Esse metodo é responsavel por mostrar todas as musicas descurtidas do 
+     * usuario
+     * na tela. 
+     * É dividido por 4 colunas capazes de armazenar 7 musicas (total = 28)
+     * @param curtidas 
+     */
     private void mostrarMusicasDescurtidas(ArrayList<Musica> descurtidas) {
         telaMostrar.removeAll();
         telaMostrar2.removeAll();
@@ -316,7 +335,10 @@ public class MusicasDescurtidasFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Volta para a tela anterior apos o click, nesse caso a Visualizar Historic
+     * @param evt 
+     */
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
         this.setVisible(false);
         VisualizarHistoricoFrame hm = new VisualizarHistoricoFrame(usuario,id);

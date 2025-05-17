@@ -147,7 +147,8 @@ public class ControllerPlaylist {
             if(sucesso){
                 JOptionPane.showMessageDialog(null, "Playlist criada com sucesso!", 
                 "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                GerenciarPlaylistFrame gp = new GerenciarPlaylistFrame(usuario,idUser);
+                GerenciarPlaylistFrame gp = new GerenciarPlaylistFrame(
+                                                                usuario,idUser);
                 view.setVisible(false);
                 gp.setLocationRelativeTo(null);
                 gp.setVisible(true); 
@@ -226,7 +227,8 @@ public class ControllerPlaylist {
             if (sucesso) {
                 JOptionPane.showMessageDialog(null, 
                                               "Playlist renomeada com sucesso!", 
-                                              "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                                              "Sucesso", 
+                                              JOptionPane.INFORMATION_MESSAGE);
                 view3.dispose();
                 EditarPlaylistFrame hm = new EditarPlaylistFrame(usuario, idUser);
                 hm.setLocationRelativeTo(null);
@@ -299,7 +301,8 @@ public class ControllerPlaylist {
                 Connection conn = conexao.getConnection();
                 PlaylistDAO playlistDAO = new PlaylistDAO(conn);
 
-                boolean sucesso = playlistDAO.removerMusicaPlaylist(idPlaylist, idMusica);
+                boolean sucesso = playlistDAO.removerMusicaPlaylist
+                                                (idPlaylist, idMusica);
 
                 if (sucesso) {
                     ArrayList<Musica> musicasNEW = 

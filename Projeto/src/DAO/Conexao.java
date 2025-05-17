@@ -18,7 +18,13 @@ import java.sql.SQLException;
  * @author Danilo ou Mixzq
  */
 
+
 public class Conexao {
+    /**
+     * 
+     * @return conexao estabelecida
+     * @throws SQLException caso de erro com a conexao com o banco de dados
+     */
     public Connection getConnection() throws SQLException{
          Connection conexao = DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/spotifei", "postgres", "elefante");

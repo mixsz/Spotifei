@@ -14,7 +14,8 @@ import javax.swing.JTextField;
 
 
 /**
- *
+ * Tela inicial, aqui o usuário pode logar em sua conta, cadastrar uma conta ou
+ * se desconectar
  * @author Danilo
  */
 public class LoginFrame extends javax.swing.JFrame {
@@ -22,10 +23,18 @@ public class LoginFrame extends javax.swing.JFrame {
     /**
      * Creates new form LoginFrame
      */
+    
+    /**
+     * No construtor, é utilizado o objeto instanciado 'c' da classe
+     * ControllerLogin para ser utilizado tais metodos
+     * 
+     * obs: o objeto nao foi declarado no construtor, porem como nao teve problema,
+     * continuara fora do construtor
+     */
+    
     public LoginFrame() {
         initComponents();
         c = new ControllerLogin(this);
-
     }
 
     /**
@@ -232,18 +241,30 @@ public class LoginFrame extends javax.swing.JFrame {
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
-
+    /**
+     * Após clicar no botao 'Acessar', o metodo do controllerLogin 'loginUsuario'
+     * é chamado para verificar se os dados estao corretos
+     * @param evt 
+     */
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
         c.loginUsuario();
     }//GEN-LAST:event_btnAcessarActionPerformed
-
+    /**
+     * Direciona o usuario para a pagina de Cadastro
+     * @param evt 
+     */
+    
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         this.setVisible(false);   
         CadastroFrame cadastroFrame = new CadastroFrame();
         cadastroFrame.setLocationRelativeTo(null);
         cadastroFrame.setVisible(true);  
     }//GEN-LAST:event_btnCadastrarActionPerformed
-
+    /**
+     * Após o click, o usuário é desconectado, recebendo um tchau!
+     * @param evt 
+     */
+    
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         JOptionPane.showMessageDialog(null, 
                                      "Até mais!",
@@ -303,6 +324,8 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
+    // GET e SET dos elementos
+    
     public JButton getBtnAcessar() {
         return btnAcessar;
     }

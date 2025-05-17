@@ -28,7 +28,7 @@ public class CadastroFrame extends javax.swing.JFrame {
     }
     
     /**
-     * o objeto foi criado fora do construtor, porem nao houve problemas
+     * o objeto foi instanciado fora do construtor, porem nao houve problemas
      * entao foi deixado assim
     */
     

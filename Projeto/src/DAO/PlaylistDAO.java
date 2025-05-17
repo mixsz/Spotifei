@@ -267,7 +267,7 @@ public class PlaylistDAO {
     /**
      * Exclui playlist selecionada do DB.
      * Obs: As músicas relacionadas com essa playlist são removidas automaticamente
-     * pois foi utilizado "ON DELETE CASCADE" que remove sozinho.
+     * pois foi utilizado "ON DELETE CASCADE" que remove sozinho pelo DB.
      * 
      * @param idPlaylist ID da playlist a ser excluída.
      * @return true se a playlist foi excluída com sucesso, false caso contrário.
@@ -275,13 +275,7 @@ public class PlaylistDAO {
      */
   
     public boolean excluirPlaylist(int idPlaylist) throws SQLException {
-        /**
-         * como a tabela foi criada com ON DELETE CASCADE, todas as musicas 
-         * relacionadas
-         * com o id da playlist ja são removidas automaticamente, entao n
-         * e necessario excluir as musicas dessa playlist manualmente!
-         */ 
-        
+
         String sqlDeletePlaylist = "DELETE FROM playlist WHERE id = ?";
         PreparedStatement stmt = conn.prepareStatement(sqlDeletePlaylist);
         stmt.setInt(1, idPlaylist);

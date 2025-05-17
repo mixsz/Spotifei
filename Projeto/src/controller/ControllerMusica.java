@@ -160,20 +160,6 @@ public class ControllerMusica {
                                               JOptionPane.INFORMATION_MESSAGE);
             } 
             else {
-//                StringBuilder sb = new StringBuilder("Músicas encontradas:\n");
-//                for (Musica musica : musicas) {
-//                    sb.append(musica.getNome()).append("\n");
-//                }
-//                JOptionPane.showMessageDialog(null, sb.toString(), 
-//                        "Resultado da busca", JOptionPane.INFORMATION_MESSAGE);               
-//                for(Musica m : musicas){
-//                    System.out.println("Artista: " + m.getArtista() +
-//                            "\nNome: " + m.getNome() +
-//                            "\nGenero: " + m.getGenero() +
-//                            "\nAno: " + m.getAnoLancamento() + 
-//                            "\nAlbum: " + m.getAlbum() + 
-//                            '\n');
-//                }
                 view.setVisible(false);
                 ResultadoMusicaFrame tela = 
                         new ResultadoMusicaFrame(this.usuario, this.id, musicas);

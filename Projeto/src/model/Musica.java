@@ -83,7 +83,10 @@ public class Musica {
         this.anoLancamento = anoLancamento;
         this.album = album;
     }
-    
+    /**
+     * 
+     * @param nome 
+     */
     public Musica(String nome) {
         this.nome = nome;
     }

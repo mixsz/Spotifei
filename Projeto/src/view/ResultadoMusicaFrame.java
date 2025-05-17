@@ -17,9 +17,13 @@ import javax.swing.JPanel;
 import model.Musica;
 
 /**
- *
+ * Aqui é a janela principal que exibe as músicas filtradas pelo usuario
+ * Cada musica é separa por blocos, que contem: nome da musica, album, ano,
+ * artista, genero (nao nessa ordem), 
+ * alem disso possuem 2 botoes: curtir/descurtir
  * @author Danilo
  */
+
 public class ResultadoMusicaFrame extends javax.swing.JFrame {
 
     /**
@@ -29,7 +33,17 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
     private int id;
     private ArrayList <Musica> musicas;
     private ControllerMusica controllerMusica;
-
+    /**
+     * 
+     */
+    /**
+     * O construtor recebe as informações principais do usuario 
+     * Além disso, recebe um arrayList retornado do metodo de buscarMusicas, ou
+     * seja, é o arrayList com as músicas encontradas
+     * @param usuario
+     * @param id
+     * @param musicas 
+     */
     public ResultadoMusicaFrame(String usuario, int id, ArrayList<Musica> musicas) {
         initComponents();
         this.controllerMusica = controllerMusica;
@@ -37,7 +51,7 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         this.id = id;
         this.musicas = musicas;
         mostrarMusicas();
-         for(Musica m : musicas){
+         for(Musica m : musicas){ // verificação
             System.out.println("Artista: " + m.getArtista() +
                                 "\nNome: " + m.getNome() +
                                 "\nGenero: " + m.getGenero() +
@@ -47,7 +61,12 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
                                 '\n');
         }
     }
-    
+   /**
+    * Método responsável por mostrar as músicas encontradas
+    * 4 colunas
+    * 5 músicas por coluna
+    * O metodo ainda cria o botão curtir e descurtir
+    */
    private void mostrarMusicas() {
         telaMostrar.removeAll();
         telaMostrar2.removeAll();
@@ -60,7 +79,7 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS));
 
         // LIMITE MUSICAS
-        int limite = Math.min(musicas.size(), 20); // 20 MUSICAS NO TOTAL (5 POR COL)
+        int limite = Math.min(musicas.size(), 20); // 20 MUSICAS NO TOTAL
 
         for (int i = 0; i < limite; i++) {
             Musica m = musicas.get(i);
@@ -90,9 +109,12 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
 
             JLabel lblArtista = new JLabel("<html><b>Artista:</b> " +
                     m.getArtista().getNomeArtistico() + "</html>");
-            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + m.getGenero() + "</html>");
-            JLabel lblAno = new JLabel("<html><b>Ano:</b> " + m.getAnoLancamento() + "</html>");
-            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + m.getAlbum() + "</html>");
+            JLabel lblGenero = new JLabel("<html><b>Gênero:</b> " + 
+                    m.getGenero() + "</html>");
+            JLabel lblAno = new JLabel("<html><b>Ano:</b> " + 
+                    m.getAnoLancamento() + "</html>");
+            JLabel lblAlbum = new JLabel("<html><b>Álbum:</b> " + 
+                    m.getAlbum() + "</html>");
 
             Font fonte = new Font("Segoe UI Semibold", Font.PLAIN, 15);
             for (JLabel lbl : new JLabel[]{lblArtista, lblGenero, lblAno, lblAlbum}) {

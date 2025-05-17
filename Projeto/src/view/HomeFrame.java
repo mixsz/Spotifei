@@ -10,7 +10,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
+ * Janela após login. Obrigatoriamente trabalha com os dados principais do usuario
+ * (id e username do usuario), assim
+ * como todas as proximas telas
  * @author Danilo
  */
 public class HomeFrame extends javax.swing.JFrame {
@@ -20,7 +22,12 @@ public class HomeFrame extends javax.swing.JFrame {
      */
     private String usuario;
     private int id;
-    
+    /**
+     * Recebe username e id do usuario como parametro, alem disso o lblUsername
+     * é alterado para o username do usuario
+     * @param username
+     * @param id 
+     */
     public HomeFrame(String username, int id) {
     initComponents();
     this.usuario = username;
@@ -28,98 +35,10 @@ public class HomeFrame extends javax.swing.JFrame {
     this.id = id;    
     System.out.println("Usuário: "+usuario);
     System.out.println("Id: "+id+'\n');
-    } // recebe apenas o id e nome do usuario (atributos unicos)
+    } // os prints sao utilizados para verificar se na ida e volta das telas
+      // os dados sao mantidos ou perdidos!
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public JButton getBtnBuscarMusica() {
-        return btnBuscarMusica;
-    }
-
-    public void setBtnBuscarMusica(JButton btnBuscarMusica) {
-        this.btnBuscarMusica = btnBuscarMusica;
-    }
-
-    public JButton getBtnDesconectar() {
-        return btnDesconectar;
-    }
-
-    public void setBtnDesconectar(JButton btnDesconectar) {
-        this.btnDesconectar = btnDesconectar;
-    }
-
-    public JButton getBtnGerenciarPlaylist() {
-        return btnGerenciarPlaylist;
-    }
-
-    public void setBtnGerenciarPlaylist(JButton btnGerenciarPlaylist) {
-        this.btnGerenciarPlaylist = btnGerenciarPlaylist;
-    }
-
-    public JButton getBtnVisualizarHistorico() {
-        return btnVisualizarHistorico;
-    }
-
-    public void setBtnVisualizarHistorico(JButton btnVisualizarHistorico) {
-        this.btnVisualizarHistorico = btnVisualizarHistorico;
-    }
-
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    public void setjLabel1(JLabel jLabel1) {
-        this.jLabel1 = jLabel1;
-    }
-
-    public JPanel getjPanel1() {
-        return jPanel1;
-    }
-
-    public void setjPanel1(JPanel jPanel1) {
-        this.jPanel1 = jPanel1;
-    }
-
-    public JPanel getjPanel2() {
-        return jPanel2;
-    }
-
-    public void setjPanel2(JPanel jPanel2) {
-        this.jPanel2 = jPanel2;
-    }
-
-    public JLabel getTitulo1() {
-        return titulo1;
-    }
-
-    public void setTitulo1(JLabel titulo1) {
-        this.titulo1 = titulo1;
-    }
-
-    public JLabel getLblUsername() {
-        return lblUsername;
-    }
-
-    public void setLblUsername(JLabel lblUsername) {
-        this.lblUsername = lblUsername;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
     
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -277,36 +196,53 @@ public class HomeFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Após o click no botao, o usuario é redirecionado para tela Buscar Musica
+     * Levando o username e id 
+     * @param evt 
+     */
     private void btnBuscarMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMusicaActionPerformed
          this.setVisible(false);
          BuscarMusicaFrame bm = new BuscarMusicaFrame(this.usuario,this.id); 
          bm.setLocationRelativeTo(null);
          bm.setVisible(true);
     }//GEN-LAST:event_btnBuscarMusicaActionPerformed
-  
+    /**
+     * Após o click no botao, o usuario é redirecionado para tela Gerenciar 
+     * Playlist
+     * Levando o username e id 
+     * @param evt 
+     */
     private void btnGerenciarPlaylistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarPlaylistActionPerformed
          this.setVisible(false);
          GerenciarPlaylistFrame gm = new GerenciarPlaylistFrame(this.usuario,this.id); 
          gm.setLocationRelativeTo(null);
          gm.setVisible(true);
     }//GEN-LAST:event_btnGerenciarPlaylistActionPerformed
-
+     /**
+     * Após o click no botao, o usuario é redirecionado para tela Visualizar
+     * Historico
+     * Levando o username e id 
+     * @param evt 
+     */
     private void btnVisualizarHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarHistoricoActionPerformed
          this.setVisible(false);
          VisualizarHistoricoFrame gm = new VisualizarHistoricoFrame(this.usuario,this.id); 
          gm.setLocationRelativeTo(null);
          gm.setVisible(true);
     }//GEN-LAST:event_btnVisualizarHistoricoActionPerformed
-
+    /**
+     * Se confirmado, o usuário é deslogado e volta para a tela de Login
+     * @param evt 
+     */
     private void btnDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesconectarActionPerformed
-    int confirm = JOptionPane.showConfirmDialog(this, "Deseja realmente "
-                                                + "sair?", "Confirmação",
-                                                JOptionPane.YES_NO_OPTION);   
-    if (confirm == JOptionPane.YES_OPTION) {
-        this.setVisible(false);
-        new LoginFrame().setVisible(true);
-    }
+        int confirmar = JOptionPane.showConfirmDialog(this, "Deseja realmente "
+                                                    + "sair?", "Confirmação",
+                                                    JOptionPane.YES_NO_OPTION);   
+        if (confirmar == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+            new LoginFrame().setVisible(true);
+        }
     }//GEN-LAST:event_btnDesconectarActionPerformed
 
     /**
@@ -343,6 +279,96 @@ public class HomeFrame extends javax.swing.JFrame {
 //            }
 //        });
 //    }
+    
+    // GET e SET dos elementos
+    
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public JButton getBtnBuscarMusica() {
+        return btnBuscarMusica;
+    }
+
+    public void setBtnBuscarMusica(JButton btnBuscarMusica) {
+        this.btnBuscarMusica = btnBuscarMusica;
+    }
+
+    public JButton getBtnDesconectar() {
+        return btnDesconectar;
+    }
+
+    public void setBtnDesconectar(JButton btnDesconectar) {
+        this.btnDesconectar = btnDesconectar;
+    }
+
+    public JButton getBtnGerenciarPlaylist() {
+        return btnGerenciarPlaylist;
+    }
+
+    public void setBtnGerenciarPlaylist(JButton btnGerenciarPlaylist) {
+        this.btnGerenciarPlaylist = btnGerenciarPlaylist;
+    }
+
+    public JButton getBtnVisualizarHistorico() {
+        return btnVisualizarHistorico;
+    }
+
+    public void setBtnVisualizarHistorico(JButton btnVisualizarHistorico) {
+        this.btnVisualizarHistorico = btnVisualizarHistorico;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public void setjPanel1(JPanel jPanel1) {
+        this.jPanel1 = jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public void setjPanel2(JPanel jPanel2) {
+        this.jPanel2 = jPanel2;
+    }
+
+    public JLabel getTitulo1() {
+        return titulo1;
+    }
+
+    public void setTitulo1(JLabel titulo1) {
+        this.titulo1 = titulo1;
+    }
+
+    public JLabel getLblUsername() {
+        return lblUsername;
+    }
+
+    public void setLblUsername(JLabel lblUsername) {
+        this.lblUsername = lblUsername;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarMusica;

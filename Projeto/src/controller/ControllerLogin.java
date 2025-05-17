@@ -35,7 +35,8 @@ public class ControllerLogin{
     }
     
     /**
-     * verifica se os dados estão corretos conforme o db:
+     * metodo que
+     *  verifica se os dados estão corretos conforme o db:
      *   captura dados inseridos do usuario
      *   verifica se ta correto
      *   utiliza o metodo autenticar implementado pela classe model.usuario

@@ -65,17 +65,18 @@ public class ControllerCadastro extends javax.swing.JFrame{
         confirmarSenha == null || confirmarSenha.isEmpty() || idade == null || 
                 idade.isEmpty() || sexo == null || sexo.isEmpty()) {
         
-            JOptionPane.showMessageDialog(null, "Todos os dados devem ser informados!", 
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Todos os dados devem ser "
+                                            + "informados!", 
+                                            "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if(!senha.equals(confirmarSenha)){
             JOptionPane.showMessageDialog(
-            null,                            
-            "Senha incorreta. Tente novamente!",
-            "Erro de Senha",                
-            JOptionPane.ERROR_MESSAGE);
+                                        null,                            
+                                        "Senha incorreta. Tente novamente!",
+                                        "Erro de Senha",                
+                                        JOptionPane.ERROR_MESSAGE);
             return;
         }
         int idadeInt = 0;

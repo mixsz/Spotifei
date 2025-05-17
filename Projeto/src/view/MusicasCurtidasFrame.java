@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import model.Musica;
 
 /**
- *
+ * Nessa tela, o usuário é capaz de ver todas as suas músicas curtidas
  * @author Mixzq
  */
 public class MusicasCurtidasFrame extends javax.swing.JFrame {
@@ -28,7 +28,16 @@ public class MusicasCurtidasFrame extends javax.swing.JFrame {
     private int id;
     private ControllerMusica controller;
     private ArrayList<Musica> musicas;
-
+    /**
+     * é necessário o id do usuario e o username (usuario), um objeto
+     * 'controller' é instanciado dentro do construtor para ser utilizado o
+     * metodo de buscar musicas curtidas (que esta dentro do ControllerMusica),
+     * que serve para retornar um arrayList com as musicas curtidas do proprio
+     * user
+     * 
+     * @param usuario
+     * @param id 
+     */
     public MusicasCurtidasFrame(String usuario, int id) {
         initComponents();
         this.usuario = usuario;
@@ -38,7 +47,11 @@ public class MusicasCurtidasFrame extends javax.swing.JFrame {
         mostrarMusicasCurtidas(musicas);
 //        mostraMusicasPRINT();
     }   
-    
+    /**
+     * Mostra o arrayList retornado apos chamar o metodo de buscar musicas 
+     * curtidas (via terminal)
+     * Metodo de teste
+     */
     public void mostraMusicasPRINT(){
         ArrayList<Musica> musicas = controller.buscarMusicasCurtidas();
         for(Musica m : musicas){
@@ -46,6 +59,12 @@ public class MusicasCurtidasFrame extends javax.swing.JFrame {
         }
     }   
     
+    /**
+     * Esse metodo é responsavel por mostrar todas as musicas curtidas do usuario
+     * na tela. 
+     * É dividido por 4 colunas capazes de armazenar 7 musicas (total = 28)
+     * @param curtidas 
+     */
     private void mostrarMusicasCurtidas(ArrayList<Musica> curtidas) {
         telaMostrar.removeAll();
         telaMostrar2.removeAll();
@@ -134,7 +153,6 @@ public class MusicasCurtidasFrame extends javax.swing.JFrame {
             }
         }
 
-        // atualiza as telas
         telaMostrar.revalidate();
         telaMostrar.repaint();
         telaMostrar2.revalidate();
@@ -143,7 +161,7 @@ public class MusicasCurtidasFrame extends javax.swing.JFrame {
         telaMostrar3.repaint();
         telaMostrar4.revalidate();
         telaMostrar4.repaint();
-      }
+    }
 
 
 
@@ -321,7 +339,10 @@ public class MusicasCurtidasFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Volta para a tela anterior apos o click, nesse caso a Visualizar Historic
+     * @param evt 
+     */
     private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
         this.setVisible(false);
         VisualizarHistoricoFrame hm = new VisualizarHistoricoFrame(usuario,id);

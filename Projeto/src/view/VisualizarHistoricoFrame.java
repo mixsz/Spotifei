@@ -5,9 +5,16 @@
 package view;
 
 /**
- *
- * @author Mixzq
+ * Tela com 3 botoes importantes: 
+ * Visualizar ultimas 10 musicas buscadas
+ * Visualizar musicas curtidas
+ * Visualizar musicas descurtidas
+ * 
+ * Essa interface grafica nao utiliza o controller, apenas serve para redirecionar
+ * o usuario para alguma outra tela
+ * @author Danilo
  */
+
 public class VisualizarHistoricoFrame extends javax.swing.JFrame {
 
     /**
@@ -15,7 +22,11 @@ public class VisualizarHistoricoFrame extends javax.swing.JFrame {
      */
     private int id;
     private String usuario;
-    
+    /**
+     * Recebe apenas as infos principais do usuario
+     * @param username
+     * @param id 
+     */
     public VisualizarHistoricoFrame(String username, int id) {
         initComponents();
         this.usuario = username;
@@ -192,28 +203,43 @@ public class VisualizarHistoricoFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Volta na tela anterior, no caso a Home
+     * @param evt 
+     */
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.setVisible(false);
         HomeFrame hm = new HomeFrame(usuario,id);
         hm.setLocationRelativeTo(null);
         hm.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
-
+    /**
+     * Direciona o usuario para a tela UltimasDezMusicasFrame, passando o id e 
+     * username do usuario como parametro
+     * @param evt 
+     */
     private void btnMusicasBuscadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicasBuscadasActionPerformed
         this.setVisible(false);
         UltimasDezMusicasFrame hm = new UltimasDezMusicasFrame(usuario,id);
         hm.setLocationRelativeTo(null);
         hm.setVisible(true);
     }//GEN-LAST:event_btnMusicasBuscadasActionPerformed
-
+    /**
+     * Direciona o usuario para a tela musicasCurtidasFrame, passando o id e 
+     * username do usuario como parametro
+     * @param evt 
+     */
     private void btnMusicasCurtidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicasCurtidasActionPerformed
         this.setVisible(false);
         MusicasCurtidasFrame hm = new MusicasCurtidasFrame(usuario,id);
         hm.setLocationRelativeTo(null);
         hm.setVisible(true);
     }//GEN-LAST:event_btnMusicasCurtidasActionPerformed
-
+    /**
+     * Direciona o usuario para a tela musicasDescurtidasFrame, passando o id e 
+     * username do usuario como parametro
+     * @param evt 
+     */
     private void btnMusicasDescurtidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicasDescurtidasActionPerformed
         this.setVisible(false);
         MusicasDescurtidasFrame hm = new MusicasDescurtidasFrame(usuario,id);

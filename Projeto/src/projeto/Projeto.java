@@ -7,7 +7,7 @@ package projeto;
 import view.LoginFrame;
 
 /**
- *
+ * Inicialização do código...
  * @author Danilo
  */
 public class Projeto {
