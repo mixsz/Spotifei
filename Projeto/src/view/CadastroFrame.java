@@ -280,7 +280,7 @@ public class CadastroFrame extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(title)
                 .addGap(16, 16, 16))
         );
@@ -310,7 +310,7 @@ public class CadastroFrame extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -421,11 +421,7 @@ public class CadastroFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnFeminino;
     private javax.swing.JRadioButton btnMasculino;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblCadastro;
@@ -436,11 +432,8 @@ public class CadastroFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsername;
     private javax.swing.JLabel lblUsername1;
     private javax.swing.JLabel lblUsername2;
-    private javax.swing.JLabel lblUsername3;
     private javax.swing.ButtonGroup sexo;
     private javax.swing.JLabel title;
-    private javax.swing.JLabel titulo1;
-    private javax.swing.JLabel titulo2;
     private javax.swing.JTextField txtNome;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JPasswordField txtSenha1;
