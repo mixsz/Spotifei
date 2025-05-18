@@ -3,7 +3,7 @@
 ## Autor e link para o vídeo:
 * Danilo Cardoso Pradella (mixsz) - 24.124.069-6
   
-Link do vídeo: nao fiz ainda
+  Link do vídeo: nao fiz ainda
 
 ## Objetivo do Projeto
 O projeto **Spotifei** tem como objetivo desenvolver uma plataforma que permite aos usuários visualizar informações detalhadas e interagir com diferentes tipos de músicas, organizando e explorando conteúdos de formas simples e intuitiva.
@@ -13,7 +13,7 @@ Inspirado no Spotify, o projeto foca no compartilhamento e organização de info
 ## Tecnologias Utilizadas
 - **Java** com **Swing** (interface gráfica)
 - **PostgreSQL** (banco de dados relacional)
-- **JDBC** (conexão Java ↔ banco)
+- **JDBC** (conexão Java - banco)
 - Arquitetura **MVC** (Model-View-Controller)
 
 ## Arquitetura e Estrutura do Sistema
