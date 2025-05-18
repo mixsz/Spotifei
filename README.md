@@ -66,19 +66,19 @@ O usuário pode escolher o que deseja fazer, clicando em um dos 3 botões com as
 
   Obs: Se o usuário não possuir nenhuma playlist, mesmo assim ele é redirecionado para essa tela, porém é exibido a seguinte mensagem: "Ops! Nenhuma playlist por aqui!" e ele só é capaz de voltar para a tela anterior.
   
-    * **Renomear Playlist**    
+    * Renomear Playlist    
         O usuário consegue ver todas as músicas adicionadas dentro da playlist selecionada, além disso é exibido a opção para o usuário alterar o nome da playlist (sem perder as músicas vinculadas). Após clicar em "confirmar", é exibido uma confirmação com "sim" e "não", se sim, o banco de dados faz um UPDATE no nome da playlist, aparece uma nova mensagem de sucesso e o usuário é redirecionado para a tela anterior, se não, não acontece nada.
         
         Obs: Não é possível colocar um nome que já está sendo utilizado por outra playlist do MESMO usuário.
 
         Obs2: Junto com o botão de "confirmar", existe o botão "cancelar", que ao clicar, volta na tela anterior e nenhuma ação é realizada.
       
-    * **Adicionar Música**  
+    * Adicionar Música  
        O usuário pode buscar música do mesmo jeito do **Item 3 (Busca de músicas)**, a diferença será na listagem de músicas buscadas: será, igualmente, divido por blocos e mostrado as informações das músicas, porém terá apenas um botão "adicionar", que após o click, o banco de dados adiciona essa música na playlist + se não for encontrado nenhuma música, será exibido, no mesmo panel que exibe as músicas, uma mensagem "Ops! Nenhuma Música Encontrada! :C".
       
       Obs: Se a música já estiver na playlist, é informado através de um pop-up, e não é feito a adição/atualização no codigo SQL.
       
-    * **Remover Música**  
+    * Remover Música 
        O usuário é capaz de ver todas as músicas que estão dentro da playlist selecionada, cada uma é dividida por blocos e dentro de cada bloco é mostrado as infos da música + um botão para excluir música representado por um 'X' vermelho. Após o click, é exibido uma mensagem se o usuário realmente deseja excluir a música, se sim, aparece uma mensagem de sucesso e a música é imediatamente removida da tela de exibição, se não, não acontece nada.
 * ### 6.3 Excluir Playlist 
    Para essa tela, é exibido todas as playlists com as primeiras 7 músicas (do mesmo jeito do item 6.2 - Editar Playlist), porém é exibido apenas um botão de exclusão representado por um 'X' vermelho. Após clicar, é exibido uma mensagem se o usuário realmente deseja excluir essa playlist, se sim, aparece uma mensagem de sucesso e a playlist é imediatamente removida da tela de exibição e no banco de dados, se não, não acontece nada.
