@@ -1,5 +1,9 @@
 # Spotifei – Plataforma de Informações de Áudios Digitais
 
+## Autor e link para o vídeo:
+* Danilo Cardoso Pradella (mixsz) - 24.124.069-6
+Link do vídeo: nao fiz ainda
+
 ## Objetivo do Projeto
 O projeto **Spotifei** tem como objetivo desenvolver uma plataforma que permite aos usuários visualizar informações detalhadas e interagir com diferentes tipos de músicas, organizando e explorando conteúdos de formas simples e intuitiva.
 
@@ -106,3 +110,67 @@ Na home, é possível que o usuário se desconecte e volte para a tela inicial d
 
 ### 9. Sair
 Já na tela inicial, é possível sair, ou seja, encerrar a sessão. É exibido uma caixa de confirmação após clicar, se sim, o programa é encerrado, se não, nada acontece.
+
+## Banco de Dados
+O banco de dados foi desenvolvido para armazenar todos os dados do programa, mesmo se for fechado de uma maneira proposital ou com alguma queda de conexão. A estrutura utiliza PostgreSQL e possui 7 tabelas que se relacionam para garantir organização de dados, a seguir será descrito cada tabela:
+
+### 1. usuario
+Armazena todos os dados do usuário, incluindo nome, sobrenome, username (único), idade, sexo e senha. Além disso, é criado um id SERIAL que é armazenado diretamente no banco de dados, com nenhum input necessário.
+
+PK: id
+
+### 2. artista
+Contém informações de artistas de diferentes gêneros musicais, seus atributos são compostos por nome artístico, nome, sobrenome, idade, sexo, nacionalidade, status e gênero musical. Também é criado um id SERIAL para cada artista.
+
+PK: id
+
+### 3. musica
+Registra todas as músicas disponíveis na plataforma, associadas a um artista, tendo atributos como nome da música, gênero, ano de lançamento, álbum e id SERIAL.
+
+PK: id --- FK: artista_id (artista(id))
+
+### 4. playlist
+Armazena todas as playlists criadas por usuários. É **importante** saber que essa tabela só armazena o **id da playlist** e o **id do usuário proprietário**, as músicas da playlist é armazenada na próxima tabela.
+
+PK: id --- FK: id_usuario (usuario(id))
+
+### 5. musicas_da_playlist
+Tabela de associação que relaciona músicas às playlists, possibilitando playlists com várias músicas. A tabela possui apenas o id da música e o id da playlist.
+
+**Importante**: ao excluir uma playlist, todas as músicas associadas a ela são removidas automaticamente por causa do uso de `ON DELETE CASCADE` na chave `id_playlist`.
+
+PK: id_playlist e id_musica --- FK: id_playlist (referência de playlist(id)) + id_musica (referência de musica(id))
+
+### 6. historico
+Registra as últimas 10 músicas buscadas por cada usuário. Possui um id SERIAL como chave primária, que é importante para saber a ordem da música mais recente pesquisada até a mais antiga (o ID sempre é crescente), além disso possui o id da música e o id do usuário. Sempre que é procurado mais músicas pelo usuário, o sistema faz um `UPDATE` nessa tabela e substitui as músicas que já estavam pelas mais recentes.
+
+PK: id --- FK: id_usuario (usuario(id)) + id_musica (musica(id))
+
+### 7. interacao
+Tabela que registra a interação do usuário com as músicas. A tabela possui o atributo `status` que tem duas opções de valores: curtida ou descurtida, além disso não possui um id próprio pois não é necessário mostrar em uma determinada ordem no histórico.
+
+PK: usuario_id e musica_id --- FK: usuario_id (usuario(id)) + musica_id (musica(id))
+
+### Relacionamentos Principais
+Cada música está associada a um único artista.
+Cada playlist pertence a um único usuário.
+Uma playlist pode conter N músicas (via `musicas_da_playlist`).
+Usuário pode interagir com N músicas, e as interações são armazenadas na tabela `interacao`.
+
+## Como usar
+É recomendado utilizar a IDE **NetBeans** e o gerenciador de banco de dados **pgAdmin** para facilitar o uso e configurações do projeto.
+
+### 1. Clonar o repositório
+Faça download do projeto pelo Git ou manualmente.
+
+### 2. Adicionar o .jar ao projeto
+No NetBeans, vá em `Projeto -> Libraries -> Add JAR/Folder` e selecione o arquivo `postgresql-42.7.5.jar` localizado em `Projeto/jar/`.
+
+### 3. Restaurar o banco de dados
+No pgAdmin, faça restore do arquivo `.sql` que está localizado em `Projeto/banco-de-dados`.
+
+### 4. Configurar a conexão com banco de dados
+No arquivo `Projeto/src/DAO/Conexao.java`, atualize os dados do usuário, senha, porta e nome do banco conforme a configuração local.
+
+### 5. Executar o projeto
+Após todos os passos, basta compilar e executar normalmente pela IDE.
