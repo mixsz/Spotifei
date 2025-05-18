@@ -2,6 +2,7 @@
 
 ## Autor e link para o vídeo:
 * Danilo Cardoso Pradella (mixsz) - 24.124.069-6
+  
 Link do vídeo: nao fiz ainda
 
 ## Objetivo do Projeto
@@ -157,7 +158,7 @@ Cada playlist pertence a um único usuário.
 Uma playlist pode conter N músicas (via `musicas_da_playlist`).
 Usuário pode interagir com N músicas, e as interações são armazenadas na tabela `interacao`.
 
-## Como usar
+## Como Usar a Plataforma
 É recomendado utilizar a IDE **NetBeans** e o gerenciador de banco de dados **pgAdmin** para facilitar o uso e configurações do projeto.
 
 ### 1. Clonar o repositório
@@ -174,3 +175,10 @@ No arquivo `Projeto/src/DAO/Conexao.java`, atualize os dados do usuário, senha,
 
 ### 5. Executar o projeto
 Após todos os passos, basta compilar e executar normalmente pela IDE.
+
+## Conclusão
+O desenvolvimento do Spotifei me proporcionou diversos aprendizados, como a aplicação da estrutura MVC, que deixou o código mais limpo e organizado, e a implementação da conexão entre Java e o banco de dados PostgreSQL que permitiu uma forma mais eficiente, fácil e legível de armazenar os dados da plataforma (diferente dos semestres anteriores com txt).
+
+Outro ponto importante foi o uso do Java Swing para criação de interfaces gráficas (diferente dos semestres anteriores, que era apenas pelo terminal. Essa etapa apresentou muitos desafios, porém um resultado visual muito melhor, aprimorado junto com os ensinamentos da matéria de UX/UI desse semestre, que tornou as interfaces mais amigáveis para o usuário.
+
+Apesar do projeto não ser igual a uma aplicação profissional, acredito que os conhecimentos e habilidades adquiridas através desse trabalho serão muitos importantes para as disciplinas futuras.
