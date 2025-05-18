@@ -181,4 +181,4 @@ O desenvolvimento do Spotifei me proporcionou diversos aprendizados, como a apli
 
 Outro ponto importante foi o uso do Java Swing para criação de interfaces gráficas (diferente dos semestres anteriores, que era apenas pelo terminal. Essa etapa apresentou muitos desafios, porém um resultado visual muito melhor, aprimorado junto com os ensinamentos da matéria de UX/UI desse semestre, que tornou as interfaces mais amigáveis para o usuário.
 
-Apesar do projeto não ser igual a uma aplicação profissional, acredito que os conhecimentos e habilidades adquiridas através desse trabalho serão muitos importantes para as disciplinas futuras.
+Apesar do projeto não ter o resultado igual de uma aplicação profissional, acredito que os conhecimentos e habilidades adquiridas através desse trabalho serão muitos importantes para o desenvolvimento das disciplinas futuras.
