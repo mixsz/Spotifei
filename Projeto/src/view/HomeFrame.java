@@ -128,7 +128,7 @@ public class HomeFrame extends javax.swing.JFrame {
         btnDesconectar.setBackground(new java.awt.Color(51, 51, 51));
         btnDesconectar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDesconectar.setForeground(new java.awt.Color(153, 0, 0));
-        btnDesconectar.setText("Sair");
+        btnDesconectar.setText("Desconectar");
         btnDesconectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDesconectarActionPerformed(evt);
@@ -237,7 +237,7 @@ public class HomeFrame extends javax.swing.JFrame {
      */
     private void btnDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesconectarActionPerformed
         int confirmar = JOptionPane.showConfirmDialog(this, "Deseja realmente "
-                                                    + "sair?", "Confirmação",
+                                                    + "se desconectar?", "Confirmação",
                                                     JOptionPane.YES_NO_OPTION);   
         if (confirmar == JOptionPane.YES_OPTION) {
             this.setVisible(false);
