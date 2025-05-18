@@ -99,6 +99,7 @@ public class EditarPlaylistFrame extends javax.swing.JFrame {
         telaMostrar4.setLayout(new BoxLayout(telaMostrar4, BoxLayout.Y_AXIS));
 
         if (playlists.isEmpty()) {
+            jLabel1.setText("");
             JLabel lblSemPlaylists = new JLabel("Ops! Nenhuma playlist por aqui!");
             lblSemPlaylists.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 50));
             telaMostrar.add(lblSemPlaylists);
