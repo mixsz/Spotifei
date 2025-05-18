@@ -67,13 +67,11 @@ O usuário pode escolher o que deseja fazer, clicando em um dos 3 botões com as
   Obs: Se o usuário não possuir nenhuma playlist, mesmo assim ele é redirecionado para essa tela, porém é exibido a seguinte mensagem: "Ops! Nenhuma playlist por aqui!" e ele só é capaz de voltar para a tela anterior.
   
     * **Renomear Playlist**    
-        O usuário consegue ver todas as músicas adicionadas dentro da playlist selecionada.
-      
-        Permite alterar o nome da playlist sem perder as músicas vinculadas.
-        
-        Após o click, é exibido uma confirmação com "sim" e "não", se sim, o banco de dados faz um UPDATE no nome da playlist, aparece uma nova mensagem de sucesso e o usuário é redirecionado para a tela anterior, se não, não acontece nada.
+        O usuário consegue ver todas as músicas adicionadas dentro da playlist selecionada, além disso é exibido a opção para o usuário alterar o nome da playlist (sem perder as músicas vinculadas). Após clicar em "confirmar", é exibido uma confirmação com "sim" e "não", se sim, o banco de dados faz um UPDATE no nome da playlist, aparece uma nova mensagem de sucesso e o usuário é redirecionado para a tela anterior, se não, não acontece nada.
         
         Obs: Não é possível colocar um nome que já está sendo utilizado por outra playlist do MESMO usuário.
+
+        Obs2: Junto com o botão de "confirmar", existe o botão "cancelar", que ao clicar, volta na tela anterior e nenhuma ação é realizada.
       
     * **Adicionar Música**  
        O usuário pode buscar música do mesmo jeito do **Item 3 (Busca de músicas)**, a diferença será na listagem de músicas buscadas: será, igualmente, divido por blocos e mostrado as informações das músicas, porém terá apenas um botão "adicionar", que após o click, o banco de dados adiciona essa música na playlist + se não for encontrado nenhuma música, será exibido, no mesmo panel que exibe as músicas, uma mensagem "Ops! Nenhuma Música Encontrada! :C".
