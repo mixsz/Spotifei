@@ -3,7 +3,7 @@
 ## Autor e link para o vídeo:
 * Danilo Cardoso Pradella (mixsz) - 24.124.069-6
   
-  Link do vídeo: nao fiz ainda
+  Link do vídeo: https://www.youtube.com/watch?v=YorS6QUNqPE
 
 ## Objetivo do Projeto
 O projeto **Spotifei** tem como objetivo desenvolver uma plataforma que permite aos usuários visualizar informações detalhadas e interagir com diferentes tipos de músicas, organizando e explorando conteúdos de formas simples e intuitiva.
