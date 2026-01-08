@@ -1,7 +1,7 @@
 # Spotifei – Plataforma de Informações de Áudios Digitais
 
 ## Autor e link para o vídeo:
-* Danilo Cardoso Pradella (mixsz) - 24.124.069-6
+* Danilo (mixsz) - 24.124.069-6
   
   Link do vídeo: https://www.youtube.com/watch?v=YorS6QUNqPE
 
