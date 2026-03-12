@@ -367,9 +367,7 @@ public class ResultadoMusicaFrame extends javax.swing.JFrame {
         hm.setVisible(true);
     }//GEN-LAST:event_btnVoltar1ActionPerformed
     
-    /**
-     * @param args the command line arguments
-     */
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVoltar1;
